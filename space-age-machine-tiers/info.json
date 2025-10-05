@@ -6,7 +6,7 @@
     "factorio_version": "2.0",
     "description": "Basically Adds Some Higher Tier Space-Age Machines To Match Bob's Style Progression. Like Quality, But Different!",
     "settings": ["settings.lua"],
-    "homepage":"",
+    "homepage":"https://github.com/ThePrimeruler/space_age_machine_tiers",
     "dependencies": [
         "base",
         "space-age",
