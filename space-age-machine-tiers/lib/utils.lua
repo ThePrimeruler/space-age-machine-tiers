@@ -7,7 +7,7 @@ local utils = {}
 
 
 
-utils.debug = true
+utils.debug = false
 
 
 utils.mod_name = "space-age-machine-tiers"
