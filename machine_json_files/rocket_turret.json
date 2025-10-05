@@ -1,0 +1,799 @@
+{
+    "type": "ammo-turret",
+    "name": "rocket-turret",
+    "icon": "__space-age__/graphics/icons/rocket-turret.png",
+    "flags": {
+        "1": "placeable-player",
+        "2": "player-creation"
+    },
+    "minable": {
+        "mining_time": 0.5,
+        "result": "rocket-turret"
+    },
+    "max_health": 400,
+    "corpse": "rocket-turret-remnants",
+    "dying_explosion": "gun-turret-explosion",
+    "collision_box": {
+        "1": {
+            "1": -1.2,
+            "2": -1.2
+        },
+        "2": {
+            "1": 1.2,
+            "2": 1.2
+        }
+    },
+    "selection_box": {
+        "1": {
+            "1": -1.5,
+            "2": -1.5
+        },
+        "2": {
+            "1": 1.5,
+            "2": 1.5
+        }
+    },
+    "damaged_trigger_effect": {
+        "type": "create-entity",
+        "entity_name": "spark-explosion",
+        "offset_deviation": {
+            "1": {
+                "1": -0.5,
+                "2": -0.5
+            },
+            "2": {
+                "1": 0.5,
+                "2": 0.5
+            }
+        },
+        "offsets": {
+            "1": {
+                "1": 0,
+                "2": 1
+            }
+        },
+        "damage_type_filters": "fire"
+    },
+    "heating_energy": "50kW",
+    "rotation_speed": 0.005,
+    "preparing_speed": 0.08,
+    "preparing_sound": {
+        "variations": {
+            "1": {
+                "filename": "__space-age__/sound/entity/rocket-turret/rocket-turret-activate-1.ogg",
+                "volume": 0.4
+            },
+            "2": {
+                "filename": "__space-age__/sound/entity/rocket-turret/rocket-turret-activate-2.ogg",
+                "volume": 0.4
+            }
+        },
+        "aggregation": {
+            "max_count": 2,
+            "remove": true,
+            "count_already_playing": true
+        }
+    },
+    "folding_sound": {
+        "variations": {
+            "1": {
+                "filename": "__space-age__/sound/entity/rocket-turret/rocket-turret-deactivate-1.ogg",
+                "volume": 0.5
+            },
+            "2": {
+                "filename": "__space-age__/sound/entity/rocket-turret/rocket-turret-deactivate-2.ogg",
+                "volume": 0.5
+            }
+        },
+        "aggregation": {
+            "max_count": 2,
+            "remove": true,
+            "count_already_playing": true
+        }
+    },
+    "rotating_sound": {
+        "sound": {
+            "variations": {
+                "filename": "__space-age__/sound/entity/rocket-turret/rocket-turret-rotation-loop.ogg",
+                "volume": 0.15
+            },
+            "aggregation": {
+                "max_count": 2,
+                "remove": true,
+                "count_already_playing": true
+            }
+        },
+        "stopped_sound": {
+            "variations": {
+                "filename": "__space-age__/sound/entity/rocket-turret/rocket-turret-rotation-stop.ogg",
+                "volume": 0.5
+            },
+            "aggregation": {
+                "max_count": 1,
+                "remove": true,
+                "count_already_playing": true
+            }
+        },
+        "minimal_change_per_tick": 0.001,
+        "minimal_sound_duration_for_stopped_sound": 10
+    },
+    "folding_speed": 0.08,
+    "inventory_size": 1,
+    "automated_ammo_count": 10,
+    "attacking_speed": 0.5,
+    "alert_when_attacking": true,
+    "circuit_connector": {
+        "1": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 52,
+                    "y": 100,
+                    "shift": {
+                        "1": -0.5625,
+                        "2": 0.4375
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 62,
+                    "y": 116,
+                    "shift": {
+                        "1": -0.5625,
+                        "2": 0.4375
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 60,
+                    "y": 120,
+                    "shift": {
+                        "1": -0.5625,
+                        "2": 0.40625
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 46,
+                    "y": 88,
+                    "shift": {
+                        "1": -0.5625,
+                        "2": 0.40625
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 48,
+                    "y": 92,
+                    "shift": {
+                        "1": -0.5625,
+                        "2": 0.40625
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 48,
+                    "y": 92,
+                    "shift": {
+                        "1": -0.5625,
+                        "2": 0.40625
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": -0.71875,
+                    "2": 0.625
+                },
+                "red_green_led_light_offset": {
+                    "1": -0.6875,
+                    "2": 0.46875
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": -0.40625,
+                        "2": 0.5625
+                    },
+                    "green": {
+                        "1": -0.53125,
+                        "2": 0.75
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": 0.09375,
+                        "2": 1.1875
+                    },
+                    "green": {
+                        "1": -0.21875,
+                        "2": 1.25
+                    }
+                }
+            }
+        }
+    },
+    "circuit_wire_max_distance": 9,
+    "open_sound": {
+        "filename": "__base__/sound/open-close/turret-open.ogg",
+        "volume": 0.8
+    },
+    "close_sound": {
+        "filename": "__base__/sound/open-close/turret-close.ogg",
+        "volume": 0.8
+    },
+    "folded_animation": {
+        "layers": {
+            "1": {
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -0.84375
+                },
+                "scale": 0.5,
+                "frame_count": 18,
+                "line_length": 18,
+                "run_mode": "forward",
+                "width": 156,
+                "height": 166,
+                "filename": "__space-age__/graphics/entity/rocket-turret/rocket-turret-rising.png"
+            },
+            "2": {
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -0.671875
+                },
+                "scale": 0.5,
+                "frame_count": 18,
+                "line_length": 18,
+                "run_mode": "forward",
+                "blend_mode": "additive",
+                "draw_as_light": true,
+                "width": 150,
+                "height": 144,
+                "filename": "__space-age__/graphics/entity/rocket-turret/rocket-turret-rising-glow.png"
+            },
+            "3": {
+                "flags": {
+                    "1": "mask"
+                },
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -0.875
+                },
+                "scale": 0.5,
+                "frame_count": 18,
+                "line_length": 18,
+                "apply_runtime_tint": true,
+                "run_mode": "forward",
+                "width": 152,
+                "height": 140,
+                "filename": "__space-age__/graphics/entity/rocket-turret/rocket-turret-rising-mask.png"
+            },
+            "4": {
+                "direction_count": 4,
+                "shift": {
+                    "1": 0.9375,
+                    "2": 0.046875
+                },
+                "scale": 0.5,
+                "frame_count": 18,
+                "line_length": 18,
+                "draw_as_shadow": true,
+                "run_mode": "forward",
+                "width": 210,
+                "height": 168,
+                "filename": "__space-age__/graphics/entity/rocket-turret/rocket-turret-rising-shadow.png"
+            }
+        }
+    },
+    "preparing_animation": {
+        "layers": {
+            "1": {
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -0.84375
+                },
+                "scale": 0.5,
+                "frame_count": 18,
+                "line_length": 18,
+                "run_mode": "forward",
+                "width": 156,
+                "height": 166,
+                "filename": "__space-age__/graphics/entity/rocket-turret/rocket-turret-rising.png"
+            },
+            "2": {
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -0.671875
+                },
+                "scale": 0.5,
+                "frame_count": 18,
+                "line_length": 18,
+                "run_mode": "forward",
+                "blend_mode": "additive",
+                "draw_as_light": true,
+                "width": 150,
+                "height": 144,
+                "filename": "__space-age__/graphics/entity/rocket-turret/rocket-turret-rising-glow.png"
+            },
+            "3": {
+                "flags": {
+                    "1": "mask"
+                },
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -0.875
+                },
+                "scale": 0.5,
+                "frame_count": 18,
+                "line_length": 18,
+                "apply_runtime_tint": true,
+                "run_mode": "forward",
+                "width": 152,
+                "height": 140,
+                "filename": "__space-age__/graphics/entity/rocket-turret/rocket-turret-rising-mask.png"
+            },
+            "4": {
+                "direction_count": 4,
+                "shift": {
+                    "1": 0.9375,
+                    "2": 0.046875
+                },
+                "scale": 0.5,
+                "frame_count": 18,
+                "line_length": 18,
+                "draw_as_shadow": true,
+                "run_mode": "forward",
+                "width": 210,
+                "height": 168,
+                "filename": "__space-age__/graphics/entity/rocket-turret/rocket-turret-rising-shadow.png"
+            }
+        }
+    },
+    "prepared_animation": {
+        "layers": {
+            "1": {
+                "slice": 1,
+                "direction_count": 64,
+                "shift": {
+                    "1": 0,
+                    "2": -0.890625
+                },
+                "scale": 0.5,
+                "width": 160,
+                "height": 164,
+                "line_length": 1,
+                "filenames": {
+                    "1": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-1.png",
+                    "2": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-2.png",
+                    "3": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-3.png"
+                },
+                "lines_per_file": 22
+            },
+            "2": {
+                "slice": 1,
+                "direction_count": 64,
+                "shift": {
+                    "1": 0,
+                    "2": -0.78125
+                },
+                "scale": 0.5,
+                "draw_as_light": true,
+                "blend_mode": "additive",
+                "width": 150,
+                "height": 130,
+                "line_length": 1,
+                "filenames": {
+                    "1": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-glow-1.png",
+                    "2": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-glow-2.png",
+                    "3": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-glow-3.png"
+                },
+                "lines_per_file": 22
+            },
+            "3": {
+                "flags": {
+                    "1": "mask"
+                },
+                "apply_runtime_tint": true,
+                "slice": 1,
+                "direction_count": 64,
+                "shift": {
+                    "1": -0.03125,
+                    "2": -0.828125
+                },
+                "scale": 0.5,
+                "width": 152,
+                "height": 146,
+                "line_length": 1,
+                "filenames": {
+                    "1": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-mask-1.png",
+                    "2": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-mask-2.png",
+                    "3": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-mask-3.png"
+                },
+                "lines_per_file": 22
+            },
+            "4": {
+                "draw_as_shadow": true,
+                "slice": 1,
+                "direction_count": 64,
+                "shift": {
+                    "1": 0.828125,
+                    "2": -0.03125
+                },
+                "scale": 0.5,
+                "width": 224,
+                "height": 182,
+                "line_length": 1,
+                "filenames": {
+                    "1": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-shadow-1.png",
+                    "2": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-shadow-2.png",
+                    "3": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-shadow-3.png"
+                },
+                "lines_per_file": 22
+            }
+        }
+    },
+    "attacking_animation": {
+        "layers": {
+            "1": {
+                "slice": 1,
+                "direction_count": 64,
+                "shift": {
+                    "1": 0,
+                    "2": -0.890625
+                },
+                "scale": 0.5,
+                "width": 160,
+                "height": 164,
+                "line_length": 1,
+                "filenames": {
+                    "1": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-1.png",
+                    "2": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-2.png",
+                    "3": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-3.png"
+                },
+                "lines_per_file": 22
+            },
+            "2": {
+                "slice": 1,
+                "direction_count": 64,
+                "shift": {
+                    "1": 0,
+                    "2": -0.78125
+                },
+                "scale": 0.5,
+                "draw_as_light": true,
+                "blend_mode": "additive",
+                "width": 150,
+                "height": 130,
+                "line_length": 1,
+                "filenames": {
+                    "1": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-glow-1.png",
+                    "2": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-glow-2.png",
+                    "3": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-glow-3.png"
+                },
+                "lines_per_file": 22
+            },
+            "3": {
+                "flags": {
+                    "1": "mask"
+                },
+                "apply_runtime_tint": true,
+                "slice": 1,
+                "direction_count": 64,
+                "shift": {
+                    "1": -0.03125,
+                    "2": -0.828125
+                },
+                "scale": 0.5,
+                "width": 152,
+                "height": 146,
+                "line_length": 1,
+                "filenames": {
+                    "1": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-mask-1.png",
+                    "2": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-mask-2.png",
+                    "3": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-mask-3.png"
+                },
+                "lines_per_file": 22
+            },
+            "4": {
+                "draw_as_shadow": true,
+                "slice": 1,
+                "direction_count": 64,
+                "shift": {
+                    "1": 0.828125,
+                    "2": -0.03125
+                },
+                "scale": 0.5,
+                "width": 224,
+                "height": 182,
+                "line_length": 1,
+                "filenames": {
+                    "1": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-shadow-1.png",
+                    "2": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-shadow-2.png",
+                    "3": "__space-age__/graphics/entity/rocket-turret/rocket-turret-shooting-shadow-3.png"
+                },
+                "lines_per_file": 22
+            }
+        }
+    },
+    "folding_animation": {
+        "layers": {
+            "1": {
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -0.84375
+                },
+                "scale": 0.5,
+                "frame_count": 18,
+                "line_length": 18,
+                "run_mode": "backward",
+                "width": 156,
+                "height": 166,
+                "filename": "__space-age__/graphics/entity/rocket-turret/rocket-turret-rising.png"
+            },
+            "2": {
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -0.671875
+                },
+                "scale": 0.5,
+                "frame_count": 18,
+                "line_length": 18,
+                "run_mode": "backward",
+                "blend_mode": "additive",
+                "draw_as_light": true,
+                "width": 150,
+                "height": 144,
+                "filename": "__space-age__/graphics/entity/rocket-turret/rocket-turret-rising-glow.png"
+            },
+            "3": {
+                "flags": {
+                    "1": "mask"
+                },
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -0.875
+                },
+                "scale": 0.5,
+                "frame_count": 18,
+                "line_length": 18,
+                "apply_runtime_tint": true,
+                "run_mode": "backward",
+                "width": 152,
+                "height": 140,
+                "filename": "__space-age__/graphics/entity/rocket-turret/rocket-turret-rising-mask.png"
+            },
+            "4": {
+                "direction_count": 4,
+                "shift": {
+                    "1": 0.9375,
+                    "2": 0.046875
+                },
+                "scale": 0.5,
+                "frame_count": 18,
+                "line_length": 18,
+                "draw_as_shadow": true,
+                "run_mode": "backward",
+                "width": 210,
+                "height": 168,
+                "filename": "__space-age__/graphics/entity/rocket-turret/rocket-turret-rising-shadow.png"
+            }
+        }
+    },
+    "graphics_set": {
+        "base_visualisation": {
+            "animation": {
+                "layers": {
+                    "1": {
+                        "priority": "high",
+                        "frame_count": 1,
+                        "scale": 0.5,
+                        "shift": {
+                            "1": -0.015625,
+                            "2": 0.140625
+                        },
+                        "width": 202,
+                        "height": 168,
+                        "line_length": 1,
+                        "filename": "__space-age__/graphics/entity/rocket-turret/rocket-turret-base.png"
+                    },
+                    "2": {
+                        "flags": {
+                            "1": "mask",
+                            "2": "low-object"
+                        },
+                        "frame_count": 1,
+                        "apply_runtime_tint": true,
+                        "scale": 0.5,
+                        "shift": {
+                            "1": 0,
+                            "2": 0.03125
+                        },
+                        "width": 170,
+                        "height": 148,
+                        "line_length": 1,
+                        "filename": "__space-age__/graphics/entity/rocket-turret/rocket-turret-base-mask.png"
+                    },
+                    "3": {
+                        "frame_count": 1,
+                        "scale": 0.5,
+                        "shift": {
+                            "1": 0.234375,
+                            "2": 0.203125
+                        },
+                        "draw_as_shadow": true,
+                        "width": 204,
+                        "height": 148,
+                        "line_length": 1,
+                        "filename": "__space-age__/graphics/entity/rocket-turret/rocket-turret-base-shadow.png"
+                    }
+                }
+            }
+        }
+    },
+    "attack_parameters": {
+        "type": "projectile",
+        "ammo_category": "rocket",
+        "cooldown": 120,
+        "projectile_creation_distance": 1,
+        "projectile_center": {
+            "1": 0,
+            "2": 0
+        },
+        "min_range": 15,
+        "range": 36,
+        "sound": {
+            "variations": {
+                "1": {
+                    "filename": "__space-age__/sound/ammo/rocket-turret-launcher-1.ogg",
+                    "volume": 0.7,
+                    "modifiers": {
+                        "type": "main-menu",
+                        "volume_multiplier": 1.8
+                    }
+                },
+                "2": {
+                    "filename": "__space-age__/sound/ammo/rocket-turret-launcher-2.ogg",
+                    "volume": 0.7,
+                    "modifiers": {
+                        "type": "main-menu",
+                        "volume_multiplier": 1.8
+                    }
+                },
+                "3": {
+                    "filename": "__space-age__/sound/ammo/rocket-turret-launcher-3.ogg",
+                    "volume": 0.7,
+                    "modifiers": {
+                        "type": "main-menu",
+                        "volume_multiplier": 1.8
+                    }
+                },
+                "4": {
+                    "filename": "__space-age__/sound/ammo/rocket-turret-launcher-4.ogg",
+                    "volume": 0.7,
+                    "modifiers": {
+                        "type": "main-menu",
+                        "volume_multiplier": 1.8
+                    }
+                },
+                "5": {
+                    "filename": "__space-age__/sound/ammo/rocket-turret-launcher-5.ogg",
+                    "volume": 0.7,
+                    "modifiers": {
+                        "type": "main-menu",
+                        "volume_multiplier": 1.8
+                    }
+                },
+                "6": {
+                    "filename": "__space-age__/sound/ammo/rocket-turret-launcher-6.ogg",
+                    "volume": 0.7,
+                    "modifiers": {
+                        "type": "main-menu",
+                        "volume_multiplier": 1.8
+                    }
+                },
+                "7": {
+                    "filename": "__space-age__/sound/ammo/rocket-turret-launcher-7.ogg",
+                    "volume": 0.7,
+                    "modifiers": {
+                        "type": "main-menu",
+                        "volume_multiplier": 1.8
+                    }
+                }
+            },
+            "aggregation": {
+                "max_count": 4,
+                "remove": true,
+                "count_already_playing": true
+            }
+        },
+        "projectile_creation_offsets": {
+            "1": {
+                "1": 1.0625,
+                "2": -0.21875
+            },
+            "2": {
+                "1": -1.0625,
+                "2": -0.21875
+            },
+            "3": {
+                "1": 0.96875,
+                "2": -0.0625
+            },
+            "4": {
+                "1": -0.96875,
+                "2": -0.0625
+            },
+            "5": {
+                "1": 0.84375,
+                "2": 0.09375
+            },
+            "6": {
+                "1": -0.84375,
+                "2": 0.09375
+            }
+        }
+    },
+    "call_for_help_radius": 40,
+    "water_reflection": {
+        "pictures": {
+            "filename": "__base__/graphics/entity/gun-turret/gun-turret-reflection.png",
+            "priority": "extra-high",
+            "width": 20,
+            "height": 32,
+            "shift": {
+                "1": 0,
+                "2": 1.25
+            },
+            "variation_count": 1,
+            "scale": 5
+        },
+        "rotate": false,
+        "orientation_to_variation": false
+    }
+}

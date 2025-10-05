@@ -1,0 +1,209 @@
+{
+    "type": "lightning-attractor",
+    "name": "lightning-rod",
+    "efficiency": 0.2,
+    "range_elongation": 15,
+    "energy_source": {
+        "type": "electric",
+        "buffer_capacity": "500MJ",
+        "usage_priority": "primary-output",
+        "output_flow_limit": "500MJ",
+        "drain": "2.5MJ"
+    },
+    "icon": "__space-age__/graphics/icons/lightning-rod.png",
+    "flags": {
+        "1": "placeable-neutral",
+        "2": "player-creation"
+    },
+    "minable": {
+        "mining_time": 0.1,
+        "result": "lightning-rod"
+    },
+    "max_health": 100,
+    "corpse": "lightning-rod-remnants",
+    "dying_explosion": "medium-electric-pole-explosion",
+    "factoriopedia_simulation": {
+        "planet": "fulgora",
+        "init": ""
+    },
+    "resistances": {
+        "1": {
+            "type": "fire",
+            "percent": 90
+        },
+        "2": {
+            "type": "electric",
+            "percent": 100
+        }
+    },
+    "collision_box": {
+        "1": {
+            "1": -0.15,
+            "2": -0.15
+        },
+        "2": {
+            "1": 0.15,
+            "2": 0.15
+        }
+    },
+    "selection_box": {
+        "1": {
+            "1": -0.5,
+            "2": -0.5
+        },
+        "2": {
+            "1": 0.5,
+            "2": 0.5
+        }
+    },
+    "lightning_strike_offset": {
+        "1": 0,
+        "2": -4.1
+    },
+    "damaged_trigger_effect": {
+        "type": "create-entity",
+        "entity_name": "spark-explosion",
+        "offset_deviation": {
+            "1": {
+                "1": -0.2,
+                "2": -2.2
+            },
+            "2": {
+                "1": 0.2,
+                "2": 0.2
+            }
+        },
+        "offsets": {
+            "1": {
+                "1": 0,
+                "2": 1
+            }
+        },
+        "damage_type_filters": "fire"
+    },
+    "drawing_box_vertical_extension": 4.3,
+    "open_sound": {
+        "filename": "__base__/sound/electric-network-open.ogg",
+        "volume": 0.6
+    },
+    "close_sound": {
+        "filename": "__base__/sound/electric-network-close.ogg",
+        "volume": 0.6
+    },
+    "working_sound": {
+        "main_sounds": {
+            "1": {
+                "sound": {
+                    "filename": "__space-age__/sound/entity/lightning-attractor/lightning-attractor-charge.ogg",
+                    "volume": 0.5,
+                    "audible_distance_modifier": 0.5
+                },
+                "match_volume_to_activity": true,
+                "activity_to_volume_modifiers": {
+                    "offset": 2,
+                    "inverted": true
+                }
+            },
+            "2": {
+                "sound": {
+                    "filename": "__space-age__/sound/entity/lightning-attractor/lightning-attractor-discharge.ogg",
+                    "volume": 0.5,
+                    "audible_distance_modifier": 0.5
+                },
+                "match_volume_to_activity": true,
+                "activity_to_volume_modifiers": {
+                    "offset": 1
+                }
+            }
+        },
+        "max_sounds_per_prototype": 3
+    },
+    "chargable_graphics": {
+        "picture": {
+            "layers": {
+                "1": {
+                    "priority": "high",
+                    "scale": 0.5,
+                    "width": 108,
+                    "height": 352,
+                    "shift": {
+                        "1": -0.0625,
+                        "2": -1.9375
+                    },
+                    "line_length": 1,
+                    "filename": "__space-age__/graphics/entity/lightning-rod/lightning-rod.png"
+                },
+                "2": {
+                    "priority": "high",
+                    "draw_as_shadow": true,
+                    "scale": 0.5,
+                    "width": 768,
+                    "height": 742,
+                    "shift": {
+                        "1": 0,
+                        "2": -0.203125
+                    },
+                    "line_length": 1,
+                    "filename": "__space-age__/graphics/entity/lightning-rod/lightning-rod-shadow.png"
+                }
+            }
+        },
+        "charge_animation": {
+            "layers": {
+                "1": {
+                    "priority": "high",
+                    "blend_mode": "additive",
+                    "scale": 0.5,
+                    "frame_count": 24,
+                    "draw_as_glow": true,
+                    "width": 72,
+                    "height": 330,
+                    "shift": {
+                        "1": -0.046875,
+                        "2": -2.109375
+                    },
+                    "line_length": 8,
+                    "filename": "__space-age__/graphics/entity/lightning-rod/lightning-rod-charge.png"
+                }
+            }
+        },
+        "charge_animation_is_looped": false,
+        "charge_cooldown": 30,
+        "discharge_animation": {
+            "layers": {
+                "1": {
+                    "priority": "high",
+                    "blend_mode": "additive",
+                    "scale": 0.5,
+                    "frame_count": 24,
+                    "draw_as_glow": true,
+                    "width": 62,
+                    "height": 314,
+                    "shift": {
+                        "1": 0,
+                        "2": -2.171875
+                    },
+                    "line_length": 8,
+                    "filename": "__space-age__/graphics/entity/lightning-rod/lightning-rod-discharge.png"
+                }
+            }
+        },
+        "discharge_cooldown": 60
+    },
+    "water_reflection": {
+        "pictures": {
+            "filename": "__space-age__/graphics/entity/lightning-rod/lightning-rod-reflection.png",
+            "priority": "extra-high",
+            "width": 11,
+            "height": 30,
+            "shift": {
+                "1": 0,
+                "2": 1.5625
+            },
+            "variation_count": 1,
+            "scale": 5
+        },
+        "rotate": false,
+        "orientation_to_variation": false
+    }
+}

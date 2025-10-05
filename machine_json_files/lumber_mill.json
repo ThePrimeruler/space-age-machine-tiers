@@ -1,0 +1,361 @@
+{
+    "type": "assembling-machine",
+    "name": "lumber-mill",
+    "icon": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-icon.png",
+    "flags": {
+        "1": "placeable-neutral",
+        "2": "player-creation"
+    },
+    "minable": {
+        "mining_time": 0.2,
+        "result": "lumber-mill"
+    },
+    "fast_replaceable_group": "lumber-mill",
+    "max_health": 500,
+    "corpse": "big-remnants",
+    "dying_explosion": "medium-explosion",
+    "collision_box": {
+        "1": {
+            "1": -3.9,
+            "2": -3.9
+        },
+        "2": {
+            "1": 3.9,
+            "2": 3.9
+        }
+    },
+    "selection_box": {
+        "1": {
+            "1": -4,
+            "2": -4
+        },
+        "2": {
+            "1": 4,
+            "2": 4
+        }
+    },
+    "damaged_trigger_effect": {
+        "type": "create-entity",
+        "entity_name": "spark-explosion",
+        "offset_deviation": {
+            "1": {
+                "1": -0.5,
+                "2": -0.5
+            },
+            "2": {
+                "1": 0.5,
+                "2": 0.5
+            }
+        },
+        "offsets": {
+            "1": {
+                "1": 0,
+                "2": 1
+            }
+        },
+        "damage_type_filters": "fire"
+    },
+    "drawing_box_vertical_extension": 1.3,
+    "module_slots": 4,
+    "icon_draw_specification": {
+        "scale": 2,
+        "shift": {
+            "1": 0,
+            "2": -0.3
+        }
+    },
+    "icons_positioning": {
+        "1": {
+            "inventory_index": 4,
+            "shift": {
+                "1": 0,
+                "2": 1.25
+            }
+        }
+    },
+    "allowed_effects": {
+        "1": "consumption",
+        "2": "speed",
+        "3": "pollution",
+        "4": "quality",
+        "5": "productivity"
+    },
+    "crafting_categories": {
+        "1": "wood-processing-or-assembling",
+        "2": "wood-processing-or-assembling-or-quality-assembling"
+    },
+    "crafting_speed": 2,
+    "energy_source": {
+        "type": "burner",
+        "fuel_categories": {
+            "1": "chemical"
+        },
+        "effectivity": 1,
+        "fuel_inventory_size": 3,
+        "emissions_per_minute": {
+            "pollution": 10,
+            "noise": 100
+        }
+    },
+    "energy_usage": "1000kW",
+    "perceived_performance": {
+        "minimum": 0.25,
+        "performance_to_activity_rate": 2,
+        "maximum": 20
+    },
+    "graphics_set": {
+        "animation": {
+            "layers": {
+                "1": {
+                    "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-shadow.png",
+                    "priority": "high",
+                    "width": 800,
+                    "height": 700,
+                    "frame_count": 1,
+                    "line_length": 1,
+                    "repeat_count": 80,
+                    "animation_speed": 0.15,
+                    "shift": {
+                        "1": 0,
+                        "2": -0.25
+                    },
+                    "draw_as_shadow": true,
+                    "scale": 0.5
+                },
+                "2": {
+                    "priority": "high",
+                    "width": 525,
+                    "height": 557,
+                    "frame_count": 80,
+                    "lines_per_file": 8,
+                    "animation_speed": 0.15,
+                    "shift": {
+                        "1": 0,
+                        "2": -0.25
+                    },
+                    "scale": 0.5,
+                    "stripes": {
+                        "1": {
+                            "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-animation-1.png",
+                            "width_in_frames": 8,
+                            "height_in_frames": 8
+                        },
+                        "2": {
+                            "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-animation-2.png",
+                            "width_in_frames": 8,
+                            "height_in_frames": 2
+                        }
+                    }
+                }
+            }
+        },
+        "working_visualisations": {
+            "1": {
+                "fadeout": true,
+                "animation": {
+                    "layers": {
+                        "1": {
+                            "priority": "high",
+                            "width": 525,
+                            "height": 557,
+                            "frame_count": 80,
+                            "lines_per_file": 8,
+                            "animation_speed": 0.15,
+                            "shift": {
+                                "1": 0,
+                                "2": -0.25
+                            },
+                            "scale": 0.5,
+                            "stripes": {
+                                "1": {
+                                    "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-animation-1.png",
+                                    "width_in_frames": 8,
+                                    "height_in_frames": 8
+                                },
+                                "2": {
+                                    "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-animation-2.png",
+                                    "width_in_frames": 8,
+                                    "height_in_frames": 2
+                                }
+                            }
+                        },
+                        "2": {
+                            "priority": "high",
+                            "draw_as_glow": true,
+                            "blend_mode": "additive",
+                            "width": 525,
+                            "height": 557,
+                            "frame_count": 80,
+                            "lines_per_file": 8,
+                            "animation_speed": 0.15,
+                            "shift": {
+                                "1": 0,
+                                "2": -0.25
+                            },
+                            "scale": 0.5,
+                            "stripes": {
+                                "1": {
+                                    "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-emission-1.png",
+                                    "width_in_frames": 8,
+                                    "height_in_frames": 8
+                                },
+                                "2": {
+                                    "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-emission-2.png",
+                                    "width_in_frames": 8,
+                                    "height_in_frames": 2
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "open_sound": {
+        "filename": "__base__/sound/open-close/train-stop-open.ogg",
+        "volume": 0.6
+    },
+    "close_sound": {
+        "filename": "__base__/sound/open-close/train-stop-close.ogg",
+        "volume": 0.5
+    },
+    "working_sound": {
+        "fade_in_ticks": 4,
+        "fade_out_ticks": 20,
+        "audible_distance_modifier": 0.6,
+        "max_sounds_per_type": 2,
+        "sound": {
+            "filename": "__space-age__/sound/entity/foundry/foundry.ogg",
+            "volume": 0.6
+        },
+        "sound_accents": {
+            "1": {
+                "sound": {
+                    "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-saw-1.ogg",
+                    "volume": 0.8
+                },
+                "frame": 26,
+                "audible_distance_modifier": 0.5
+            },
+            "2": {
+                "sound": {
+                    "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-fall.ogg",
+                    "volume": 1.2
+                },
+                "frame": 42,
+                "audible_distance_modifier": 0.5
+            },
+            "3": {
+                "sound": {
+                    "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-saw-2.ogg",
+                    "volume": 0.8
+                },
+                "frame": 53,
+                "audible_distance_modifier": 0.4
+            },
+            "4": {
+                "sound": {
+                    "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-split.ogg",
+                    "volume": 0.4
+                },
+                "frame": 62,
+                "audible_distance_modifier": 0.3
+            },
+            "5": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-plank-1.ogg",
+                            "volume": 0.5
+                        },
+                        "2": {
+                            "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-plank-2.ogg",
+                            "volume": 0.5
+                        },
+                        "3": {
+                            "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-plank-3.ogg",
+                            "volume": 0.5
+                        }
+                    }
+                },
+                "frame": 14,
+                "audible_distance_modifier": 0.3
+            },
+            "6": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-plank-1.ogg",
+                            "volume": 0.5
+                        },
+                        "2": {
+                            "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-plank-2.ogg",
+                            "volume": 0.5
+                        },
+                        "3": {
+                            "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-plank-3.ogg",
+                            "volume": 0.5
+                        }
+                    }
+                },
+                "frame": 34,
+                "audible_distance_modifier": 0.3
+            },
+            "7": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-plank-1.ogg",
+                            "volume": 0.5
+                        },
+                        "2": {
+                            "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-plank-2.ogg",
+                            "volume": 0.5
+                        },
+                        "3": {
+                            "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-plank-3.ogg",
+                            "volume": 0.5
+                        }
+                    }
+                },
+                "frame": 54,
+                "audible_distance_modifier": 0.3
+            },
+            "8": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-plank-1.ogg",
+                            "volume": 0.5
+                        },
+                        "2": {
+                            "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-plank-2.ogg",
+                            "volume": 0.5
+                        },
+                        "3": {
+                            "filename": "__mf-buildings-graphics-1__/graphics/lumber-mill/lumber-mill-plank-3.ogg",
+                            "volume": 0.5
+                        }
+                    }
+                },
+                "frame": 74,
+                "audible_distance_modifier": 0.3
+            }
+        }
+    },
+    "effect_receiver": {
+        "base_effect": {
+            "productivity": 0.5
+        }
+    },
+    "surface_conditions": {
+        "1": {
+            "property": "oxygen",
+            "min": 3
+        },
+        "2": {
+            "property": "gravity",
+            "min": 1
+        }
+    }
+}

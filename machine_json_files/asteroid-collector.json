@@ -1,0 +1,1200 @@
+{
+    "type": "asteroid-collector",
+    "name": "asteroid-collector",
+    "flags": {
+        "1": "placeable-neutral",
+        "2": "placeable-player",
+        "3": "player-creation"
+    },
+    "icon": "__space-age__/graphics/icons/asteroid-collector.png",
+    "factoriopedia_simulation": {},
+    "collision_box": {
+        "1": {
+            "1": -1.2,
+            "2": -1.2
+        },
+        "2": {
+            "1": 1.2,
+            "2": 1.2
+        }
+    },
+    "collision_mask": {
+        "layers": {
+            "is_object": true,
+            "is_lower_object": true,
+            "transport_belt": true
+        }
+    },
+    "tile_buildability_rules": {
+        "1": {
+            "area": {
+                "1": {
+                    "1": -1.4,
+                    "2": -0.4
+                },
+                "2": {
+                    "1": 1.4,
+                    "2": 1.4
+                }
+            },
+            "required_tiles": {
+                "layers": {
+                    "ground_tile": true
+                }
+            },
+            "colliding_tiles": {
+                "layers": {
+                    "empty_space": true
+                }
+            },
+            "remove_on_collision": true
+        },
+        "2": {
+            "area": {
+                "1": {
+                    "1": -1.4,
+                    "2": -4.4
+                },
+                "2": {
+                    "1": 1.4,
+                    "2": -0.6
+                }
+            },
+            "required_tiles": {
+                "layers": {
+                    "empty_space": true
+                }
+            },
+            "remove_on_collision": true
+        }
+    },
+    "surface_conditions": {
+        "1": {
+            "property": "pressure",
+            "min": 0,
+            "max": 0
+        }
+    },
+    "arm_color_gradient": {
+        "1": {
+            "1": 215,
+            "2": 212,
+            "3": 212
+        },
+        "2": {
+            "1": 229,
+            "2": 227,
+            "3": 229
+        },
+        "3": {
+            "1": 235,
+            "2": 235,
+            "3": 235
+        },
+        "4": {
+            "1": 240,
+            "2": 240,
+            "3": 243
+        },
+        "5": {
+            "1": 229,
+            "2": 245,
+            "3": 245
+        },
+        "6": {
+            "1": 253,
+            "2": 248,
+            "3": 253
+        },
+        "7": {
+            "1": 201,
+            "2": 198,
+            "3": 203
+        },
+        "8": {
+            "1": 204,
+            "2": 201,
+            "3": 202
+        },
+        "9": {
+            "1": 216,
+            "2": 212,
+            "3": 218
+        },
+        "10": {
+            "1": 223,
+            "2": 223,
+            "3": 224
+        },
+        "11": {
+            "1": 227,
+            "2": 212,
+            "3": 235
+        },
+        "12": {
+            "1": 245,
+            "2": 245,
+            "3": 245
+        },
+        "13": {
+            "1": 202,
+            "2": 197,
+            "3": 195
+        },
+        "14": {
+            "1": 245,
+            "2": 245,
+            "3": 245
+        },
+        "15": {
+            "1": 216,
+            "2": 223,
+            "3": 231
+        },
+        "16": {
+            "1": 255,
+            "2": 245,
+            "3": 255
+        },
+        "17": {
+            "1": 224,
+            "2": 219,
+            "3": 221
+        },
+        "18": {
+            "1": 224,
+            "2": 222,
+            "3": 249
+        },
+        "19": {
+            "1": 219,
+            "2": 216,
+            "3": 224
+        },
+        "20": {
+            "1": 231,
+            "2": 226,
+            "3": 238
+        },
+        "21": {
+            "1": 223,
+            "2": 223,
+            "3": 224
+        },
+        "22": {
+            "1": 255,
+            "2": 255,
+            "3": 255
+        }
+    },
+    "tile_height": 3,
+    "tile_width": 3,
+    "selection_box": {
+        "1": {
+            "1": -1.5,
+            "2": -1.5
+        },
+        "2": {
+            "1": 1.5,
+            "2": 1.5
+        }
+    },
+    "fast_replaceable_group": "asteroid-collector",
+    "corpse": "asteroid-collector-remnants",
+    "dying_explosion": "asteroid-collector-explosion",
+    "collection_radius": 7.5,
+    "collection_box_offset": 5,
+    "deposit_radius": 1.5,
+    "minimal_arm_swing_segment_retraction": 6,
+    "impact_category": "metal",
+    "open_sound": {
+        "filename": "__base__/sound/open-close/mechanical-inventory-move.ogg",
+        "volume": 1
+    },
+    "close_sound": {
+        "filename": "__base__/sound/open-close/mechanical-inventory-pickup.ogg",
+        "volume": 1
+    },
+    "munch_sound": {
+        "variations": {
+            "1": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/asteroid-munch-1.ogg",
+                "volume": 0.8
+            },
+            "2": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/asteroid-munch-2.ogg",
+                "volume": 0.8
+            },
+            "3": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/asteroid-munch-3.ogg",
+                "volume": 0.8
+            },
+            "4": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/asteroid-munch-4.ogg",
+                "volume": 0.8
+            },
+            "5": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/asteroid-munch-5.ogg",
+                "volume": 0.8
+            },
+            "6": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/asteroid-munch-6.ogg",
+                "volume": 0.8
+            },
+            "7": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/asteroid-munch-7.ogg",
+                "volume": 0.8
+            }
+        },
+        "aggregation": {
+            "max_count": 2,
+            "remove": true,
+            "count_already_playing": true
+        },
+        "advanced_volume_control": {
+            "fades": {
+                "fade_in": {
+                    "curve_type": "cosine",
+                    "from": {
+                        "control": 0.4,
+                        "volume_percentage": 0
+                    },
+                    "to": {
+                        "1": 2,
+                        "2": 100
+                    }
+                }
+            }
+        }
+    },
+    "arm_extend_sound": {
+        "variations": {
+            "1": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/arm-extend-1.ogg",
+                "volume": 0.7
+            },
+            "2": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/arm-extend-2.ogg",
+                "volume": 0.7
+            },
+            "3": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/arm-extend-3.ogg",
+                "volume": 0.7
+            },
+            "4": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/arm-extend-4.ogg",
+                "volume": 0.7
+            },
+            "5": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/arm-extend-5.ogg",
+                "volume": 0.7
+            }
+        },
+        "aggregation": {
+            "max_count": 1,
+            "remove": true,
+            "count_already_playing": true
+        },
+        "advanced_volume_control": {
+            "fades": {
+                "fade_in": {
+                    "curve_type": "S-curve",
+                    "from": {
+                        "control": 0.5,
+                        "volume_percentage": 0
+                    },
+                    "to": {
+                        "1": 3,
+                        "2": 100
+                    }
+                }
+            }
+        }
+    },
+    "arm_retract_sound": {
+        "variations": {
+            "1": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/arm-retract-1.ogg",
+                "volume": 0.7
+            },
+            "2": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/arm-retract-2.ogg",
+                "volume": 0.7
+            },
+            "3": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/arm-retract-3.ogg",
+                "volume": 0.7
+            },
+            "4": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/arm-retract-4.ogg",
+                "volume": 0.7
+            },
+            "5": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/arm-retract-5.ogg",
+                "volume": 0.7
+            }
+        },
+        "aggregation": {
+            "max_count": 1,
+            "remove": true,
+            "count_already_playing": true
+        },
+        "advanced_volume_control": {
+            "fades": {
+                "fade_in": {
+                    "curve_type": "S-curve",
+                    "from": {
+                        "control": 0.5,
+                        "volume_percentage": 0
+                    },
+                    "to": {
+                        "1": 3,
+                        "2": 100
+                    }
+                }
+            }
+        }
+    },
+    "deposit_sound": {
+        "variations": {
+            "1": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/asteroid-deposit-1.ogg",
+                "volume": 0.5
+            },
+            "2": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/asteroid-deposit-2.ogg",
+                "volume": 0.5
+            },
+            "3": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/asteroid-deposit-3.ogg",
+                "volume": 0.5
+            },
+            "4": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/asteroid-deposit-4.ogg",
+                "volume": 0.5
+            },
+            "5": {
+                "filename": "__space-age__/sound/entity/asteroid-collector/asteroid-deposit-5.ogg",
+                "volume": 0.5
+            }
+        },
+        "aggregation": {
+            "max_count": 2,
+            "remove": true,
+            "count_already_playing": true
+        },
+        "advanced_volume_control": {
+            "fades": {
+                "fade_in": {
+                    "curve_type": "S-curve",
+                    "from": {
+                        "control": 0.5,
+                        "volume_percentage": 0
+                    },
+                    "to": {
+                        "1": 3,
+                        "2": 100
+                    }
+                }
+            }
+        }
+    },
+    "passive_energy_usage": "200J",
+    "arm_energy_usage": "1kJ",
+    "arm_slow_energy_usage": "300J",
+    "energy_usage_quality_scaling": 0.1,
+    "head_collection_radius": 0.6,
+    "arm_count_base": 1,
+    "arm_count_quality_scaling": 1,
+    "arm_speed_base": 0.2,
+    "arm_speed_quality_scaling": 0.05,
+    "arm_angular_speed_cap_base": 0.2,
+    "arm_angular_speed_cap_quality_scaling": 0.05,
+    "tether_size": 0.35,
+    "unpowered_arm_speed_scale": 0.3,
+    "held_items_offset": 0.6,
+    "energy_source": {
+        "type": "electric",
+        "usage_priority": "secondary-input"
+    },
+    "inventory_size": 39,
+    "inventory_size_quality_increase": 5,
+    "arm_inventory_size": 5,
+    "arm_inventory_size_quality_increase": 0,
+    "max_health": 300,
+    "minable": {
+        "mining_time": 0.2,
+        "result": "asteroid-collector"
+    },
+    "resistances": {
+        "1": {
+            "type": "fire",
+            "percent": 70
+        }
+    },
+    "circuit_connector": {
+        "1": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 0,
+                    "shift": {
+                        "1": 0.125,
+                        "2": -1.109375
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 0,
+                    "shift": {
+                        "1": 0.125,
+                        "2": -1.109375
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 0,
+                    "shift": {
+                        "1": 0.125,
+                        "2": -1.140625
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 0,
+                    "shift": {
+                        "1": 0.125,
+                        "2": -1.140625
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 0,
+                    "shift": {
+                        "1": 0.125,
+                        "2": -1.140625
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 0,
+                    "shift": {
+                        "1": 0.125,
+                        "2": -1.140625
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": -0.09375,
+                    "2": -1.234375
+                },
+                "red_green_led_light_offset": {
+                    "1": 0.0625,
+                    "2": -1.265625
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": 0.09375,
+                        "2": -0.984375
+                    },
+                    "green": {
+                        "1": -0.125,
+                        "2": -0.984375
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": 0.875,
+                        "2": -0.09375
+                    },
+                    "green": {
+                        "1": 0.6875,
+                        "2": -0.09375
+                    }
+                }
+            }
+        },
+        "2": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 312,
+                    "y": 0,
+                    "shift": {
+                        "1": 0.578125,
+                        "2": -0.5625
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 372,
+                    "y": 0,
+                    "shift": {
+                        "1": 0.578125,
+                        "2": -0.5625
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 360,
+                    "y": 0,
+                    "shift": {
+                        "1": 0.578125,
+                        "2": -0.59375
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 276,
+                    "y": 0,
+                    "shift": {
+                        "1": 0.578125,
+                        "2": -0.59375
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 288,
+                    "y": 0,
+                    "shift": {
+                        "1": 0.578125,
+                        "2": -0.59375
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 288,
+                    "y": 0,
+                    "shift": {
+                        "1": 0.578125,
+                        "2": -0.59375
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": 0.578125,
+                    "2": -0.875
+                },
+                "red_green_led_light_offset": {
+                    "1": 0.578125,
+                    "2": -0.78125
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": 0.265625,
+                        "2": -0.6875
+                    },
+                    "green": {
+                        "1": 0.328125,
+                        "2": -0.90625
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": 1.3125,
+                        "2": 0.09375
+                    },
+                    "green": {
+                        "1": 1.4375,
+                        "2": -0.0625
+                    }
+                }
+            }
+        },
+        "3": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 208,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.125,
+                        "2": -0.28125
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 248,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.125,
+                        "2": -0.28125
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 240,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.125,
+                        "2": -0.3125
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 184,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.125,
+                        "2": -0.3125
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 192,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.125,
+                        "2": -0.3125
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 192,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.125,
+                        "2": -0.3125
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": 0.09375,
+                    "2": -0.4375
+                },
+                "red_green_led_light_offset": {
+                    "1": -0.0625,
+                    "2": -0.46875
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": -0.09375,
+                        "2": -0.625
+                    },
+                    "green": {
+                        "1": 0.125,
+                        "2": -0.625
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": 0.78125,
+                        "2": 0.21875
+                    },
+                    "green": {
+                        "1": 1.0625,
+                        "2": 0.21875
+                    }
+                }
+            }
+        },
+        "4": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 104,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.59375,
+                        "2": -0.765625
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 124,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.59375,
+                        "2": -0.765625
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 120,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.59375,
+                        "2": -0.796875
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 92,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.59375,
+                        "2": -0.796875
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 96,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.59375,
+                        "2": -0.796875
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 96,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.59375,
+                        "2": -0.796875
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": -0.59375,
+                    "2": -0.796875
+                },
+                "red_green_led_light_offset": {
+                    "1": -0.59375,
+                    "2": -0.890625
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": -0.34375,
+                        "2": -0.890625
+                    },
+                    "green": {
+                        "1": -0.28125,
+                        "2": -0.734375
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": 0.5,
+                        "2": 0
+                    },
+                    "green": {
+                        "1": 0.59375,
+                        "2": 0.1875
+                    }
+                }
+            }
+        }
+    },
+    "circuit_wire_max_distance": 9,
+    "graphics_set": {
+        "animation": {
+            "north": {
+                "layers": {
+                    "1": {
+                        "frame_count": 16,
+                        "scale": 0.5,
+                        "animation_speed": 3,
+                        "width": 236,
+                        "height": 266,
+                        "shift": {
+                            "1": 0,
+                            "2": -0.34375
+                        },
+                        "line_length": 4,
+                        "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-top-north.png"
+                    },
+                    "2": {
+                        "draw_as_shadow": true,
+                        "frame_sequence": {
+                            "1": 1,
+                            "2": 1,
+                            "3": 1,
+                            "4": 1
+                        },
+                        "frame_count": 4,
+                        "repeat_count": 4,
+                        "scale": 0.5,
+                        "width": 228,
+                        "height": 252,
+                        "shift": {
+                            "1": 0.328125,
+                            "2": 0.421875
+                        },
+                        "line_length": 4,
+                        "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-shadow.png"
+                    }
+                }
+            },
+            "east": {
+                "layers": {
+                    "1": {
+                        "frame_count": 16,
+                        "scale": 0.5,
+                        "animation_speed": 3,
+                        "width": 280,
+                        "height": 228,
+                        "shift": {
+                            "1": 0.328125,
+                            "2": 0.0625
+                        },
+                        "line_length": 4,
+                        "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-top-east.png"
+                    },
+                    "2": {
+                        "draw_as_shadow": true,
+                        "frame_sequence": {
+                            "1": 2,
+                            "2": 2,
+                            "3": 2,
+                            "4": 2
+                        },
+                        "frame_count": 4,
+                        "repeat_count": 4,
+                        "scale": 0.5,
+                        "width": 228,
+                        "height": 252,
+                        "shift": {
+                            "1": 0.328125,
+                            "2": 0.421875
+                        },
+                        "line_length": 4,
+                        "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-shadow.png"
+                    }
+                }
+            },
+            "south": {
+                "layers": {
+                    "1": {
+                        "frame_count": 16,
+                        "scale": 0.5,
+                        "animation_speed": 3,
+                        "width": 238,
+                        "height": 254,
+                        "shift": {
+                            "1": 0.015625,
+                            "2": 0.1875
+                        },
+                        "line_length": 4,
+                        "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-top-south.png"
+                    },
+                    "2": {
+                        "draw_as_shadow": true,
+                        "frame_sequence": {
+                            "1": 3,
+                            "2": 3,
+                            "3": 3,
+                            "4": 3
+                        },
+                        "frame_count": 4,
+                        "repeat_count": 4,
+                        "scale": 0.5,
+                        "width": 228,
+                        "height": 252,
+                        "shift": {
+                            "1": 0.328125,
+                            "2": 0.421875
+                        },
+                        "line_length": 4,
+                        "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-shadow.png"
+                    }
+                }
+            },
+            "west": {
+                "layers": {
+                    "1": {
+                        "frame_count": 16,
+                        "scale": 0.5,
+                        "animation_speed": 3,
+                        "width": 280,
+                        "height": 256,
+                        "shift": {
+                            "1": -0.328125,
+                            "2": -0.0625
+                        },
+                        "line_length": 4,
+                        "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-top-west.png"
+                    },
+                    "2": {
+                        "draw_as_shadow": true,
+                        "frame_sequence": {
+                            "1": 4,
+                            "2": 4,
+                            "3": 4,
+                            "4": 4
+                        },
+                        "frame_count": 4,
+                        "repeat_count": 4,
+                        "scale": 0.5,
+                        "width": 228,
+                        "height": 252,
+                        "shift": {
+                            "1": 0.328125,
+                            "2": 0.421875
+                        },
+                        "line_length": 4,
+                        "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-shadow.png"
+                    }
+                }
+            }
+        },
+        "status_lamp_picture_on": {
+            "tint": {
+                "1": 0,
+                "2": 1,
+                "3": 0,
+                "4": 1
+            },
+            "blend_mode": "additive",
+            "draw_as_glow": true,
+            "direction_count": 4,
+            "scale": 0.5,
+            "width": 320,
+            "height": 310,
+            "shift": {
+                "1": 0,
+                "2": 0.390625
+            },
+            "line_length": 4,
+            "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-status-lamp.png"
+        },
+        "status_lamp_picture_full": {
+            "tint": {
+                "1": 1,
+                "2": 0.5,
+                "3": 0,
+                "4": 1
+            },
+            "blend_mode": "additive",
+            "draw_as_glow": true,
+            "direction_count": 4,
+            "scale": 0.5,
+            "width": 320,
+            "height": 310,
+            "shift": {
+                "1": 0,
+                "2": 0.390625
+            },
+            "line_length": 4,
+            "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-status-lamp.png"
+        },
+        "status_lamp_picture_off": {
+            "tint": {
+                "1": 0.7,
+                "2": 0,
+                "3": 0,
+                "4": 1
+            },
+            "blend_mode": "additive",
+            "draw_as_glow": true,
+            "direction_count": 4,
+            "scale": 0.5,
+            "width": 320,
+            "height": 310,
+            "shift": {
+                "1": 0,
+                "2": 0.390625
+            },
+            "line_length": 4,
+            "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-status-lamp.png"
+        },
+        "below_arm_pictures": {
+            "layers": {
+                "1": {
+                    "direction_count": 4,
+                    "scale": 0.5,
+                    "width": 322,
+                    "height": 140,
+                    "shift": {
+                        "1": 0,
+                        "2": 1.375
+                    },
+                    "line_length": 4,
+                    "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-middle.png"
+                }
+            }
+        },
+        "below_ground_pictures": {
+            "layers": {
+                "1": {
+                    "direction_count": 4,
+                    "scale": 0.5,
+                    "width": 322,
+                    "height": 106,
+                    "shift": {
+                        "1": 0,
+                        "2": 2
+                    },
+                    "line_length": 4,
+                    "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-bottom.png"
+                }
+            }
+        },
+        "arm_head_animation": {
+            "frame_count": 5,
+            "direction_count": 32,
+            "scale": 0.5,
+            "width": 108,
+            "height": 84,
+            "shift": {
+                "1": 0,
+                "2": -0.375
+            },
+            "line_length": 5,
+            "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-head.png"
+        },
+        "arm_head_top_animation": {
+            "frame_count": 5,
+            "direction_count": 32,
+            "scale": 0.5,
+            "width": 76,
+            "height": 82,
+            "shift": {
+                "1": 0,
+                "2": -0.390625
+            },
+            "line_length": 5,
+            "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-head-top.png"
+        },
+        "arm_link": {
+            "direction_count": 64,
+            "scale": 0.5,
+            "width": 36,
+            "height": 40,
+            "shift": {
+                "1": 0,
+                "2": -0.09375
+            },
+            "line_length": 16,
+            "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-link.png"
+        }
+    },
+    "radius_visualisation_picture": {
+        "filename": "__space-age__/graphics/entity/asteroid-collector/asteroid-collector-radius-visualization.png",
+        "size": 10
+    }
+}

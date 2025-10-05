@@ -1,0 +1,928 @@
+{
+    "type": "electric-turret",
+    "name": "tesla-turret",
+    "icon": "__space-age__/graphics/icons/tesla-turret.png",
+    "flags": {
+        "1": "placeable-player",
+        "2": "placeable-enemy",
+        "3": "player-creation"
+    },
+    "minable": {
+        "mining_time": 0.5,
+        "result": "tesla-turret"
+    },
+    "fast_replaceable_group": "tesla-turret",
+    "max_health": 1000,
+    "collision_box": {
+        "1": {
+            "1": -1.7,
+            "2": -1.7
+        },
+        "2": {
+            "1": 1.7,
+            "2": 1.7
+        }
+    },
+    "selection_box": {
+        "1": {
+            "1": -2,
+            "2": -2
+        },
+        "2": {
+            "1": 2,
+            "2": 2
+        }
+    },
+    "collision_mask": {
+        "layers": {
+            "item": true,
+            "object": true,
+            "player": true,
+            "water_tile": true,
+            "is_object": true,
+            "is_lower_object": true
+        }
+    },
+    "damaged_trigger_effect": {
+        "type": "create-entity",
+        "entity_name": "spark-explosion",
+        "offset_deviation": {
+            "1": {
+                "1": -0.5,
+                "2": -0.5
+            },
+            "2": {
+                "1": 0.5,
+                "2": 0.5
+            }
+        },
+        "offsets": {
+            "1": {
+                "1": 0,
+                "2": 1
+            }
+        },
+        "damage_type_filters": "fire"
+    },
+    "start_attacking_only_when_can_shoot": true,
+    "rotation_speed": 0.005,
+    "preparing_speed": 0.1,
+    "folding_speed": 0.1,
+    "ending_attack_speed": 0.032258064516129,
+    "circuit_connector": {
+        "1": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 52,
+                    "y": 100,
+                    "shift": {
+                        "1": -0.5625,
+                        "2": 0.4375
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 62,
+                    "y": 116,
+                    "shift": {
+                        "1": -0.5625,
+                        "2": 0.4375
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 60,
+                    "y": 120,
+                    "shift": {
+                        "1": -0.5625,
+                        "2": 0.40625
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 46,
+                    "y": 88,
+                    "shift": {
+                        "1": -0.5625,
+                        "2": 0.40625
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 48,
+                    "y": 92,
+                    "shift": {
+                        "1": -0.5625,
+                        "2": 0.40625
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 48,
+                    "y": 92,
+                    "shift": {
+                        "1": -0.5625,
+                        "2": 0.40625
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": -0.71875,
+                    "2": 0.625
+                },
+                "red_green_led_light_offset": {
+                    "1": -0.6875,
+                    "2": 0.46875
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": -0.40625,
+                        "2": 0.5625
+                    },
+                    "green": {
+                        "1": -0.53125,
+                        "2": 0.75
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": 0.09375,
+                        "2": 1.1875
+                    },
+                    "green": {
+                        "1": -0.21875,
+                        "2": 1.25
+                    }
+                }
+            }
+        }
+    },
+    "circuit_wire_max_distance": 9,
+    "open_sound": {
+        "filename": "__base__/sound/open-close/turret-open.ogg",
+        "volume": 0.8
+    },
+    "close_sound": {
+        "filename": "__base__/sound/open-close/turret-close.ogg",
+        "volume": 0.8
+    },
+    "working_sound": {
+        "sound": {
+            "filename": "__space-age__/sound/entity/tesla-turret/tesla-turret-base.ogg",
+            "volume": 0.3
+        },
+        "use_doppler_shift": false,
+        "fade_in_ticks": 4,
+        "fade_out_ticks": 20
+    },
+    "preparing_sound": {
+        "filename": "__space-age__/sound/entity/tesla-turret/tesla-turret-activate.ogg",
+        "volume": 0.8,
+        "aggregation": {
+            "max_count": 2,
+            "remove": true,
+            "count_already_playing": true
+        },
+        "advanced_volume_control": {
+            "fades": {
+                "fade_in": {
+                    "curve_type": "S-curve",
+                    "from": {
+                        "control": 0.5,
+                        "volume_percentage": 0
+                    },
+                    "to": {
+                        "1": 2,
+                        "2": 100
+                    }
+                }
+            }
+        }
+    },
+    "folding_sound": {
+        "filename": "__space-age__/sound/entity/tesla-turret/tesla-turret-deactivate.ogg",
+        "volume": 0.5,
+        "aggregation": {
+            "max_count": 2,
+            "remove": true,
+            "count_already_playing": true
+        },
+        "advanced_volume_control": {
+            "fades": {
+                "fade_in": {
+                    "curve_type": "S-curve",
+                    "from": {
+                        "control": 0.5,
+                        "volume_percentage": 0
+                    },
+                    "to": {
+                        "1": 2,
+                        "2": 100
+                    }
+                }
+            }
+        }
+    },
+    "rotating_sound": {
+        "sound": {
+            "filename": "__space-age__/sound/entity/tesla-turret/tesla-turret-rotation-loop.ogg",
+            "volume": 0.7,
+            "aggregation": {
+                "max_count": 2,
+                "remove": true,
+                "count_already_playing": true
+            },
+            "advanced_volume_control": {
+                "fades": {
+                    "fade_in": {
+                        "curve_type": "S-curve",
+                        "from": {
+                            "control": 0.5,
+                            "volume_percentage": 0
+                        },
+                        "to": {
+                            "1": 1.5,
+                            "2": 100
+                        }
+                    }
+                }
+            }
+        },
+        "stopped_sound": {
+            "filename": "__space-age__/sound/entity/tesla-turret/tesla-turret-rotation-stop.ogg",
+            "volume": 0.7
+        },
+        "minimal_change_per_tick": 0.001,
+        "minimal_sound_duration_for_stopped_sound": 5
+    },
+    "corpse": "tesla-turret-remnants",
+    "dying_explosion": "laser-turret-explosion",
+    "energy_source": {
+        "type": "electric",
+        "buffer_capacity": "15MJ",
+        "input_flow_limit": "7MW",
+        "drain": "1MW",
+        "usage_priority": "primary-input"
+    },
+    "folded_animation": {
+        "layers": {
+            "1": {
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -2.234375
+                },
+                "scale": 0.5,
+                "frame_count": 16,
+                "line_length": 16,
+                "run_mode": "forward",
+                "width": 132,
+                "height": 144,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-rising.png"
+            },
+            "2": {
+                "flags": {
+                    "1": "mask"
+                },
+                "apply_runtime_tint": true,
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -2.21875
+                },
+                "scale": 0.5,
+                "frame_count": 16,
+                "line_length": 16,
+                "run_mode": "forward",
+                "width": 74,
+                "height": 120,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-rising-mask.png"
+            },
+            "3": {
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -2.234375
+                },
+                "scale": 0.5,
+                "draw_as_glow": true,
+                "blend_mode": "additive",
+                "frame_count": 16,
+                "line_length": 16,
+                "run_mode": "forward",
+                "width": 132,
+                "height": 144,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-rising-emit.png"
+            },
+            "4": {
+                "draw_as_shadow": true,
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 2.859375,
+                    "2": 0.328125
+                },
+                "scale": 0.5,
+                "frame_count": 16,
+                "line_length": 16,
+                "run_mode": "forward",
+                "width": 134,
+                "height": 92,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-rising-shadow.png"
+            }
+        }
+    },
+    "preparing_animation": {
+        "layers": {
+            "1": {
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -2.234375
+                },
+                "scale": 0.5,
+                "frame_count": 16,
+                "line_length": 16,
+                "run_mode": "forward",
+                "width": 132,
+                "height": 144,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-rising.png"
+            },
+            "2": {
+                "flags": {
+                    "1": "mask"
+                },
+                "apply_runtime_tint": true,
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -2.21875
+                },
+                "scale": 0.5,
+                "frame_count": 16,
+                "line_length": 16,
+                "run_mode": "forward",
+                "width": 74,
+                "height": 120,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-rising-mask.png"
+            },
+            "3": {
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -2.234375
+                },
+                "scale": 0.5,
+                "draw_as_glow": true,
+                "blend_mode": "additive",
+                "frame_count": 16,
+                "line_length": 16,
+                "run_mode": "forward",
+                "width": 132,
+                "height": 144,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-rising-emit.png"
+            },
+            "4": {
+                "draw_as_shadow": true,
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 2.859375,
+                    "2": 0.328125
+                },
+                "scale": 0.5,
+                "frame_count": 16,
+                "line_length": 16,
+                "run_mode": "forward",
+                "width": 134,
+                "height": 92,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-rising-shadow.png"
+            }
+        }
+    },
+    "prepared_animation": {
+        "layers": {
+            "1": {
+                "direction_count": 64,
+                "frame_count": 1,
+                "repeat_count": 30,
+                "shift": {
+                    "1": 0,
+                    "2": -2.328125
+                },
+                "scale": 0.5,
+                "width": 130,
+                "height": 134,
+                "line_length": 8,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-attacking.png"
+            },
+            "2": {
+                "flags": {
+                    "1": "mask"
+                },
+                "apply_runtime_tint": true,
+                "direction_count": 64,
+                "frame_count": 1,
+                "repeat_count": 30,
+                "shift": {
+                    "1": 0,
+                    "2": -2.296875
+                },
+                "scale": 0.5,
+                "width": 76,
+                "height": 110,
+                "line_length": 8,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-attacking-mask.png"
+            },
+            "3": {
+                "direction_count": 64,
+                "frame_count": 1,
+                "repeat_count": 30,
+                "shift": {
+                    "1": 0,
+                    "2": -2.328125
+                },
+                "scale": 0.5,
+                "draw_as_glow": true,
+                "blend_mode": "additive",
+                "width": 130,
+                "height": 134,
+                "line_length": 8,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-attacking-emit.png"
+            },
+            "4": {
+                "draw_as_shadow": true,
+                "direction_count": 64,
+                "frame_count": 1,
+                "repeat_count": 30,
+                "shift": {
+                    "1": 2.828125,
+                    "2": 0.328125
+                },
+                "scale": 0.5,
+                "width": 138,
+                "height": 90,
+                "line_length": 8,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-attacking-shadow.png"
+            }
+        }
+    },
+    "ending_attack_animation": {
+        "layers": {
+            "1": {
+                "direction_count": 64,
+                "frame_count": 1,
+                "repeat_count": 30,
+                "shift": {
+                    "1": 0,
+                    "2": -2.328125
+                },
+                "scale": 0.5,
+                "width": 130,
+                "height": 134,
+                "line_length": 8,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-attacking.png"
+            },
+            "2": {
+                "flags": {
+                    "1": "mask"
+                },
+                "apply_runtime_tint": true,
+                "direction_count": 64,
+                "frame_count": 1,
+                "repeat_count": 30,
+                "shift": {
+                    "1": 0,
+                    "2": -2.296875
+                },
+                "scale": 0.5,
+                "width": 76,
+                "height": 110,
+                "line_length": 8,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-attacking-mask.png"
+            },
+            "3": {
+                "direction_count": 64,
+                "frame_count": 1,
+                "repeat_count": 30,
+                "shift": {
+                    "1": 0,
+                    "2": -2.328125
+                },
+                "scale": 0.5,
+                "draw_as_glow": true,
+                "blend_mode": "additive",
+                "width": 130,
+                "height": 134,
+                "line_length": 8,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-attacking-emit.png"
+            },
+            "4": {
+                "direction_count": 64,
+                "frame_count": 1,
+                "repeat_count": 30,
+                "shift": {
+                    "1": 0,
+                    "2": -2.328125
+                },
+                "scale": 0.5,
+                "draw_as_glow": true,
+                "blend_mode": "additive",
+                "width": 130,
+                "height": 134,
+                "line_length": 8,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-attacking-facelight.png"
+            },
+            "5": {
+                "draw_as_shadow": true,
+                "direction_count": 64,
+                "frame_count": 1,
+                "repeat_count": 30,
+                "shift": {
+                    "1": 2.828125,
+                    "2": 0.328125
+                },
+                "scale": 0.5,
+                "width": 138,
+                "height": 90,
+                "line_length": 8,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-attacking-shadow.png"
+            },
+            "6": {
+                "direction_count": 1,
+                "duplicate_first_direction": true,
+                "frame_count": 30,
+                "shift": {
+                    "1": -0.03125,
+                    "2": -0.015625
+                },
+                "scale": 0.5,
+                "animation_speed": 0.5,
+                "draw_as_glow": true,
+                "blend_mode": "additive",
+                "width": 268,
+                "height": 258,
+                "line_length": 8,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-sfx-active.png"
+            }
+        }
+    },
+    "folding_animation": {
+        "layers": {
+            "1": {
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -2.234375
+                },
+                "scale": 0.5,
+                "frame_count": 16,
+                "line_length": 16,
+                "run_mode": "backward",
+                "width": 132,
+                "height": 144,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-rising.png"
+            },
+            "2": {
+                "flags": {
+                    "1": "mask"
+                },
+                "apply_runtime_tint": true,
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -2.21875
+                },
+                "scale": 0.5,
+                "frame_count": 16,
+                "line_length": 16,
+                "run_mode": "backward",
+                "width": 74,
+                "height": 120,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-rising-mask.png"
+            },
+            "3": {
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 0,
+                    "2": -2.234375
+                },
+                "scale": 0.5,
+                "draw_as_glow": true,
+                "blend_mode": "additive",
+                "frame_count": 16,
+                "line_length": 16,
+                "run_mode": "backward",
+                "width": 132,
+                "height": 144,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-rising-emit.png"
+            },
+            "4": {
+                "draw_as_shadow": true,
+                "priority": "medium",
+                "direction_count": 4,
+                "shift": {
+                    "1": 2.859375,
+                    "2": 0.328125
+                },
+                "scale": 0.5,
+                "frame_count": 16,
+                "line_length": 16,
+                "run_mode": "backward",
+                "width": 134,
+                "height": 92,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-head-rising-shadow.png"
+            }
+        }
+    },
+    "energy_glow_animation": {
+        "filename": "__base__/graphics/entity/laser-turret/laser-turret-shooting-light.png",
+        "line_length": 8,
+        "width": 122,
+        "height": 116,
+        "direction_count": 64,
+        "shift": {
+            "1": -0.015625,
+            "2": -1.09375
+        },
+        "blend_mode": "additive",
+        "scale": 0.5
+    },
+    "resource_indicator_animation": {
+        "layers": {
+            "1": {
+                "direction_count": 1,
+                "duplicate_first_direction": true,
+                "shift": {
+                    "1": 1.796875,
+                    "2": 1.671875
+                },
+                "draw_as_glow": true,
+                "blend_mode": "additive",
+                "scale": 0.5,
+                "frame_count": 5,
+                "width": 24,
+                "height": 26,
+                "line_length": 10,
+                "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-LED.png"
+            }
+        }
+    },
+    "glow_light_intensity": 0.5,
+    "graphics_set": {
+        "base_visualisation": {
+            "1": {
+                "animation": {
+                    "layers": {
+                        "1": {
+                            "frame_count": 1,
+                            "repeat_count": 30,
+                            "shift": {
+                                "1": -0.03125,
+                                "2": -0.015625
+                            },
+                            "scale": 0.5,
+                            "animation_speed": 0.5,
+                            "width": 268,
+                            "height": 258,
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-base.png"
+                        },
+                        "2": {
+                            "flags": {
+                                "1": "mask"
+                            },
+                            "apply_runtime_tint": true,
+                            "frame_count": 1,
+                            "repeat_count": 30,
+                            "shift": {
+                                "1": 0.125,
+                                "2": 0.109375
+                            },
+                            "scale": 0.5,
+                            "width": 244,
+                            "height": 228,
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-base-mask.png"
+                        },
+                        "3": {
+                            "frame_count": 1,
+                            "repeat_count": 30,
+                            "draw_as_shadow": true,
+                            "shift": {
+                                "1": 0.375,
+                                "2": 0.078125
+                            },
+                            "scale": 0.5,
+                            "width": 304,
+                            "height": 242,
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-base-shadow.png"
+                        },
+                        "4": {
+                            "frame_count": 1,
+                            "repeat_count": 30,
+                            "shift": {
+                                "1": -0.03125,
+                                "2": 0
+                            },
+                            "scale": 0.5,
+                            "draw_as_glow": true,
+                            "blend_mode": "additive",
+                            "width": 268,
+                            "height": 256,
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-base-emit.png"
+                        }
+                    }
+                }
+            },
+            "2": {
+                "enabled_states": {
+                    "1": "folded",
+                    "2": "preparing",
+                    "3": "rotate-for-folding",
+                    "4": "folding"
+                },
+                "draw_when_no_energy": false,
+                "draw_when_frozen": false,
+                "animation": {
+                    "layers": {
+                        "1": {
+                            "frame_count": 50,
+                            "repeat_count": 4,
+                            "shift": {
+                                "1": -0.03125,
+                                "2": -0.015625
+                            },
+                            "scale": 0.5,
+                            "animation_speed": 0.33,
+                            "draw_as_glow": true,
+                            "blend_mode": "additive",
+                            "width": 268,
+                            "height": 258,
+                            "line_length": 10,
+                            "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-sfx-idle-2.png"
+                        },
+                        "2": {
+                            "frame_count": 40,
+                            "repeat_count": 5,
+                            "shift": {
+                                "1": -0.03125,
+                                "2": -0.015625
+                            },
+                            "scale": 0.5,
+                            "animation_speed": 0.33,
+                            "draw_as_glow": true,
+                            "blend_mode": "additive",
+                            "width": 268,
+                            "height": 258,
+                            "line_length": 10,
+                            "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-sfx-idle-1.png"
+                        }
+                    }
+                }
+            },
+            "3": {
+                "enabled_states": {
+                    "1": "prepared",
+                    "2": "starting-attack",
+                    "3": "attacking",
+                    "4": "ending-attack"
+                },
+                "draw_when_no_energy": false,
+                "draw_when_frozen": false,
+                "animation": {
+                    "layers": {
+                        "1": {
+                            "frame_count": 30,
+                            "shift": {
+                                "1": -0.03125,
+                                "2": -0.015625
+                            },
+                            "scale": 0.5,
+                            "animation_speed": 0.5,
+                            "draw_as_glow": true,
+                            "blend_mode": "additive",
+                            "width": 268,
+                            "height": 258,
+                            "line_length": 8,
+                            "filename": "__space-age__/graphics/entity/tesla-turret/tesla-turret-sfx-passive.png"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "attack_parameters": {
+        "type": "beam",
+        "cooldown": 120,
+        "range": 30,
+        "range_mode": "center-to-bounding-box",
+        "fire_penalty": 0.9,
+        "source_direction_count": 64,
+        "source_offset": {
+            "1": 0,
+            "2": -0.55
+        },
+        "ammo_category": "tesla",
+        "ammo_type": {
+            "energy_consumption": "12MJ",
+            "action": {
+                "type": "direct",
+                "action_delivery": {
+                    "type": "instant",
+                    "target_effects": {
+                        "1": {
+                            "type": "nested-result",
+                            "action": {
+                                "type": "direct",
+                                "action_delivery": {
+                                    "type": "chain",
+                                    "chain": "chain-tesla-turret-chain"
+                                }
+                            }
+                        },
+                        "2": {
+                            "type": "nested-result",
+                            "action": {
+                                "type": "direct",
+                                "action_delivery": {
+                                    "type": "beam",
+                                    "beam": "chain-tesla-turret-beam-start",
+                                    "max_length": 40,
+                                    "duration": 30,
+                                    "add_to_shooter": false,
+                                    "destroy_with_source_or_target": false,
+                                    "source_offset": {
+                                        "1": 0,
+                                        "2": -2.6
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "call_for_help_radius": 40,
+    "water_reflection": {
+        "pictures": {
+            "filename": "__base__/graphics/entity/laser-turret/laser-turret-reflection.png",
+            "priority": "extra-high",
+            "width": 20,
+            "height": 32,
+            "shift": {
+                "1": 0,
+                "2": 1.25
+            },
+            "variation_count": 1,
+            "scale": 5
+        },
+        "rotate": false,
+        "orientation_to_variation": false
+    }
+}

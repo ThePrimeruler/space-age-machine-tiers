@@ -1,0 +1,2392 @@
+{
+    "type": "assembling-machine",
+    "name": "electromagnetic-plant",
+    "icon": "__space-age__/graphics/icons/electromagnetic-plant.png",
+    "flags": {
+        "1": "placeable-neutral",
+        "2": "placeable-player",
+        "3": "player-creation"
+    },
+    "minable": {
+        "mining_time": 0.1,
+        "result": "electromagnetic-plant"
+    },
+    "fast_replaceable_group": "electromagnetic-plant",
+    "max_health": 350,
+    "corpse": "electromagnetic-plant-remnants",
+    "dying_explosion": "electromagnetic-plant-explosion",
+    "icon_draw_specification": {
+        "shift": {
+            "1": 0,
+            "2": -0.25
+        }
+    },
+    "circuit_wire_max_distance": 9,
+    "circuit_connector": {
+        "1": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 364,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.6875
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 434,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.6875
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 420,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.65625
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 322,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.65625
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 336,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.65625
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 336,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.65625
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": -1,
+                    "2": 1.4375
+                },
+                "red_green_led_light_offset": {
+                    "1": -0.90625,
+                    "2": 1.5
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": -1.0625,
+                        "2": 1.6875
+                    },
+                    "green": {
+                        "1": -1.25,
+                        "2": 1.625
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": -0.6875,
+                        "2": 1.84375
+                    },
+                    "green": {
+                        "1": -0.875,
+                        "2": 1.71875
+                    }
+                }
+            }
+        },
+        "2": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 364,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.6875
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 434,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.6875
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 420,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.65625
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 322,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.65625
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 336,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.65625
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 336,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.65625
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": -1,
+                    "2": 1.4375
+                },
+                "red_green_led_light_offset": {
+                    "1": -0.90625,
+                    "2": 1.5
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": -1.0625,
+                        "2": 1.6875
+                    },
+                    "green": {
+                        "1": -1.25,
+                        "2": 1.625
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": -0.6875,
+                        "2": 1.84375
+                    },
+                    "green": {
+                        "1": -0.875,
+                        "2": 1.71875
+                    }
+                }
+            }
+        },
+        "3": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 364,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.6875
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 434,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.6875
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 420,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.65625
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 322,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.65625
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 336,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.65625
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 336,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.65625
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": -1,
+                    "2": 1.4375
+                },
+                "red_green_led_light_offset": {
+                    "1": -0.90625,
+                    "2": 1.5
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": -1.0625,
+                        "2": 1.6875
+                    },
+                    "green": {
+                        "1": -1.25,
+                        "2": 1.625
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": -0.6875,
+                        "2": 1.84375
+                    },
+                    "green": {
+                        "1": -0.875,
+                        "2": 1.71875
+                    }
+                }
+            }
+        },
+        "4": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 364,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.6875
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 434,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.6875
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 420,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.65625
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 322,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.65625
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 336,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.65625
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 336,
+                    "y": 0,
+                    "shift": {
+                        "1": -0.84375,
+                        "2": 1.65625
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": -1,
+                    "2": 1.4375
+                },
+                "red_green_led_light_offset": {
+                    "1": -0.90625,
+                    "2": 1.5
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": -1.0625,
+                        "2": 1.6875
+                    },
+                    "green": {
+                        "1": -1.25,
+                        "2": 1.625
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": -0.6875,
+                        "2": 1.84375
+                    },
+                    "green": {
+                        "1": -0.875,
+                        "2": 1.71875
+                    }
+                }
+            }
+        }
+    },
+    "heating_energy": "100kW",
+    "effect_receiver": {
+        "base_effect": {
+            "productivity": 0.5
+        }
+    },
+    "resistances": {
+        "1": {
+            "type": "fire",
+            "percent": 70
+        }
+    },
+    "collision_box": {
+        "1": {
+            "1": -1.7,
+            "2": -1.7
+        },
+        "2": {
+            "1": 1.7,
+            "2": 1.7
+        }
+    },
+    "selection_box": {
+        "1": {
+            "1": -2,
+            "2": -2
+        },
+        "2": {
+            "1": 2,
+            "2": 2
+        }
+    },
+    "damaged_trigger_effect": {
+        "type": "create-entity",
+        "entity_name": "spark-explosion",
+        "offset_deviation": {
+            "1": {
+                "1": -0.5,
+                "2": -0.5
+            },
+            "2": {
+                "1": 0.5,
+                "2": 0.5
+            }
+        },
+        "offsets": {
+            "1": {
+                "1": 0,
+                "2": 1
+            }
+        },
+        "damage_type_filters": "fire"
+    },
+    "drawing_box_vertical_extension": 0.7,
+    "fluid_boxes": {
+        "1": {
+            "production_type": "input",
+            "pipe_picture": {
+                "north": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 60,
+                            "height": 74,
+                            "shift": {
+                                "1": -0.03125,
+                                "2": 0.703125
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-north.png"
+                        },
+                        "2": {
+                            "scale": 0.5,
+                            "draw_as_shadow": true,
+                            "width": 70,
+                            "height": 68,
+                            "shift": {
+                                "1": 0.25,
+                                "2": 1.265625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-shadow-north.png"
+                        }
+                    }
+                },
+                "east": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 32,
+                            "height": 56,
+                            "shift": {
+                                "1": -0.640625,
+                                "2": 0.015625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-east.png"
+                        },
+                        "2": {
+                            "scale": 0.5,
+                            "draw_as_shadow": true,
+                            "width": 68,
+                            "height": 32,
+                            "shift": {
+                                "1": -0.34375,
+                                "2": 1.28125
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-shadow-east.png"
+                        }
+                    }
+                },
+                "south": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 54,
+                            "height": 58,
+                            "shift": {
+                                "1": 0.015625,
+                                "2": -0.5625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-south.png"
+                        },
+                        "2": {
+                            "scale": 0.5,
+                            "draw_as_shadow": true,
+                            "width": 66,
+                            "height": 38,
+                            "shift": {
+                                "1": 0.1875,
+                                "2": -0.484375
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-shadow-south.png"
+                        }
+                    }
+                },
+                "west": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 38,
+                            "height": 62,
+                            "shift": {
+                                "1": 0.703125,
+                                "2": 0.0625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-west.png"
+                        },
+                        "2": {
+                            "scale": 0.5,
+                            "draw_as_shadow": true,
+                            "width": 68,
+                            "height": 36,
+                            "shift": {
+                                "1": 1.03125,
+                                "2": 0.265625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-shadow-west.png"
+                        }
+                    }
+                }
+            },
+            "pipe_picture_frozen": {
+                "north": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 60,
+                            "height": 74,
+                            "shift": {
+                                "1": -0.03125,
+                                "2": 0.703125
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-north-frozen.png"
+                        }
+                    }
+                },
+                "east": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 32,
+                            "height": 56,
+                            "shift": {
+                                "1": -0.640625,
+                                "2": 0.015625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-east-frozen.png"
+                        }
+                    }
+                },
+                "south": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 54,
+                            "height": 58,
+                            "shift": {
+                                "1": 0.015625,
+                                "2": -0.5625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-south-frozen.png"
+                        }
+                    }
+                },
+                "west": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 38,
+                            "height": 62,
+                            "shift": {
+                                "1": 0.703125,
+                                "2": 0.0625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-west-frozen.png"
+                        }
+                    }
+                }
+            },
+            "pipe_covers": {
+                "north": {
+                    "layers": {
+                        "1": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-north.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5
+                        },
+                        "2": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-north-shadow.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5,
+                            "draw_as_shadow": true
+                        }
+                    }
+                },
+                "east": {
+                    "layers": {
+                        "1": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-east.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5
+                        },
+                        "2": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-east-shadow.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5,
+                            "draw_as_shadow": true
+                        }
+                    }
+                },
+                "south": {
+                    "layers": {
+                        "1": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-south.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5
+                        },
+                        "2": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-south-shadow.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5,
+                            "draw_as_shadow": true
+                        }
+                    }
+                },
+                "west": {
+                    "layers": {
+                        "1": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-west.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5
+                        },
+                        "2": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-west-shadow.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5,
+                            "draw_as_shadow": true
+                        }
+                    }
+                }
+            },
+            "volume": 200,
+            "secondary_draw_orders": {
+                "north": -1
+            },
+            "pipe_connections": {
+                "1": {
+                    "flow_direction": "input-output",
+                    "direction": 12,
+                    "position": {
+                        "1": -1.5,
+                        "2": 0.5
+                    }
+                }
+            }
+        },
+        "2": {
+            "production_type": "input",
+            "pipe_picture": {
+                "north": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 60,
+                            "height": 74,
+                            "shift": {
+                                "1": -0.03125,
+                                "2": 0.703125
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-north.png"
+                        },
+                        "2": {
+                            "scale": 0.5,
+                            "draw_as_shadow": true,
+                            "width": 70,
+                            "height": 68,
+                            "shift": {
+                                "1": 0.25,
+                                "2": 1.265625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-shadow-north.png"
+                        }
+                    }
+                },
+                "east": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 32,
+                            "height": 56,
+                            "shift": {
+                                "1": -0.640625,
+                                "2": 0.015625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-east.png"
+                        },
+                        "2": {
+                            "scale": 0.5,
+                            "draw_as_shadow": true,
+                            "width": 68,
+                            "height": 32,
+                            "shift": {
+                                "1": -0.34375,
+                                "2": 1.28125
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-shadow-east.png"
+                        }
+                    }
+                },
+                "south": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 54,
+                            "height": 58,
+                            "shift": {
+                                "1": 0.015625,
+                                "2": -0.5625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-south.png"
+                        },
+                        "2": {
+                            "scale": 0.5,
+                            "draw_as_shadow": true,
+                            "width": 66,
+                            "height": 38,
+                            "shift": {
+                                "1": 0.1875,
+                                "2": -0.484375
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-shadow-south.png"
+                        }
+                    }
+                },
+                "west": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 38,
+                            "height": 62,
+                            "shift": {
+                                "1": 0.703125,
+                                "2": 0.0625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-west.png"
+                        },
+                        "2": {
+                            "scale": 0.5,
+                            "draw_as_shadow": true,
+                            "width": 68,
+                            "height": 36,
+                            "shift": {
+                                "1": 1.03125,
+                                "2": 0.265625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-shadow-west.png"
+                        }
+                    }
+                }
+            },
+            "pipe_picture_frozen": {
+                "north": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 60,
+                            "height": 74,
+                            "shift": {
+                                "1": -0.03125,
+                                "2": 0.703125
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-north-frozen.png"
+                        }
+                    }
+                },
+                "east": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 32,
+                            "height": 56,
+                            "shift": {
+                                "1": -0.640625,
+                                "2": 0.015625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-east-frozen.png"
+                        }
+                    }
+                },
+                "south": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 54,
+                            "height": 58,
+                            "shift": {
+                                "1": 0.015625,
+                                "2": -0.5625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-south-frozen.png"
+                        }
+                    }
+                },
+                "west": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 38,
+                            "height": 62,
+                            "shift": {
+                                "1": 0.703125,
+                                "2": 0.0625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-west-frozen.png"
+                        }
+                    }
+                }
+            },
+            "pipe_covers": {
+                "north": {
+                    "layers": {
+                        "1": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-north.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5
+                        },
+                        "2": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-north-shadow.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5,
+                            "draw_as_shadow": true
+                        }
+                    }
+                },
+                "east": {
+                    "layers": {
+                        "1": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-east.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5
+                        },
+                        "2": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-east-shadow.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5,
+                            "draw_as_shadow": true
+                        }
+                    }
+                },
+                "south": {
+                    "layers": {
+                        "1": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-south.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5
+                        },
+                        "2": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-south-shadow.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5,
+                            "draw_as_shadow": true
+                        }
+                    }
+                },
+                "west": {
+                    "layers": {
+                        "1": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-west.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5
+                        },
+                        "2": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-west-shadow.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5,
+                            "draw_as_shadow": true
+                        }
+                    }
+                }
+            },
+            "volume": 200,
+            "secondary_draw_orders": {
+                "north": -1
+            },
+            "pipe_connections": {
+                "1": {
+                    "flow_direction": "input-output",
+                    "direction": 4,
+                    "position": {
+                        "1": 1.5,
+                        "2": -0.5
+                    }
+                }
+            }
+        },
+        "3": {
+            "production_type": "output",
+            "pipe_picture": {
+                "north": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 60,
+                            "height": 74,
+                            "shift": {
+                                "1": -0.03125,
+                                "2": 0.703125
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-north.png"
+                        },
+                        "2": {
+                            "scale": 0.5,
+                            "draw_as_shadow": true,
+                            "width": 70,
+                            "height": 68,
+                            "shift": {
+                                "1": 0.25,
+                                "2": 1.265625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-shadow-north.png"
+                        }
+                    }
+                },
+                "east": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 32,
+                            "height": 56,
+                            "shift": {
+                                "1": -0.640625,
+                                "2": 0.015625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-east.png"
+                        },
+                        "2": {
+                            "scale": 0.5,
+                            "draw_as_shadow": true,
+                            "width": 68,
+                            "height": 32,
+                            "shift": {
+                                "1": -0.34375,
+                                "2": 1.28125
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-shadow-east.png"
+                        }
+                    }
+                },
+                "south": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 54,
+                            "height": 58,
+                            "shift": {
+                                "1": 0.015625,
+                                "2": -0.5625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-south.png"
+                        },
+                        "2": {
+                            "scale": 0.5,
+                            "draw_as_shadow": true,
+                            "width": 66,
+                            "height": 38,
+                            "shift": {
+                                "1": 0.1875,
+                                "2": -0.484375
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-shadow-south.png"
+                        }
+                    }
+                },
+                "west": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 38,
+                            "height": 62,
+                            "shift": {
+                                "1": 0.703125,
+                                "2": 0.0625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-west.png"
+                        },
+                        "2": {
+                            "scale": 0.5,
+                            "draw_as_shadow": true,
+                            "width": 68,
+                            "height": 36,
+                            "shift": {
+                                "1": 1.03125,
+                                "2": 0.265625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-shadow-west.png"
+                        }
+                    }
+                }
+            },
+            "pipe_picture_frozen": {
+                "north": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 60,
+                            "height": 74,
+                            "shift": {
+                                "1": -0.03125,
+                                "2": 0.703125
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-north-frozen.png"
+                        }
+                    }
+                },
+                "east": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 32,
+                            "height": 56,
+                            "shift": {
+                                "1": -0.640625,
+                                "2": 0.015625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-east-frozen.png"
+                        }
+                    }
+                },
+                "south": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 54,
+                            "height": 58,
+                            "shift": {
+                                "1": 0.015625,
+                                "2": -0.5625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-south-frozen.png"
+                        }
+                    }
+                },
+                "west": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 38,
+                            "height": 62,
+                            "shift": {
+                                "1": 0.703125,
+                                "2": 0.0625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-west-frozen.png"
+                        }
+                    }
+                }
+            },
+            "pipe_covers": {
+                "north": {
+                    "layers": {
+                        "1": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-north.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5
+                        },
+                        "2": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-north-shadow.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5,
+                            "draw_as_shadow": true
+                        }
+                    }
+                },
+                "east": {
+                    "layers": {
+                        "1": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-east.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5
+                        },
+                        "2": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-east-shadow.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5,
+                            "draw_as_shadow": true
+                        }
+                    }
+                },
+                "south": {
+                    "layers": {
+                        "1": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-south.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5
+                        },
+                        "2": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-south-shadow.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5,
+                            "draw_as_shadow": true
+                        }
+                    }
+                },
+                "west": {
+                    "layers": {
+                        "1": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-west.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5
+                        },
+                        "2": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-west-shadow.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5,
+                            "draw_as_shadow": true
+                        }
+                    }
+                }
+            },
+            "volume": 100,
+            "secondary_draw_orders": {
+                "north": -1
+            },
+            "pipe_connections": {
+                "1": {
+                    "flow_direction": "input-output",
+                    "direction": 8,
+                    "position": {
+                        "1": 0.5,
+                        "2": 1.5
+                    }
+                }
+            }
+        },
+        "4": {
+            "production_type": "output",
+            "pipe_picture": {
+                "north": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 60,
+                            "height": 74,
+                            "shift": {
+                                "1": -0.03125,
+                                "2": 0.703125
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-north.png"
+                        },
+                        "2": {
+                            "scale": 0.5,
+                            "draw_as_shadow": true,
+                            "width": 70,
+                            "height": 68,
+                            "shift": {
+                                "1": 0.25,
+                                "2": 1.265625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-shadow-north.png"
+                        }
+                    }
+                },
+                "east": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 32,
+                            "height": 56,
+                            "shift": {
+                                "1": -0.640625,
+                                "2": 0.015625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-east.png"
+                        },
+                        "2": {
+                            "scale": 0.5,
+                            "draw_as_shadow": true,
+                            "width": 68,
+                            "height": 32,
+                            "shift": {
+                                "1": -0.34375,
+                                "2": 1.28125
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-shadow-east.png"
+                        }
+                    }
+                },
+                "south": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 54,
+                            "height": 58,
+                            "shift": {
+                                "1": 0.015625,
+                                "2": -0.5625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-south.png"
+                        },
+                        "2": {
+                            "scale": 0.5,
+                            "draw_as_shadow": true,
+                            "width": 66,
+                            "height": 38,
+                            "shift": {
+                                "1": 0.1875,
+                                "2": -0.484375
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-shadow-south.png"
+                        }
+                    }
+                },
+                "west": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 38,
+                            "height": 62,
+                            "shift": {
+                                "1": 0.703125,
+                                "2": 0.0625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-west.png"
+                        },
+                        "2": {
+                            "scale": 0.5,
+                            "draw_as_shadow": true,
+                            "width": 68,
+                            "height": 36,
+                            "shift": {
+                                "1": 1.03125,
+                                "2": 0.265625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-shadow-west.png"
+                        }
+                    }
+                }
+            },
+            "pipe_picture_frozen": {
+                "north": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 60,
+                            "height": 74,
+                            "shift": {
+                                "1": -0.03125,
+                                "2": 0.703125
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-north-frozen.png"
+                        }
+                    }
+                },
+                "east": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 32,
+                            "height": 56,
+                            "shift": {
+                                "1": -0.640625,
+                                "2": 0.015625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-east-frozen.png"
+                        }
+                    }
+                },
+                "south": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 54,
+                            "height": 58,
+                            "shift": {
+                                "1": 0.015625,
+                                "2": -0.5625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-south-frozen.png"
+                        }
+                    }
+                },
+                "west": {
+                    "layers": {
+                        "1": {
+                            "scale": 0.5,
+                            "width": 38,
+                            "height": 62,
+                            "shift": {
+                                "1": 0.703125,
+                                "2": 0.0625
+                            },
+                            "line_length": 1,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/pipe-connections/electromagnetic-plant-pipe-west-frozen.png"
+                        }
+                    }
+                }
+            },
+            "pipe_covers": {
+                "north": {
+                    "layers": {
+                        "1": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-north.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5
+                        },
+                        "2": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-north-shadow.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5,
+                            "draw_as_shadow": true
+                        }
+                    }
+                },
+                "east": {
+                    "layers": {
+                        "1": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-east.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5
+                        },
+                        "2": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-east-shadow.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5,
+                            "draw_as_shadow": true
+                        }
+                    }
+                },
+                "south": {
+                    "layers": {
+                        "1": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-south.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5
+                        },
+                        "2": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-south-shadow.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5,
+                            "draw_as_shadow": true
+                        }
+                    }
+                },
+                "west": {
+                    "layers": {
+                        "1": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-west.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5
+                        },
+                        "2": {
+                            "filename": "__base__/graphics/entity/pipe-covers/pipe-cover-west-shadow.png",
+                            "priority": "extra-high",
+                            "width": 128,
+                            "height": 128,
+                            "scale": 0.5,
+                            "draw_as_shadow": true
+                        }
+                    }
+                }
+            },
+            "volume": 100,
+            "secondary_draw_orders": {
+                "north": -1
+            },
+            "pipe_connections": {
+                "1": {
+                    "flow_direction": "input-output",
+                    "direction": 0,
+                    "position": {
+                        "1": -0.5,
+                        "2": -1.5
+                    }
+                }
+            }
+        }
+    },
+    "fluid_boxes_off_when_no_fluid_recipe": true,
+    "forced_symmetry": "horizontal",
+    "perceived_performance": {
+        "minimum": 0.25,
+        "maximum": 10
+    },
+    "graphics_set": {
+        "animation_progress": 0.25,
+        "always_draw_idle_animation": true,
+        "states": {
+            "1": {
+                "name": "idle",
+                "duration": 1,
+                "next_active": "warm-up",
+                "next_inactive": "idle"
+            },
+            "2": {
+                "name": "warm-up",
+                "duration": 32,
+                "next_active": "working-1",
+                "next_inactive": "working-1"
+            },
+            "3": {
+                "name": "working-1",
+                "duration": 111,
+                "next_active": "working-1-continue",
+                "next_inactive": "cool-down"
+            },
+            "4": {
+                "name": "working-1-continue",
+                "duration": 17,
+                "next_active": "working-2",
+                "next_inactive": "working-2"
+            },
+            "5": {
+                "name": "working-2",
+                "duration": 111,
+                "next_active": "working-2-continue",
+                "next_inactive": "cool-down"
+            },
+            "6": {
+                "name": "working-2-continue",
+                "duration": 17,
+                "next_active": "working-3",
+                "next_inactive": "working-3"
+            },
+            "7": {
+                "name": "working-3",
+                "duration": 111,
+                "next_active": "cool-down",
+                "next_inactive": "cool-down"
+            },
+            "8": {
+                "name": "cool-down",
+                "duration": 32,
+                "next_active": "warm-up",
+                "next_inactive": "idle"
+            }
+        },
+        "idle_animation": {
+            "layers": {
+                "1": {
+                    "animation_speed": 0.4,
+                    "frame_count": 1,
+                    "scale": 0.5,
+                    "width": 238,
+                    "height": 252,
+                    "shift": {
+                        "1": 0.078125,
+                        "2": 0.1875
+                    },
+                    "line_length": 1,
+                    "filename": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-base.png"
+                },
+                "2": {
+                    "animation_speed": 0.4,
+                    "draw_as_shadow": true,
+                    "frame_count": 1,
+                    "scale": 0.5,
+                    "width": 262,
+                    "height": 242,
+                    "shift": {
+                        "1": 0.171875,
+                        "2": 0.203125
+                    },
+                    "line_length": 1,
+                    "filename": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-base-shadow.png"
+                }
+            }
+        },
+        "working_visualisations": {
+            "1": {
+                "always_draw": true,
+                "draw_in_states": {
+                    "1": "idle"
+                },
+                "animation": {
+                    "layers": {
+                        "1": {
+                            "animation_speed": 0.4,
+                            "frame_count": 1,
+                            "scale": 0.5,
+                            "width": 218,
+                            "height": 302,
+                            "shift": {
+                                "1": 0.046875,
+                                "2": -0.375
+                            },
+                            "line_length": 8,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-main-warm-up.png"
+                        },
+                        "2": {
+                            "draw_as_shadow": true,
+                            "animation_speed": 0.4,
+                            "frame_count": 1,
+                            "scale": 0.5,
+                            "width": 362,
+                            "height": 158,
+                            "shift": {
+                                "1": 1.375,
+                                "2": 0.8125
+                            },
+                            "line_length": 6,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-shadow-warm-up.png"
+                        }
+                    }
+                }
+            },
+            "2": {
+                "always_draw": true,
+                "draw_in_states": {
+                    "1": "warm-up"
+                },
+                "animation": {
+                    "layers": {
+                        "1": {
+                            "animation_speed": 0.4,
+                            "frame_count": 32,
+                            "scale": 0.5,
+                            "width": 218,
+                            "height": 302,
+                            "shift": {
+                                "1": 0.046875,
+                                "2": -0.375
+                            },
+                            "line_length": 8,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-main-warm-up.png"
+                        },
+                        "2": {
+                            "draw_as_shadow": true,
+                            "animation_speed": 0.4,
+                            "frame_count": 32,
+                            "scale": 0.5,
+                            "width": 362,
+                            "height": 158,
+                            "shift": {
+                                "1": 1.375,
+                                "2": 0.8125
+                            },
+                            "line_length": 6,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-shadow-warm-up.png"
+                        }
+                    }
+                },
+                "name": "warm-up"
+            },
+            "3": {
+                "always_draw": true,
+                "draw_in_states": {
+                    "1": "working-1",
+                    "2": "working-2",
+                    "3": "working-3"
+                },
+                "animation": {
+                    "layers": {
+                        "1": {
+                            "animation_speed": 0.4,
+                            "frame_count": 111,
+                            "scale": 0.5,
+                            "width": 226,
+                            "height": 312,
+                            "shift": {
+                                "1": 0,
+                                "2": -0.453125
+                            },
+                            "line_length": 8,
+                            "filenames": {
+                                "1": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-main-rotate-1.png",
+                                "2": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-main-rotate-2.png"
+                            },
+                            "lines_per_file": 7
+                        },
+                        "2": {
+                            "draw_as_shadow": true,
+                            "animation_speed": 0.4,
+                            "frame_count": 111,
+                            "scale": 0.5,
+                            "width": 402,
+                            "height": 162,
+                            "shift": {
+                                "1": 1.6875,
+                                "2": 0.84375
+                            },
+                            "line_length": 6,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-shadow-rotate.png"
+                        }
+                    }
+                },
+                "name": "rotation"
+            },
+            "4": {
+                "always_draw": true,
+                "draw_in_states": {
+                    "1": "working-1-continue",
+                    "2": "working-2-continue"
+                },
+                "animation": {
+                    "layers": {
+                        "1": {
+                            "animation_speed": 0.4,
+                            "frame_count": 17,
+                            "scale": 0.5,
+                            "width": 220,
+                            "height": 302,
+                            "shift": {
+                                "1": 0.0625,
+                                "2": -0.375
+                            },
+                            "line_length": 8,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-main-rotate-continue.png"
+                        },
+                        "2": {
+                            "draw_as_shadow": true,
+                            "animation_speed": 0.4,
+                            "frame_count": 17,
+                            "scale": 0.5,
+                            "width": 372,
+                            "height": 156,
+                            "shift": {
+                                "1": 1.453125,
+                                "2": 0.796875
+                            },
+                            "line_length": 6,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-shadow-rotate-continue.png"
+                        }
+                    }
+                },
+                "name": "rotation-continue"
+            },
+            "5": {
+                "always_draw": true,
+                "draw_in_states": {
+                    "1": "cool-down"
+                },
+                "animation": {
+                    "layers": {
+                        "1": {
+                            "animation_speed": 0.4,
+                            "frame_count": 32,
+                            "scale": 0.5,
+                            "width": 220,
+                            "height": 294,
+                            "shift": {
+                                "1": 0.0625,
+                                "2": -0.3125
+                            },
+                            "line_length": 8,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-main-cool-down.png"
+                        },
+                        "2": {
+                            "draw_as_shadow": true,
+                            "animation_speed": 0.4,
+                            "frame_count": 32,
+                            "scale": 0.5,
+                            "width": 374,
+                            "height": 158,
+                            "shift": {
+                                "1": 1.46875,
+                                "2": 0.8125
+                            },
+                            "line_length": 6,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-shadow-cool-down.png"
+                        }
+                    }
+                },
+                "name": "cool-down"
+            },
+            "6": {
+                "draw_in_states": {
+                    "1": "warm-up"
+                },
+                "animation": {
+                    "layers": {
+                        "1": {
+                            "draw_as_glow": true,
+                            "blend_mode": "additive",
+                            "animation_speed": 0.4,
+                            "frame_count": 32,
+                            "scale": 0.5,
+                            "width": 204,
+                            "height": 300,
+                            "shift": {
+                                "1": 0.125,
+                                "2": -0.375
+                            },
+                            "line_length": 8,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-lights-warm-up.png"
+                        }
+                    }
+                },
+                "name": "warm-up-lights"
+            },
+            "7": {
+                "draw_in_states": {
+                    "1": "working-1",
+                    "2": "working-2",
+                    "3": "working-3"
+                },
+                "animation": {
+                    "layers": {
+                        "1": {
+                            "draw_as_glow": true,
+                            "blend_mode": "additive",
+                            "animation_speed": 0.4,
+                            "frame_count": 111,
+                            "scale": 0.5,
+                            "width": 204,
+                            "height": 300,
+                            "shift": {
+                                "1": 0.125,
+                                "2": -0.375
+                            },
+                            "line_length": 8,
+                            "filenames": {
+                                "1": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-lights-rotate-1.png",
+                                "2": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-lights-rotate-2.png"
+                            },
+                            "lines_per_file": 7
+                        }
+                    }
+                },
+                "name": "rotation-lights"
+            },
+            "8": {
+                "draw_in_states": {
+                    "1": "working-1-continue",
+                    "2": "working-2-continue"
+                },
+                "animation": {
+                    "layers": {
+                        "1": {
+                            "draw_as_glow": true,
+                            "blend_mode": "additive",
+                            "animation_speed": 0.4,
+                            "frame_count": 17,
+                            "scale": 0.5,
+                            "width": 204,
+                            "height": 300,
+                            "shift": {
+                                "1": 0.125,
+                                "2": -0.375
+                            },
+                            "line_length": 8,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-lights-rotate-continue.png"
+                        }
+                    }
+                },
+                "name": "rotation-continue-lights"
+            },
+            "9": {
+                "draw_in_states": {
+                    "1": "cool-down"
+                },
+                "animation": {
+                    "layers": {
+                        "1": {
+                            "draw_as_glow": true,
+                            "blend_mode": "additive",
+                            "animation_speed": 0.4,
+                            "frame_count": 32,
+                            "scale": 0.5,
+                            "width": 204,
+                            "height": 294,
+                            "shift": {
+                                "1": 0.125,
+                                "2": -0.3125
+                            },
+                            "line_length": 8,
+                            "filename": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-lights-cool-down.png"
+                        }
+                    }
+                },
+                "name": "cool-down-lights"
+            },
+            "10": {
+                "effect": "flicker",
+                "fadeout": true,
+                "light": {
+                    "intensity": 0.35,
+                    "size": 20,
+                    "color": {
+                        "r": 0.2,
+                        "g": 0.25,
+                        "b": 1
+                    }
+                }
+            }
+        },
+        "frozen_patch": {
+            "scale": 0.5,
+            "width": 238,
+            "height": 316,
+            "shift": {
+                "1": 0.078125,
+                "2": -0.3125
+            },
+            "line_length": 1,
+            "filename": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-frozen.png"
+        },
+        "reset_animation_when_frozen": true
+    },
+    "open_sound": {
+        "filename": "__base__/sound/open-close/electric-large-open.ogg",
+        "volume": 0.6
+    },
+    "close_sound": {
+        "filename": "__base__/sound/open-close/electric-large-close.ogg",
+        "volume": 0.6
+    },
+    "working_sound": {
+        "main_sounds": {
+            "1": {
+                "sound": {
+                    "filename": "__space-age__/sound/entity/electromagnetic-plant/electromagnetic-plant-warmup.ogg",
+                    "volume": 0.6,
+                    "audible_distance_modifier": 0.6
+                },
+                "play_for_working_visualisations": {
+                    "1": "warm-up"
+                }
+            },
+            "2": {
+                "sound": {
+                    "filename": "__space-age__/sound/entity/electromagnetic-plant/electromagnetic-plant-loop.ogg",
+                    "volume": 0.6,
+                    "audible_distance_modifier": 0.6
+                },
+                "play_for_working_visualisations": {
+                    "1": "rotation",
+                    "2": "rotation-continue"
+                },
+                "fade_in_ticks": 4,
+                "fade_out_ticks": 20
+            },
+            "3": {
+                "sound": {
+                    "filename": "__space-age__/sound/entity/electromagnetic-plant/electromagnetic-plant-cooldown.ogg",
+                    "volume": 0.8,
+                    "audible_distance_modifier": 0.6
+                },
+                "play_for_working_visualisations": {
+                    "1": "cool-down"
+                }
+            }
+        },
+        "sound_accents": {
+            "1": {
+                "sound": {
+                    "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-arm-retract.ogg",
+                    "volume": 0.35,
+                    "audible_distance_modifier": 0.4
+                },
+                "play_for_working_visualisation": "warm-up",
+                "frame": 11
+            },
+            "2": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-coil-1.ogg",
+                            "volume": 0.6
+                        },
+                        "2": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-coil-2.ogg",
+                            "volume": 0.6
+                        }
+                    },
+                    "audible_distance_modifier": 0.4
+                },
+                "play_for_working_visualisation": "rotation",
+                "frame": 1
+            },
+            "3": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-coil-1.ogg",
+                            "volume": 0.6
+                        },
+                        "2": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-coil-2.ogg",
+                            "volume": 0.6
+                        }
+                    },
+                    "audible_distance_modifier": 0.4
+                },
+                "play_for_working_visualisation": "rotation",
+                "frame": 40
+            },
+            "4": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-coil-1.ogg",
+                            "volume": 0.4
+                        },
+                        "2": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-coil-2.ogg",
+                            "volume": 0.4
+                        }
+                    },
+                    "audible_distance_modifier": 0.4
+                },
+                "play_for_working_visualisation": "rotation",
+                "frame": 102
+            },
+            "5": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-riser-stop-1.ogg",
+                            "volume": 0.6
+                        },
+                        "2": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-riser-stop-2.ogg",
+                            "volume": 0.6
+                        }
+                    },
+                    "audible_distance_modifier": 0.4
+                },
+                "play_for_working_visualisation": "rotation",
+                "frame": 93
+            },
+            "6": {
+                "sound": {
+                    "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-bridge-close.ogg",
+                    "volume": 0.4,
+                    "audible_distance_modifier": 0.4
+                },
+                "play_for_working_visualisation": "rotation",
+                "frame": 33
+            },
+            "7": {
+                "sound": {
+                    "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-bridge-open.ogg",
+                    "volume": 0.4,
+                    "audible_distance_modifier": 0.4
+                },
+                "play_for_working_visualisation": "rotation",
+                "frame": 50
+            },
+            "8": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-electric-1.ogg",
+                            "volume": 0.4
+                        },
+                        "2": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-electric-2.ogg",
+                            "volume": 0.4
+                        },
+                        "3": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-electric-3.ogg",
+                            "volume": 0.4
+                        },
+                        "4": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-electric-4.ogg",
+                            "volume": 0.4
+                        },
+                        "5": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-electric-5.ogg",
+                            "volume": 0.4
+                        }
+                    },
+                    "audible_distance_modifier": 0.4
+                },
+                "play_for_working_visualisation": "rotation",
+                "frame": 35
+            },
+            "9": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-electric-1.ogg",
+                            "volume": 0.5
+                        },
+                        "2": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-electric-2.ogg",
+                            "volume": 0.5
+                        },
+                        "3": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-electric-3.ogg",
+                            "volume": 0.5
+                        },
+                        "4": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-electric-4.ogg",
+                            "volume": 0.5
+                        },
+                        "5": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-electric-5.ogg",
+                            "volume": 0.5
+                        }
+                    },
+                    "audible_distance_modifier": 0.5
+                },
+                "play_for_working_visualisation": "rotation",
+                "frame": 58
+            },
+            "10": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-slide-stop-1.ogg",
+                            "volume": 0.4
+                        },
+                        "2": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-slide-stop-2.ogg",
+                            "volume": 0.4
+                        }
+                    },
+                    "audible_distance_modifier": 0.4
+                },
+                "play_for_working_visualisation": "rotation",
+                "frame": 102
+            },
+            "11": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-riser-stop-1.ogg",
+                            "volume": 0.4
+                        },
+                        "2": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-riser-stop-2.ogg",
+                            "volume": 0.4
+                        }
+                    },
+                    "audible_distance_modifier": 0.4
+                },
+                "play_for_working_visualisation": "rotation-continue",
+                "frame": 14
+            },
+            "12": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-slide-stop-1.ogg",
+                            "volume": 0.4
+                        },
+                        "2": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-slide-stop-2.ogg",
+                            "volume": 0.4
+                        }
+                    },
+                    "audible_distance_modifier": 0.4
+                },
+                "play_for_working_visualisation": "rotation-continue",
+                "frame": 3
+            },
+            "13": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-riser-stop-1.ogg",
+                            "volume": 0.2
+                        },
+                        "2": {
+                            "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-riser-stop-2.ogg",
+                            "volume": 0.2
+                        }
+                    },
+                    "audible_distance_modifier": 0.4
+                },
+                "play_for_working_visualisation": "cool-down",
+                "frame": 31
+            },
+            "14": {
+                "sound": {
+                    "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-arm-stop.ogg",
+                    "volume": 0.45,
+                    "audible_distance_modifier": 0.4
+                },
+                "play_for_working_visualisation": "cool-down",
+                "frame": 12
+            },
+            "15": {
+                "sound": {
+                    "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-arm-extend.ogg",
+                    "volume": 0.5,
+                    "audible_distance_modifier": 0.4
+                },
+                "play_for_working_visualisation": "cool-down",
+                "frame": 1
+            },
+            "16": {
+                "sound": {
+                    "filename": "__space-age__/sound/entity/electromagnetic-plant/emp-arm-weld.ogg",
+                    "volume": 0.9,
+                    "audible_distance_modifier": 0.4
+                },
+                "play_for_working_visualisation": "cool-down-lights",
+                "frame": 12
+            }
+        },
+        "max_sounds_per_prototype": 2
+    },
+    "crafting_speed": 2,
+    "crafting_categories": {
+        "1": "electromagnetics",
+        "2": "electronics",
+        "3": "electronics-with-fluid",
+        "4": "electronics-or-assembling"
+    },
+    "energy_source": {
+        "type": "electric",
+        "usage_priority": "secondary-input",
+        "emissions_per_minute": {
+            "pollution": 4
+        }
+    },
+    "energy_usage": "2000kW",
+    "module_slots": 5,
+    "icons_positioning": {
+        "1": {
+            "inventory_index": 4,
+            "shift": {
+                "1": 0,
+                "2": 1
+            }
+        }
+    },
+    "allowed_effects": {
+        "1": "consumption",
+        "2": "speed",
+        "3": "productivity",
+        "4": "pollution",
+        "5": "quality"
+    },
+    "water_reflection": {
+        "pictures": {
+            "filename": "__space-age__/graphics/entity/electromagnetic-plant/electromagnetic-plant-water-reflection.png",
+            "width": 26,
+            "height": 34,
+            "shift": {
+                "1": 0.15625,
+                "2": 2.25
+            },
+            "priority": "extra-high",
+            "variation_count": 1,
+            "scale": 5
+        },
+        "rotate": false,
+        "orientation_to_variation": false
+    }
+}

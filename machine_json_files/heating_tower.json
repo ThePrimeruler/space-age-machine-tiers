@@ -1,0 +1,480 @@
+{
+    "type": "reactor",
+    "name": "heating-tower",
+    "icon": "__muluna-graphics__/graphics/thermal-plant/thermal-plant-icon.png",
+    "flags": {
+        "1": "placeable-neutral",
+        "2": "player-creation"
+    },
+    "minable": {
+        "mining_time": 0.5,
+        "result": "heating-tower"
+    },
+    "max_health": 500,
+    "corpse": "heating-tower-remnants",
+    "dying_explosion": "heating-tower-explosion",
+    "surface_conditions": {
+        "1": {
+            "property": "pressure",
+            "min": 10
+        }
+    },
+    "consumption": "40MW",
+    "neighbour_bonus": 0,
+    "energy_source": {
+        "type": "burner",
+        "fuel_categories": {
+            "1": "chemical"
+        },
+        "emissions_per_minute": {
+            "pollution": 100
+        },
+        "effectivity": 2.5,
+        "fuel_inventory_size": 2,
+        "burnt_inventory_size": 2,
+        "light_flicker": {
+            "color": {
+                "1": 0,
+                "2": 0,
+                "3": 0
+            },
+            "minimum_intensity": 0.7,
+            "maximum_intensity": 0.95
+        }
+    },
+    "collision_box": {
+        "1": {
+            "1": -1.25,
+            "2": -1.25
+        },
+        "2": {
+            "1": 1.25,
+            "2": 1.25
+        }
+    },
+    "selection_box": {
+        "1": {
+            "1": -1.5,
+            "2": -1.5
+        },
+        "2": {
+            "1": 1.5,
+            "2": 1.5
+        }
+    },
+    "damaged_trigger_effect": {
+        "type": "create-entity",
+        "entity_name": "spark-explosion",
+        "offset_deviation": {
+            "1": {
+                "1": -0.5,
+                "2": -0.5
+            },
+            "2": {
+                "1": 0.5,
+                "2": 0.5
+            }
+        },
+        "offsets": {
+            "1": {
+                "1": 0,
+                "2": 1
+            }
+        },
+        "damage_type_filters": "fire"
+    },
+    "drawing_box_vertical_extension": 1,
+    "picture": {
+        "layers": {
+            "1": {
+                "scale": 0.5,
+                "width": 214,
+                "height": 320,
+                "shift": {
+                    "1": -0.03125,
+                    "2": -0.703125
+                },
+                "line_length": 1,
+                "filename": "__space-age__/graphics/entity/heating-tower/heating-tower-main.png"
+            },
+            "2": {
+                "scale": 0.5,
+                "draw_as_shadow": true,
+                "width": 312,
+                "height": 130,
+                "shift": {
+                    "1": 0.90625,
+                    "2": 0.59375
+                },
+                "line_length": 1,
+                "filename": "__space-age__/graphics/entity/heating-tower/heating-tower-shadow.png"
+            }
+        }
+    },
+    "working_light_picture": {
+        "layers": {
+            "1": {
+                "frame_count": 24,
+                "scale": 0.5,
+                "blend_mode": "additive",
+                "draw_as_glow": true,
+                "animation_speed": 0.333,
+                "width": 160,
+                "height": 184,
+                "shift": {
+                    "1": -0.03125,
+                    "2": -2.328125
+                },
+                "line_length": 6,
+                "filename": "__space-age__/graphics/entity/heating-tower/heating-tower-working-fire.png"
+            },
+            "2": {
+                "frame_count": 1,
+                "repeat_count": 24,
+                "scale": 0.5,
+                "blend_mode": "additive",
+                "draw_as_glow": true,
+                "width": 472,
+                "height": 242,
+                "shift": {
+                    "1": -0.078125,
+                    "2": 1.109375
+                },
+                "line_length": 1,
+                "filename": "__space-age__/graphics/entity/heating-tower/heating-tower-working-light.png"
+            }
+        }
+    },
+    "heat_buffer": {
+        "max_temperature": 1000,
+        "specific_heat": "5MJ",
+        "max_transfer": "10GW",
+        "minimum_glow_temperature": 50,
+        "connections": {
+            "1": {
+                "position": {
+                    "1": 0,
+                    "2": -1
+                },
+                "direction": 0
+            },
+            "2": {
+                "position": {
+                    "1": 1,
+                    "2": 0
+                },
+                "direction": 4
+            },
+            "3": {
+                "position": {
+                    "1": 0,
+                    "2": 1
+                },
+                "direction": 8
+            },
+            "4": {
+                "position": {
+                    "1": -1,
+                    "2": 0
+                },
+                "direction": 12
+            }
+        },
+        "heat_picture": {
+            "layers": {
+                "1": {
+                    "scale": 0.5,
+                    "blend_mode": "additive",
+                    "width": 168,
+                    "height": 274,
+                    "shift": {
+                        "1": -0.046875,
+                        "2": -0.75
+                    },
+                    "line_length": 1,
+                    "filename": "__heat_glow__/graphics/entity/heating-tower/heating-tower-glow.png",
+                    "tint": {
+                        "1": 0.675,
+                        "2": 0.525,
+                        "3": 0.2,
+                        "4": 0.675
+                    }
+                },
+                "2": {
+                    "scale": 0.5,
+                    "blend_mode": "additive",
+                    "width": 168,
+                    "height": 274,
+                    "shift": {
+                        "1": -0.046875,
+                        "2": -0.75
+                    },
+                    "line_length": 1,
+                    "filename": "__heat_glow__/graphics/entity/heating-tower/heating-tower-glow.png",
+                    "tint": {
+                        "1": 1,
+                        "2": 1,
+                        "3": 1,
+                        "4": 1
+                    },
+                    "draw_as_light": true
+                }
+            }
+        }
+    },
+    "connection_patches_connected": {
+        "sheet": {
+            "scale": 0.5,
+            "variation_count": 4,
+            "width": 64,
+            "height": 64,
+            "shift": {
+                "1": 0,
+                "2": 0
+            },
+            "line_length": 4,
+            "filename": "__space-age__/graphics/entity/heating-tower/heating-tower-pipes.png"
+        }
+    },
+    "connection_patches_disconnected": {
+        "sheet": {
+            "scale": 0.5,
+            "variation_count": 4,
+            "width": 88,
+            "height": 90,
+            "shift": {
+                "1": 0.0625,
+                "2": 0.0625
+            },
+            "line_length": 4,
+            "filename": "__space-age__/graphics/entity/heating-tower/heating-tower-pipes-disconnected.png"
+        }
+    },
+    "heat_connection_patches_connected": {
+        "sheet": {
+            "layers": {
+                "1": {
+                    "scale": 0.5,
+                    "variation_count": 4,
+                    "width": 64,
+                    "height": 64,
+                    "shift": {
+                        "1": 0,
+                        "2": 0
+                    },
+                    "line_length": 4,
+                    "filename": "__heat_glow__/graphics/entity/heating-tower/heating-tower-pipes-heat.png",
+                    "tint": {
+                        "1": 0.675,
+                        "2": 0.525,
+                        "3": 0.2,
+                        "4": 0.675
+                    }
+                },
+                "2": {
+                    "scale": 0.5,
+                    "variation_count": 4,
+                    "width": 64,
+                    "height": 64,
+                    "shift": {
+                        "1": 0,
+                        "2": 0
+                    },
+                    "line_length": 4,
+                    "filename": "__heat_glow__/graphics/entity/heating-tower/heating-tower-pipes-heat.png",
+                    "tint": {
+                        "1": 1,
+                        "2": 1,
+                        "3": 1,
+                        "4": 1
+                    },
+                    "draw_as_light": true
+                }
+            }
+        }
+    },
+    "heat_connection_patches_disconnected": {
+        "sheet": {
+            "layers": {
+                "1": {
+                    "scale": 0.5,
+                    "variation_count": 4,
+                    "width": 80,
+                    "height": 72,
+                    "shift": {
+                        "1": -0.046875,
+                        "2": 0.0625
+                    },
+                    "line_length": 4,
+                    "filename": "__heat_glow__/graphics/entity/heating-tower/heating-tower-pipes-heat-disconnected.png",
+                    "tint": {
+                        "1": 0.675,
+                        "2": 0.525,
+                        "3": 0.2,
+                        "4": 0.675
+                    }
+                },
+                "2": {
+                    "scale": 0.5,
+                    "variation_count": 4,
+                    "width": 80,
+                    "height": 72,
+                    "shift": {
+                        "1": -0.046875,
+                        "2": 0.0625
+                    },
+                    "line_length": 4,
+                    "filename": "__heat_glow__/graphics/entity/heating-tower/heating-tower-pipes-heat-disconnected.png",
+                    "tint": {
+                        "1": 1,
+                        "2": 1,
+                        "3": 1,
+                        "4": 1
+                    },
+                    "draw_as_light": true
+                }
+            }
+        }
+    },
+    "open_sound": {
+        "filename": "__base__/sound/open-close/steam-open.ogg",
+        "volume": 0.4
+    },
+    "close_sound": {
+        "filename": "__base__/sound/open-close/steam-close.ogg",
+        "volume": 0.4
+    },
+    "working_sound": {
+        "sound": {
+            "filename": "__space-age__/sound/entity//heating-tower/heating-tower-loop.ogg",
+            "volume": 0.5
+        },
+        "max_sounds_per_prototype": 2,
+        "fade_in_ticks": 4,
+        "fade_out_ticks": 20
+    },
+    "default_temperature_signal": {
+        "type": "virtual",
+        "name": "signal-T"
+    },
+    "circuit_wire_max_distance": 9,
+    "circuit_connector": {
+        "sprites": {
+            "connector_main": {
+                "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                "priority": "low",
+                "width": 52,
+                "height": 50,
+                "scale": 0.5,
+                "x": 312,
+                "y": 150,
+                "shift": {
+                    "1": -0.375,
+                    "2": 0.5625
+                }
+            },
+            "wire_pins": {
+                "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                "priority": "low",
+                "width": 62,
+                "height": 58,
+                "scale": 0.5,
+                "x": 372,
+                "y": 174,
+                "shift": {
+                    "1": -0.375,
+                    "2": 0.5625
+                }
+            },
+            "led_blue": {
+                "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                "priority": "low",
+                "draw_as_glow": true,
+                "width": 60,
+                "height": 60,
+                "scale": 0.5,
+                "x": 360,
+                "y": 180,
+                "shift": {
+                    "1": -0.375,
+                    "2": 0.53125
+                }
+            },
+            "led_blue_off": {
+                "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                "priority": "low",
+                "width": 46,
+                "height": 44,
+                "scale": 0.5,
+                "x": 276,
+                "y": 132,
+                "shift": {
+                    "1": -0.375,
+                    "2": 0.53125
+                }
+            },
+            "led_green": {
+                "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                "priority": "low",
+                "draw_as_glow": true,
+                "width": 48,
+                "height": 46,
+                "scale": 0.5,
+                "x": 288,
+                "y": 138,
+                "shift": {
+                    "1": -0.375,
+                    "2": 0.53125
+                }
+            },
+            "led_red": {
+                "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                "priority": "low",
+                "draw_as_glow": true,
+                "width": 48,
+                "height": 46,
+                "scale": 0.5,
+                "x": 288,
+                "y": 138,
+                "shift": {
+                    "1": -0.375,
+                    "2": 0.53125
+                }
+            },
+            "led_light": {
+                "intensity": 0,
+                "size": 0.9
+            },
+            "blue_led_light_offset": {
+                "1": -0.375,
+                "2": 0.8125
+            },
+            "red_green_led_light_offset": {
+                "1": -0.375,
+                "2": 0.71875
+            }
+        },
+        "points": {
+            "wire": {
+                "red": {
+                    "1": -0.625,
+                    "2": 0.59375
+                },
+                "green": {
+                    "1": -0.65625,
+                    "2": 0.8125
+                }
+            },
+            "shadow": {
+                "red": {
+                    "1": 0.375,
+                    "2": 1.28125
+                },
+                "green": {
+                    "1": 0.125,
+                    "2": 1.28125
+                }
+            }
+        }
+    }
+}

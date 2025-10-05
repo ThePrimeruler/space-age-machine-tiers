@@ -1,0 +1,2049 @@
+{
+    "type": "furnace",
+    "name": "recycler",
+    "icon": "__quality__/graphics/icons/recycler.png",
+    "flags": {
+        "1": "placeable-neutral",
+        "2": "placeable-player",
+        "3": "player-creation"
+    },
+    "fast_transfer_modules_into_module_slots_only": true,
+    "minable": {
+        "mining_time": 0.2,
+        "result": "recycler"
+    },
+    "circuit_wire_max_distance": 9,
+    "circuit_connector": {
+        "1": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 364,
+                    "y": 150,
+                    "shift": {
+                        "1": 0.8125,
+                        "2": -0.46875
+                    }
+                },
+                "connector_shadow": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04b-base-shadow-sequence.png",
+                    "priority": "low",
+                    "draw_as_shadow": true,
+                    "width": 60,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 420,
+                    "y": 138,
+                    "shift": {
+                        "1": 1.578125,
+                        "2": 0.078125
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 434,
+                    "y": 174,
+                    "shift": {
+                        "1": 0.8125,
+                        "2": -0.46875
+                    }
+                },
+                "wire_pins_shadow": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04d-wire-shadow-sequence.png",
+                    "priority": "low",
+                    "draw_as_shadow": true,
+                    "width": 68,
+                    "height": 54,
+                    "scale": 0.5,
+                    "x": 476,
+                    "y": 162,
+                    "shift": {
+                        "1": 1.65625,
+                        "2": 0.109375
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 420,
+                    "y": 180,
+                    "shift": {
+                        "1": 0.8125,
+                        "2": -0.5
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 322,
+                    "y": 132,
+                    "shift": {
+                        "1": 0.8125,
+                        "2": -0.5
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 336,
+                    "y": 138,
+                    "shift": {
+                        "1": 0.8125,
+                        "2": -0.5
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 336,
+                    "y": 138,
+                    "shift": {
+                        "1": 0.8125,
+                        "2": -0.5
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": 1,
+                    "2": -0.375
+                },
+                "red_green_led_light_offset": {
+                    "1": 1,
+                    "2": -0.46875
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": 0.90625,
+                        "2": -0.3125
+                    },
+                    "green": {
+                        "1": 0.96875,
+                        "2": -0.15625
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": 1.90625,
+                        "2": 0.4375
+                    },
+                    "green": {
+                        "1": 1.78125,
+                        "2": 0.4375
+                    }
+                }
+            }
+        },
+        "2": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 104,
+                    "y": 150,
+                    "shift": {
+                        "1": 0,
+                        "2": 0.65625
+                    }
+                },
+                "connector_shadow": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04b-base-shadow-sequence.png",
+                    "priority": "low",
+                    "draw_as_shadow": true,
+                    "width": 60,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 120,
+                    "y": 138,
+                    "shift": {
+                        "1": 0.140625,
+                        "2": 0.828125
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 124,
+                    "y": 174,
+                    "shift": {
+                        "1": 0,
+                        "2": 0.65625
+                    }
+                },
+                "wire_pins_shadow": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04d-wire-shadow-sequence.png",
+                    "priority": "low",
+                    "draw_as_shadow": true,
+                    "width": 68,
+                    "height": 54,
+                    "scale": 0.5,
+                    "x": 136,
+                    "y": 162,
+                    "shift": {
+                        "1": 0.21875,
+                        "2": 0.859375
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 120,
+                    "y": 180,
+                    "shift": {
+                        "1": 0,
+                        "2": 0.625
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 92,
+                    "y": 132,
+                    "shift": {
+                        "1": 0,
+                        "2": 0.625
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 96,
+                    "y": 138,
+                    "shift": {
+                        "1": 0,
+                        "2": 0.625
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 96,
+                    "y": 138,
+                    "shift": {
+                        "1": 0,
+                        "2": 0.625
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": 0,
+                    "2": 0.90625
+                },
+                "red_green_led_light_offset": {
+                    "1": 0,
+                    "2": 0.8125
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": 0.25,
+                        "2": 0.65625
+                    },
+                    "green": {
+                        "1": 0.3125,
+                        "2": 0.875
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": 0.6875,
+                        "2": 1.0625
+                    },
+                    "green": {
+                        "1": 0.5,
+                        "2": 1.0625
+                    }
+                }
+            }
+        },
+        "3": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 364,
+                    "y": 150,
+                    "shift": {
+                        "1": 0.78125,
+                        "2": -0.78125
+                    }
+                },
+                "connector_shadow": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04b-base-shadow-sequence.png",
+                    "priority": "low",
+                    "draw_as_shadow": true,
+                    "width": 60,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 420,
+                    "y": 138,
+                    "shift": {
+                        "1": 1.578125,
+                        "2": -0.234375
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 434,
+                    "y": 174,
+                    "shift": {
+                        "1": 0.78125,
+                        "2": -0.78125
+                    }
+                },
+                "wire_pins_shadow": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04d-wire-shadow-sequence.png",
+                    "priority": "low",
+                    "draw_as_shadow": true,
+                    "width": 68,
+                    "height": 54,
+                    "scale": 0.5,
+                    "x": 476,
+                    "y": 162,
+                    "shift": {
+                        "1": 1.65625,
+                        "2": -0.203125
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 420,
+                    "y": 180,
+                    "shift": {
+                        "1": 0.78125,
+                        "2": -0.8125
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 322,
+                    "y": 132,
+                    "shift": {
+                        "1": 0.78125,
+                        "2": -0.8125
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 336,
+                    "y": 138,
+                    "shift": {
+                        "1": 0.78125,
+                        "2": -0.8125
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 336,
+                    "y": 138,
+                    "shift": {
+                        "1": 0.78125,
+                        "2": -0.8125
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": 0.96875,
+                    "2": -0.6875
+                },
+                "red_green_led_light_offset": {
+                    "1": 0.96875,
+                    "2": -0.78125
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": 0.875,
+                        "2": -0.625
+                    },
+                    "green": {
+                        "1": 0.9375,
+                        "2": -0.46875
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": 1.90625,
+                        "2": 0.125
+                    },
+                    "green": {
+                        "1": 1.78125,
+                        "2": 0.125
+                    }
+                }
+            }
+        },
+        "4": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 312,
+                    "y": 150,
+                    "shift": {
+                        "1": 0.78125,
+                        "2": 0.65625
+                    }
+                },
+                "connector_shadow": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04b-base-shadow-sequence.png",
+                    "priority": "low",
+                    "draw_as_shadow": true,
+                    "width": 60,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 360,
+                    "y": 138,
+                    "shift": {
+                        "1": 0.921875,
+                        "2": 0.828125
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 372,
+                    "y": 174,
+                    "shift": {
+                        "1": 0.78125,
+                        "2": 0.65625
+                    }
+                },
+                "wire_pins_shadow": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04d-wire-shadow-sequence.png",
+                    "priority": "low",
+                    "draw_as_shadow": true,
+                    "width": 68,
+                    "height": 54,
+                    "scale": 0.5,
+                    "x": 408,
+                    "y": 162,
+                    "shift": {
+                        "1": 1,
+                        "2": 0.859375
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 360,
+                    "y": 180,
+                    "shift": {
+                        "1": 0.78125,
+                        "2": 0.625
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 276,
+                    "y": 132,
+                    "shift": {
+                        "1": 0.78125,
+                        "2": 0.625
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 288,
+                    "y": 138,
+                    "shift": {
+                        "1": 0.78125,
+                        "2": 0.625
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 288,
+                    "y": 138,
+                    "shift": {
+                        "1": 0.78125,
+                        "2": 0.625
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": 0.78125,
+                    "2": 0.90625
+                },
+                "red_green_led_light_offset": {
+                    "1": 0.78125,
+                    "2": 0.8125
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": 0.53125,
+                        "2": 0.6875
+                    },
+                    "green": {
+                        "1": 0.5,
+                        "2": 0.90625
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": 0.90625,
+                        "2": 1.09375
+                    },
+                    "green": {
+                        "1": 0.65625,
+                        "2": 1.09375
+                    }
+                }
+            }
+        }
+    },
+    "circuit_connector_flipped": {
+        "1": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 150,
+                    "shift": {
+                        "1": -0.8125,
+                        "2": -0.46875
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 174,
+                    "shift": {
+                        "1": -0.8125,
+                        "2": -0.46875
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 180,
+                    "shift": {
+                        "1": -0.8125,
+                        "2": -0.5
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 132,
+                    "shift": {
+                        "1": -0.8125,
+                        "2": -0.5
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 138,
+                    "shift": {
+                        "1": -0.8125,
+                        "2": -0.5
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 138,
+                    "shift": {
+                        "1": -0.8125,
+                        "2": -0.5
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": -1,
+                    "2": -0.34375
+                },
+                "red_green_led_light_offset": {
+                    "1": -1,
+                    "2": -0.46875
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": -0.875,
+                        "2": -0.3125
+                    },
+                    "green": {
+                        "1": -0.96875,
+                        "2": -0.15625
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": 0.21875,
+                        "2": 0.4375
+                    },
+                    "green": {
+                        "1": -0.0625,
+                        "2": 0.4375
+                    }
+                }
+            }
+        },
+        "2": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 104,
+                    "y": 150,
+                    "shift": {
+                        "1": -0.78125,
+                        "2": 0.65625
+                    }
+                },
+                "connector_shadow": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04b-base-shadow-sequence.png",
+                    "priority": "low",
+                    "draw_as_shadow": true,
+                    "width": 60,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 120,
+                    "y": 138,
+                    "shift": {
+                        "1": -0.640625,
+                        "2": 0.828125
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 124,
+                    "y": 174,
+                    "shift": {
+                        "1": -0.78125,
+                        "2": 0.65625
+                    }
+                },
+                "wire_pins_shadow": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04d-wire-shadow-sequence.png",
+                    "priority": "low",
+                    "draw_as_shadow": true,
+                    "width": 68,
+                    "height": 54,
+                    "scale": 0.5,
+                    "x": 136,
+                    "y": 162,
+                    "shift": {
+                        "1": -0.5625,
+                        "2": 0.859375
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 120,
+                    "y": 180,
+                    "shift": {
+                        "1": -0.78125,
+                        "2": 0.625
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 92,
+                    "y": 132,
+                    "shift": {
+                        "1": -0.78125,
+                        "2": 0.625
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 96,
+                    "y": 138,
+                    "shift": {
+                        "1": -0.78125,
+                        "2": 0.625
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 96,
+                    "y": 138,
+                    "shift": {
+                        "1": -0.78125,
+                        "2": 0.625
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": -0.78125,
+                    "2": 0.90625
+                },
+                "red_green_led_light_offset": {
+                    "1": -0.78125,
+                    "2": 0.8125
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": -0.53125,
+                        "2": 0.65625
+                    },
+                    "green": {
+                        "1": -0.46875,
+                        "2": 0.875
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": -0.09375,
+                        "2": 1.0625
+                    },
+                    "green": {
+                        "1": -0.28125,
+                        "2": 1.0625
+                    }
+                }
+            }
+        },
+        "3": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 150,
+                    "shift": {
+                        "1": -0.78125,
+                        "2": -0.78125
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 174,
+                    "shift": {
+                        "1": -0.78125,
+                        "2": -0.78125
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 180,
+                    "shift": {
+                        "1": -0.78125,
+                        "2": -0.8125
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 132,
+                    "shift": {
+                        "1": -0.78125,
+                        "2": -0.8125
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 138,
+                    "shift": {
+                        "1": -0.78125,
+                        "2": -0.8125
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 0,
+                    "y": 138,
+                    "shift": {
+                        "1": -0.78125,
+                        "2": -0.8125
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": -0.96875,
+                    "2": -0.65625
+                },
+                "red_green_led_light_offset": {
+                    "1": -0.96875,
+                    "2": -0.78125
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": -0.84375,
+                        "2": -0.625
+                    },
+                    "green": {
+                        "1": -0.9375,
+                        "2": -0.46875
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": 0.34375,
+                        "2": 0.125
+                    },
+                    "green": {
+                        "1": 0.0625,
+                        "2": 0.125
+                    }
+                }
+            }
+        },
+        "4": {
+            "sprites": {
+                "connector_main": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04a-base-sequence.png",
+                    "priority": "low",
+                    "width": 52,
+                    "height": 50,
+                    "scale": 0.5,
+                    "x": 312,
+                    "y": 150,
+                    "shift": {
+                        "1": 0,
+                        "2": 0.65625
+                    }
+                },
+                "connector_shadow": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04b-base-shadow-sequence.png",
+                    "priority": "low",
+                    "draw_as_shadow": true,
+                    "width": 60,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 360,
+                    "y": 138,
+                    "shift": {
+                        "1": 0.140625,
+                        "2": 0.828125
+                    }
+                },
+                "wire_pins": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04c-wire-sequence.png",
+                    "priority": "low",
+                    "width": 62,
+                    "height": 58,
+                    "scale": 0.5,
+                    "x": 372,
+                    "y": 174,
+                    "shift": {
+                        "1": 0,
+                        "2": 0.65625
+                    }
+                },
+                "wire_pins_shadow": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04d-wire-shadow-sequence.png",
+                    "priority": "low",
+                    "draw_as_shadow": true,
+                    "width": 68,
+                    "height": 54,
+                    "scale": 0.5,
+                    "x": 408,
+                    "y": 162,
+                    "shift": {
+                        "1": 0.21875,
+                        "2": 0.859375
+                    }
+                },
+                "led_blue": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04e-blue-LED-on-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 60,
+                    "height": 60,
+                    "scale": 0.5,
+                    "x": 360,
+                    "y": 180,
+                    "shift": {
+                        "1": 0,
+                        "2": 0.625
+                    }
+                },
+                "led_blue_off": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04f-blue-LED-off-sequence.png",
+                    "priority": "low",
+                    "width": 46,
+                    "height": 44,
+                    "scale": 0.5,
+                    "x": 276,
+                    "y": 132,
+                    "shift": {
+                        "1": 0,
+                        "2": 0.625
+                    }
+                },
+                "led_green": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04h-green-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 288,
+                    "y": 138,
+                    "shift": {
+                        "1": 0,
+                        "2": 0.625
+                    }
+                },
+                "led_red": {
+                    "filename": "__base__/graphics/entity/circuit-connector/ccm-universal-04i-red-LED-sequence.png",
+                    "priority": "low",
+                    "draw_as_glow": true,
+                    "width": 48,
+                    "height": 46,
+                    "scale": 0.5,
+                    "x": 288,
+                    "y": 138,
+                    "shift": {
+                        "1": 0,
+                        "2": 0.625
+                    }
+                },
+                "led_light": {
+                    "intensity": 0,
+                    "size": 0.9
+                },
+                "blue_led_light_offset": {
+                    "1": 0,
+                    "2": 0.90625
+                },
+                "red_green_led_light_offset": {
+                    "1": 0,
+                    "2": 0.8125
+                }
+            },
+            "points": {
+                "wire": {
+                    "red": {
+                        "1": -0.25,
+                        "2": 0.6875
+                    },
+                    "green": {
+                        "1": -0.28125,
+                        "2": 0.90625
+                    }
+                },
+                "shadow": {
+                    "red": {
+                        "1": 0.125,
+                        "2": 1.09375
+                    },
+                    "green": {
+                        "1": -0.125,
+                        "2": 1.09375
+                    }
+                }
+            }
+        }
+    },
+    "max_health": 300,
+    "fast_replaceable_group": "recycler",
+    "vector_to_place_result": {
+        "1": -0.5,
+        "2": -2.3
+    },
+    "dying_explosion": "recycler-explosion",
+    "corpse": "recycler-remnants",
+    "impact_category": "metal",
+    "working_sound": {
+        "sound": {
+            "filename": "__quality__/sound/recycler/recycler-loop.ogg",
+            "volume": 0.7
+        },
+        "sound_accents": {
+            "1": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__quality__/sound/recycler/recycler-jaw-move-1.ogg",
+                            "volume": 0.45
+                        },
+                        "2": {
+                            "filename": "__quality__/sound/recycler/recycler-jaw-move-2.ogg",
+                            "volume": 0.45
+                        },
+                        "3": {
+                            "filename": "__quality__/sound/recycler/recycler-jaw-move-3.ogg",
+                            "volume": 0.45
+                        },
+                        "4": {
+                            "filename": "__quality__/sound/recycler/recycler-jaw-move-4.ogg",
+                            "volume": 0.45
+                        },
+                        "5": {
+                            "filename": "__quality__/sound/recycler/recycler-jaw-move-5.ogg",
+                            "volume": 0.45
+                        }
+                    },
+                    "audible_distance_modifier": 0.2
+                },
+                "frame": 14
+            },
+            "2": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__quality__/sound/recycler/recycler-vox-1.ogg",
+                            "volume": 0.2
+                        },
+                        "2": {
+                            "filename": "__quality__/sound/recycler/recycler-vox-2.ogg",
+                            "volume": 0.2
+                        },
+                        "3": {
+                            "filename": "__quality__/sound/recycler/recycler-vox-3.ogg",
+                            "volume": 0.2
+                        },
+                        "4": {
+                            "filename": "__quality__/sound/recycler/recycler-vox-4.ogg",
+                            "volume": 0.2
+                        },
+                        "5": {
+                            "filename": "__quality__/sound/recycler/recycler-vox-5.ogg",
+                            "volume": 0.2
+                        }
+                    },
+                    "audible_distance_modifier": 0.3
+                },
+                "frame": 20
+            },
+            "3": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__quality__/sound/recycler/recycler-mechanic-1.ogg",
+                            "volume": 0.3
+                        },
+                        "2": {
+                            "filename": "__quality__/sound/recycler/recycler-mechanic-2.ogg",
+                            "volume": 0.3
+                        },
+                        "3": {
+                            "filename": "__quality__/sound/recycler/recycler-mechanic-3.ogg",
+                            "volume": 0.3
+                        }
+                    },
+                    "audible_distance_modifier": 0.3
+                },
+                "frame": 45
+            },
+            "4": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__quality__/sound/recycler/recycler-jaw-move-1.ogg",
+                            "volume": 0.45
+                        },
+                        "2": {
+                            "filename": "__quality__/sound/recycler/recycler-jaw-move-2.ogg",
+                            "volume": 0.45
+                        },
+                        "3": {
+                            "filename": "__quality__/sound/recycler/recycler-jaw-move-3.ogg",
+                            "volume": 0.45
+                        },
+                        "4": {
+                            "filename": "__quality__/sound/recycler/recycler-jaw-move-4.ogg",
+                            "volume": 0.45
+                        },
+                        "5": {
+                            "filename": "__quality__/sound/recycler/recycler-jaw-move-5.ogg",
+                            "volume": 0.45
+                        }
+                    },
+                    "audible_distance_modifier": 0.2
+                },
+                "frame": 60
+            },
+            "5": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__quality__/sound/recycler/recycler-trash-1.ogg",
+                            "volume": 0.6
+                        },
+                        "2": {
+                            "filename": "__quality__/sound/recycler/recycler-trash-2.ogg",
+                            "volume": 0.6
+                        },
+                        "3": {
+                            "filename": "__quality__/sound/recycler/recycler-trash-3.ogg",
+                            "volume": 0.6
+                        },
+                        "4": {
+                            "filename": "__quality__/sound/recycler/recycler-trash-4.ogg",
+                            "volume": 0.6
+                        },
+                        "5": {
+                            "filename": "__quality__/sound/recycler/recycler-trash-5.ogg",
+                            "volume": 0.6
+                        }
+                    },
+                    "audible_distance_modifier": 0.3
+                },
+                "frame": 61
+            },
+            "6": {
+                "sound": {
+                    "variations": {
+                        "1": {
+                            "filename": "__quality__/sound/recycler/recycler-jaw-shut-1.ogg",
+                            "volume": 0.3
+                        },
+                        "2": {
+                            "filename": "__quality__/sound/recycler/recycler-jaw-shut-2.ogg",
+                            "volume": 0.3
+                        },
+                        "3": {
+                            "filename": "__quality__/sound/recycler/recycler-jaw-shut-3.ogg",
+                            "volume": 0.3
+                        },
+                        "4": {
+                            "filename": "__quality__/sound/recycler/recycler-jaw-shut-4.ogg",
+                            "volume": 0.3
+                        },
+                        "5": {
+                            "filename": "__quality__/sound/recycler/recycler-jaw-shut-5.ogg",
+                            "volume": 0.3
+                        },
+                        "6": {
+                            "filename": "__quality__/sound/recycler/recycler-jaw-shut-6.ogg",
+                            "volume": 0.3
+                        }
+                    },
+                    "audible_distance_modifier": 0.6
+                },
+                "frame": 63
+            }
+        },
+        "max_sounds_per_prototype": 2,
+        "fade_in_ticks": 4,
+        "fade_out_ticks": 20
+    },
+    "open_sound": {
+        "filename": "__base__/sound/open-close/metal-large-open.ogg",
+        "volume": 0.8
+    },
+    "close_sound": {
+        "filename": "__base__/sound/open-close/metal-large-close.ogg",
+        "volume": 0.7
+    },
+    "resistances": {
+        "1": {
+            "type": "fire",
+            "percent": 80
+        }
+    },
+    "collision_box": {
+        "1": {
+            "1": -0.7,
+            "2": -1.7
+        },
+        "2": {
+            "1": 0.7,
+            "2": 1.7
+        }
+    },
+    "selection_box": {
+        "1": {
+            "1": -0.9,
+            "2": -1.85
+        },
+        "2": {
+            "1": 0.9,
+            "2": 1.85
+        }
+    },
+    "crafting_categories": {
+        "1": "recycling",
+        "2": "recycling-or-hand-crafting"
+    },
+    "result_inventory_size": 12,
+    "energy_usage": "180kW",
+    "crafting_speed": 0.5,
+    "source_inventory_size": 1,
+    "custom_input_slot_tooltip_key": "recycler-input-slot-tooltip",
+    "energy_source": {
+        "type": "electric",
+        "usage_priority": "secondary-input",
+        "emissions_per_minute": {
+            "pollution": 2
+        }
+    },
+    "module_slots": 4,
+    "icon_draw_specification": {
+        "shift": {
+            "1": 0,
+            "2": -0.55
+        }
+    },
+    "icons_positioning": {
+        "1": {
+            "inventory_index": 4,
+            "shift": {
+                "1": 0,
+                "2": 0.2
+            }
+        }
+    },
+    "allowed_effects": {
+        "1": "consumption",
+        "2": "speed",
+        "3": "pollution",
+        "4": "quality"
+    },
+    "perceived_performance": {
+        "maximum": 4
+    },
+    "graphics_set": {
+        "animation": {
+            "north": {
+                "layers": {
+                    "1": {
+                        "priority": "high",
+                        "frame_count": 64,
+                        "animation_speed": 4,
+                        "scale": 0.5,
+                        "width": 170,
+                        "height": 304,
+                        "shift": {
+                            "1": 0.0625,
+                            "2": -0.203125
+                        },
+                        "line_length": 8,
+                        "filename": "__quality__/graphics/entity/recycler/recycler-N.png"
+                    },
+                    "2": {
+                        "draw_as_shadow": true,
+                        "priority": "high",
+                        "frame_count": 64,
+                        "animation_speed": 4,
+                        "scale": 0.5,
+                        "width": 234,
+                        "height": 252,
+                        "shift": {
+                            "1": 0.875,
+                            "2": 0.0625
+                        },
+                        "line_length": 8,
+                        "filename": "__quality__/graphics/entity/recycler/recycler-N-shadow.png"
+                    }
+                }
+            },
+            "east": {
+                "layers": {
+                    "1": {
+                        "priority": "high",
+                        "frame_count": 64,
+                        "animation_speed": 4,
+                        "scale": 0.5,
+                        "width": 286,
+                        "height": 204,
+                        "shift": {
+                            "1": 0.03125,
+                            "2": -0.265625
+                        },
+                        "line_length": 8,
+                        "filename": "__quality__/graphics/entity/recycler/recycler-E.png"
+                    },
+                    "2": {
+                        "draw_as_shadow": true,
+                        "priority": "high",
+                        "frame_count": 64,
+                        "animation_speed": 4,
+                        "scale": 0.5,
+                        "width": 350,
+                        "height": 114,
+                        "shift": {
+                            "1": 0.78125,
+                            "2": 0.234375
+                        },
+                        "line_length": 8,
+                        "filename": "__quality__/graphics/entity/recycler/recycler-E-shadow.png"
+                    }
+                }
+            },
+            "south": {
+                "layers": {
+                    "1": {
+                        "priority": "high",
+                        "frame_count": 64,
+                        "animation_speed": 4,
+                        "scale": 0.5,
+                        "width": 168,
+                        "height": 290,
+                        "shift": {
+                            "1": -0.015625,
+                            "2": 0.046875
+                        },
+                        "line_length": 8,
+                        "filename": "__quality__/graphics/entity/recycler/recycler-S.png"
+                    },
+                    "2": {
+                        "draw_as_shadow": true,
+                        "priority": "high",
+                        "frame_count": 64,
+                        "animation_speed": 4,
+                        "scale": 0.5,
+                        "width": 232,
+                        "height": 238,
+                        "shift": {
+                            "1": 0.796875,
+                            "2": 0.328125
+                        },
+                        "line_length": 8,
+                        "filename": "__quality__/graphics/entity/recycler/recycler-S-shadow.png"
+                    }
+                }
+            },
+            "west": {
+                "layers": {
+                    "1": {
+                        "priority": "high",
+                        "frame_count": 64,
+                        "animation_speed": 4,
+                        "scale": 0.5,
+                        "width": 284,
+                        "height": 186,
+                        "shift": {
+                            "1": 0.015625,
+                            "2": -0.140625
+                        },
+                        "line_length": 8,
+                        "filename": "__quality__/graphics/entity/recycler/recycler-W.png"
+                    },
+                    "2": {
+                        "draw_as_shadow": true,
+                        "priority": "high",
+                        "frame_count": 64,
+                        "animation_speed": 4,
+                        "scale": 0.5,
+                        "width": 314,
+                        "height": 112,
+                        "shift": {
+                            "1": 0.5,
+                            "2": 0.28125
+                        },
+                        "line_length": 8,
+                        "filename": "__quality__/graphics/entity/recycler/recycler-W-shadow.png"
+                    }
+                }
+            }
+        },
+        "working_visualisations": {
+            "1": {
+                "north_animation": {
+                    "draw_as_glow": true,
+                    "priority": "high",
+                    "frame_count": 64,
+                    "blend_mode": "additive",
+                    "animation_speed": 4,
+                    "scale": 0.5,
+                    "width": 128,
+                    "height": 184,
+                    "shift": {
+                        "1": 0.015625,
+                        "2": -1.125
+                    },
+                    "line_length": 8,
+                    "filename": "__quality__/graphics/entity/recycler/recycler-N-lights.png"
+                },
+                "east_animation": {
+                    "draw_as_glow": true,
+                    "priority": "high",
+                    "frame_count": 64,
+                    "blend_mode": "additive",
+                    "animation_speed": 4,
+                    "scale": 0.5,
+                    "width": 178,
+                    "height": 108,
+                    "shift": {
+                        "1": 0.375,
+                        "2": -0.15625
+                    },
+                    "line_length": 8,
+                    "filename": "__quality__/graphics/entity/recycler/recycler-E-lights.png"
+                },
+                "south_animation": {
+                    "draw_as_glow": true,
+                    "priority": "high",
+                    "frame_count": 64,
+                    "blend_mode": "additive",
+                    "animation_speed": 4,
+                    "scale": 0.5,
+                    "width": 122,
+                    "height": 202,
+                    "shift": {
+                        "1": -0.09375,
+                        "2": 0.15625
+                    },
+                    "line_length": 8,
+                    "filename": "__quality__/graphics/entity/recycler/recycler-S-lights.png"
+                },
+                "west_animation": {
+                    "draw_as_glow": true,
+                    "priority": "high",
+                    "frame_count": 64,
+                    "blend_mode": "additive",
+                    "animation_speed": 4,
+                    "scale": 0.5,
+                    "width": 192,
+                    "height": 148,
+                    "shift": {
+                        "1": -0.3125,
+                        "2": -0.4375
+                    },
+                    "line_length": 8,
+                    "filename": "__quality__/graphics/entity/recycler/recycler-W-lights.png"
+                }
+            },
+            "2": {
+                "apply_recipe_tint": "tertiary",
+                "fadeout": true,
+                "constant_speed": true,
+                "north_position": {
+                    "1": 0.546875,
+                    "2": -2.5
+                },
+                "east_position": {
+                    "1": 1.3125,
+                    "2": -0.8125
+                },
+                "south_position": {
+                    "1": -0.5,
+                    "2": 0.28125
+                },
+                "west_position": {
+                    "1": -1.34375,
+                    "2": -1.5625
+                },
+                "render_layer": "wires",
+                "animation": {
+                    "filename": "__quality__/graphics/entity/recycler/recycler-smoke-outer.png",
+                    "frame_count": 47,
+                    "line_length": 16,
+                    "width": 90,
+                    "height": 188,
+                    "animation_speed": 0.5,
+                    "shift": {
+                        "1": -0.0625,
+                        "2": -1.25
+                    },
+                    "scale": 0.5
+                }
+            },
+            "3": {
+                "apply_recipe_tint": "quaternary",
+                "fadeout": true,
+                "constant_speed": true,
+                "north_position": {
+                    "1": 0.546875,
+                    "2": -2.5
+                },
+                "east_position": {
+                    "1": 1.3125,
+                    "2": -0.8125
+                },
+                "south_position": {
+                    "1": -0.5,
+                    "2": 0.28125
+                },
+                "west_position": {
+                    "1": -1.34375,
+                    "2": -1.5625
+                },
+                "render_layer": "wires",
+                "animation": {
+                    "filename": "__quality__/graphics/entity/recycler/recycler-smoke-inner.png",
+                    "frame_count": 47,
+                    "line_length": 16,
+                    "width": 40,
+                    "height": 84,
+                    "animation_speed": 0.5,
+                    "shift": {
+                        "1": 0,
+                        "2": -0.4375
+                    },
+                    "scale": 0.5
+                }
+            }
+        },
+        "frozen_patch": {
+            "north": {
+                "priority": "high",
+                "scale": 0.5,
+                "width": 140,
+                "height": 288,
+                "shift": {
+                    "1": 0.046875,
+                    "2": -0.296875
+                },
+                "line_length": 1,
+                "filename": "__quality__/graphics/entity/recycler/recycler-N-frozen.png"
+            },
+            "east": {
+                "priority": "high",
+                "scale": 0.5,
+                "width": 250,
+                "height": 170,
+                "shift": {
+                    "1": -0.015625,
+                    "2": -0.34375
+                },
+                "line_length": 1,
+                "filename": "__quality__/graphics/entity/recycler/recycler-E-frozen.png"
+            },
+            "south": {
+                "priority": "high",
+                "scale": 0.5,
+                "width": 134,
+                "height": 258,
+                "shift": {
+                    "1": -0.03125,
+                    "2": -0.03125
+                },
+                "line_length": 1,
+                "filename": "__quality__/graphics/entity/recycler/recycler-S-frozen.png"
+            },
+            "west": {
+                "priority": "high",
+                "scale": 0.5,
+                "width": 252,
+                "height": 162,
+                "shift": {
+                    "1": -0.015625,
+                    "2": -0.296875
+                },
+                "line_length": 1,
+                "filename": "__quality__/graphics/entity/recycler/recycler-W-frozen.png"
+            }
+        }
+    },
+    "graphics_set_flipped": {
+        "animation": {
+            "north": {
+                "layers": {
+                    "1": {
+                        "priority": "high",
+                        "frame_count": 64,
+                        "animation_speed": 4,
+                        "scale": 0.5,
+                        "width": 168,
+                        "height": 300,
+                        "shift": {
+                            "1": -0.046875,
+                            "2": -0.234375
+                        },
+                        "line_length": 8,
+                        "filename": "__quality__/graphics/entity/recycler/recycler-flipped-N.png"
+                    },
+                    "2": {
+                        "draw_as_shadow": true,
+                        "priority": "high",
+                        "frame_count": 64,
+                        "animation_speed": 4,
+                        "scale": 0.5,
+                        "width": 232,
+                        "height": 252,
+                        "shift": {
+                            "1": 0.78125,
+                            "2": 0.0625
+                        },
+                        "line_length": 8,
+                        "filename": "__quality__/graphics/entity/recycler/recycler-flipped-N-shadow.png"
+                    }
+                }
+            },
+            "east": {
+                "layers": {
+                    "1": {
+                        "priority": "high",
+                        "frame_count": 64,
+                        "animation_speed": 4,
+                        "scale": 0.5,
+                        "width": 282,
+                        "height": 184,
+                        "shift": {
+                            "1": 0.015625,
+                            "2": -0.15625
+                        },
+                        "line_length": 8,
+                        "filename": "__quality__/graphics/entity/recycler/recycler-flipped-E.png"
+                    },
+                    "2": {
+                        "draw_as_shadow": true,
+                        "priority": "high",
+                        "frame_count": 64,
+                        "animation_speed": 4,
+                        "scale": 0.5,
+                        "width": 352,
+                        "height": 112,
+                        "shift": {
+                            "1": 0.78125,
+                            "2": 0.28125
+                        },
+                        "line_length": 8,
+                        "filename": "__quality__/graphics/entity/recycler/recycler-flipped-E-shadow.png"
+                    }
+                }
+            },
+            "south": {
+                "layers": {
+                    "1": {
+                        "priority": "high",
+                        "frame_count": 64,
+                        "animation_speed": 4,
+                        "scale": 0.5,
+                        "width": 172,
+                        "height": 288,
+                        "shift": {
+                            "1": 0.046875,
+                            "2": 0.03125
+                        },
+                        "line_length": 8,
+                        "filename": "__quality__/graphics/entity/recycler/recycler-flipped-S.png"
+                    },
+                    "2": {
+                        "draw_as_shadow": true,
+                        "priority": "high",
+                        "frame_count": 64,
+                        "animation_speed": 4,
+                        "scale": 0.5,
+                        "width": 234,
+                        "height": 238,
+                        "shift": {
+                            "1": 0.765625,
+                            "2": 0.328125
+                        },
+                        "line_length": 8,
+                        "filename": "__quality__/graphics/entity/recycler/recycler-flipped-S-shadow.png"
+                    }
+                }
+            },
+            "west": {
+                "layers": {
+                    "1": {
+                        "priority": "high",
+                        "frame_count": 64,
+                        "animation_speed": 4,
+                        "scale": 0.5,
+                        "width": 292,
+                        "height": 202,
+                        "shift": {
+                            "1": 0.046875,
+                            "2": -0.28125
+                        },
+                        "line_length": 8,
+                        "filename": "__quality__/graphics/entity/recycler/recycler-flipped-W.png"
+                    },
+                    "2": {
+                        "draw_as_shadow": true,
+                        "priority": "high",
+                        "frame_count": 64,
+                        "animation_speed": 4,
+                        "scale": 0.5,
+                        "width": 312,
+                        "height": 114,
+                        "shift": {
+                            "1": 0.484375,
+                            "2": 0.234375
+                        },
+                        "line_length": 8,
+                        "filename": "__quality__/graphics/entity/recycler/recycler-flipped-W-shadow.png"
+                    }
+                }
+            }
+        },
+        "working_visualisations": {
+            "1": {
+                "north_animation": {
+                    "draw_as_glow": true,
+                    "priority": "high",
+                    "frame_count": 64,
+                    "blend_mode": "additive",
+                    "animation_speed": 4,
+                    "scale": 0.5,
+                    "width": 118,
+                    "height": 202,
+                    "shift": {
+                        "1": -0.109375,
+                        "2": -1.03125
+                    },
+                    "line_length": 8,
+                    "filename": "__quality__/graphics/entity/recycler/recycler-flipped-N-lights.png"
+                },
+                "east_animation": {
+                    "draw_as_glow": true,
+                    "priority": "high",
+                    "frame_count": 64,
+                    "blend_mode": "additive",
+                    "animation_speed": 4,
+                    "scale": 0.5,
+                    "width": 192,
+                    "height": 146,
+                    "shift": {
+                        "1": 0.328125,
+                        "2": -0.453125
+                    },
+                    "line_length": 8,
+                    "filename": "__quality__/graphics/entity/recycler/recycler-flipped-E-lights.png"
+                },
+                "south_animation": {
+                    "draw_as_glow": true,
+                    "priority": "high",
+                    "frame_count": 64,
+                    "blend_mode": "additive",
+                    "animation_speed": 4,
+                    "scale": 0.5,
+                    "width": 130,
+                    "height": 202,
+                    "shift": {
+                        "1": -0.015625,
+                        "2": 0.078125
+                    },
+                    "line_length": 8,
+                    "filename": "__quality__/graphics/entity/recycler/recycler-flipped-S-lights.png"
+                },
+                "west_animation": {
+                    "draw_as_glow": true,
+                    "priority": "high",
+                    "frame_count": 64,
+                    "blend_mode": "additive",
+                    "animation_speed": 4,
+                    "scale": 0.5,
+                    "width": 186,
+                    "height": 128,
+                    "shift": {
+                        "1": -0.484375,
+                        "2": -0.21875
+                    },
+                    "line_length": 8,
+                    "filename": "__quality__/graphics/entity/recycler/recycler-flipped-W-lights.png"
+                }
+            },
+            "2": {
+                "apply_recipe_tint": "tertiary",
+                "fadeout": true,
+                "constant_speed": true,
+                "north_position": {
+                    "1": -0.546875,
+                    "2": -2.5
+                },
+                "east_position": {
+                    "1": 1.3125,
+                    "2": -1.5625
+                },
+                "south_position": {
+                    "1": 0.484375,
+                    "2": 0.28125
+                },
+                "west_position": {
+                    "1": -1.34375,
+                    "2": -0.8125
+                },
+                "render_layer": "wires",
+                "animation": {
+                    "filename": "__quality__/graphics/entity/recycler/recycler-smoke-outer.png",
+                    "frame_count": 47,
+                    "line_length": 16,
+                    "width": 90,
+                    "height": 188,
+                    "animation_speed": 0.5,
+                    "shift": {
+                        "1": -0.0625,
+                        "2": -1.25
+                    },
+                    "scale": 0.5
+                }
+            },
+            "3": {
+                "apply_recipe_tint": "quaternary",
+                "fadeout": true,
+                "constant_speed": true,
+                "north_position": {
+                    "1": -0.546875,
+                    "2": -2.5
+                },
+                "east_position": {
+                    "1": 1.3125,
+                    "2": -1.5625
+                },
+                "south_position": {
+                    "1": 0.484375,
+                    "2": 0.28125
+                },
+                "west_position": {
+                    "1": -1.34375,
+                    "2": -0.8125
+                },
+                "render_layer": "wires",
+                "animation": {
+                    "filename": "__quality__/graphics/entity/recycler/recycler-smoke-inner.png",
+                    "frame_count": 47,
+                    "line_length": 16,
+                    "width": 40,
+                    "height": 84,
+                    "animation_speed": 0.5,
+                    "shift": {
+                        "1": 0,
+                        "2": -0.4375
+                    },
+                    "scale": 0.5
+                }
+            }
+        },
+        "frozen_patch": {
+            "north": {
+                "priority": "high",
+                "scale": 0.5,
+                "width": 140,
+                "height": 288,
+                "shift": {
+                    "1": -0.046875,
+                    "2": -0.296875
+                },
+                "line_length": 1,
+                "filename": "__quality__/graphics/entity/recycler/recycler-flipped-N-frozen.png"
+            },
+            "east": {
+                "priority": "high",
+                "scale": 0.5,
+                "width": 250,
+                "height": 162,
+                "shift": {
+                    "1": 0.03125,
+                    "2": -0.296875
+                },
+                "line_length": 1,
+                "filename": "__quality__/graphics/entity/recycler/recycler-flipped-E-frozen.png"
+            },
+            "south": {
+                "priority": "high",
+                "scale": 0.5,
+                "width": 134,
+                "height": 258,
+                "shift": {
+                    "1": 0.03125,
+                    "2": -0.046875
+                },
+                "line_length": 1,
+                "filename": "__quality__/graphics/entity/recycler/recycler-flipped-S-frozen.png"
+            },
+            "west": {
+                "priority": "high",
+                "scale": 0.5,
+                "width": 250,
+                "height": 170,
+                "shift": {
+                    "1": 0.015625,
+                    "2": -0.359375
+                },
+                "line_length": 1,
+                "filename": "__quality__/graphics/entity/recycler/recycler-flipped-W-frozen.png"
+            }
+        }
+    },
+    "cant_insert_at_source_message_key": "inventory-restriction.cant-be-recycled",
+    "heating_energy": "100kW"
+}
