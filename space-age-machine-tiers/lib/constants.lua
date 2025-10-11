@@ -381,9 +381,6 @@ local function get_constants(utils)
     }
 
     utils.constants.science_to_next_tier_map = {
-        ['all_space'] = {
-            item='cryogenic-science-pack', ratio=1.0
-        },
         ['automation-science-pack'] = {
             item='logistic-science-pack', ratio=1.0
         },
@@ -397,6 +394,9 @@ local function get_constants(utils)
             item='promethium-science-pack', ratio=2.0
         },
     }
+    utils.constants.all_space_pack_next = {
+        item='cryogenic-science-pack', ratio=1.0
+    }
 
     -- if lignumis, then add in new sci-packs
     if utils.do_lignumis then
@@ -408,7 +408,7 @@ local function get_constants(utils)
                 item='automation-science-pack', ratio=2.0
             },
         }) do
-            utils.constants.science_material_to_next_tier_map[k] = v
+            utils.constants.science_to_next_tier_map[k] = v
         end
     end
 

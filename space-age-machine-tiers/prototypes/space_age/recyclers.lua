@@ -139,7 +139,7 @@ local function make_recycler_technology(level)
             type = "technology",
             name = get_recycler_name(level),
             icon = get_recycler_icon(level),
-            icon_size = 256,
+            icon_size = 64,
             effects = {
                 {
                     type = "unlock-recipe",
