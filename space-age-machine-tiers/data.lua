@@ -1,17 +1,6 @@
 local utils = require("lib.utils")
 
-require "prototypes.space_age.big_drills"
-require "prototypes.space_age.foundries"
-require "prototypes.space_age.recyclers"
-require "prototypes.space_age.electromagnetic_plants"
-require "prototypes.space_age.lightning_rods"
-require "prototypes.space_age.lightning_collectors"
-require "prototypes.space_age.biochambers"
-require "prototypes.space_age.agriculture_towers"
-require "prototypes.space_age.cryogenic_plants"
-require "prototypes.space_age.biolabs"
-require "prototypes.space_age.stack_inserters"
-require "prototypes.space_age.heating_towers"
+require "prototypes.space_age.base_machines"
 
 if utils.setting_do_space_platform_tiers then
     require "prototypes.space_age.space_platform"

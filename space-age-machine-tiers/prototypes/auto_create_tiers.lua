@@ -32,6 +32,9 @@ local function if_exist_modify(level, entity, key, modifier, is_mult, floor)
         if type(the_key) == "string" then
             return the_entity[the_key]
         end
+        if type(the_key) ~= 'table' then
+            error('received a non string or table value for the_key: '..tostring(the_key)..' of type '..type(the_key))
+        end
         if #the_key == 0 then
             error("received an empty list for the_key")
         end
@@ -89,10 +92,6 @@ local function if_exist_modify(level, entity, key, modifier, is_mult, floor)
 
         return the_entity
     end
-
-
-
-
 
     if get_value(entity, key) == nil then
         return
@@ -199,6 +198,10 @@ local function make_machine_entity(level, name, entity)
 
     -- Todo: figure out damage bonus ...
 
+    -- lightning collector
+    if_exist_modify(level, new_machine, 'range_elongation', utils.setting_range_mult, true, false)
+
+
     -- inserter
     if_exist_modify(level, new_machine, 'extension_speed', utils.setting_speed_mult, true, false)
     --(rotation speed already covered)
@@ -210,6 +213,7 @@ local function make_machine_entity(level, name, entity)
     -- Energy Settings
     if_exist_modify(level, new_machine, { 'energy_source', 'buffer_capacity', }, utils.setting_energy_mult, true, false)
     if_exist_modify(level, new_machine, { 'energy_source', 'input_flow_limit', }, utils.setting_energy_mult, true, false)
+    if_exist_modify(level, new_machine, 'drain', 2/(1+utils.setting_energy_mult), true, false)
 
     local energy_source = new_machine["energy_source"]
     if energy_source then
@@ -626,7 +630,7 @@ local function find_next_science_pack(level, new_technology, new_science_packs, 
         -- if we have enough space (max of two before moving on) science packs, add higher tier
         if space_pack_count > 1 then
             -- Try the special all_space mapping (see if you can add cryogenic if we have enough pre-requisites)
-            map = science_to_next_tier_map['all_space']
+            map = utils.constants.all_space_pack_next
             if map and not current_packs[map.item] then
                 added_pack = map.item
                 ratio = map.ratio or 1.0
@@ -689,7 +693,7 @@ local function make_machine_technology(level, name, t1_technology)
 
     local new_science_packs = find_next_science_pack(level, new_machine_technology, {}, 2) -- Needs To Be Before The prerequisites Update
 
-    -- utils.debug('new_science_packs are ' .. utils.jsonSerializeTable(new_science_packs))
+    utils.debug('new_science_packs are ' .. utils.jsonSerializeTable(new_science_packs))
 
     if level == 2 then
         new_machine_technology.prerequisites = { old_tech_name }
@@ -772,6 +776,7 @@ end
 
 
 function auto_create_tiers.create_machine_tiers(machine_name, backup_tech)
+    utils.debug('Creating Machine Tiers For '..machine_name)
     local entity_type, machine_entity = utils.find_entity_by_name(machine_name)
     if not entity_type or entity_type == '' then
         utils.error('did not find entity definition for ' .. machine_name)

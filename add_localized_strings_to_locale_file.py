@@ -3,16 +3,6 @@ from typing import OrderedDict
 mod_name = 'space-age-machine-tiers'
 
 names_to_add = [ # Format As Sandard Name
-    'Big Mining Drill',
-    'Electromagnetic plant',
-    'Foundry',
-    'Lightning Rod',
-    'Lightning Collector',
-    'Recycler',
-    'Biochamber',
-    'Agricultural Tower',
-    'Cryogenic Plant',
-    'Biolab',
 ]
 
 tiers = [2,3]

@@ -189,7 +189,7 @@ local function make_electric_lumber_mill_technology(level, name, old_technology)
             type = "technology",
             name = get_electric_lumber_mill_name(level),
             icon = old_technology.icon,
-            icon_size = 256,
+            icon_size = old_technology.icon_size,
             effects = {
                 {
                     type = "unlock-recipe",
