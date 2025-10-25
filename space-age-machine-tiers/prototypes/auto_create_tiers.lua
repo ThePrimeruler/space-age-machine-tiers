@@ -137,7 +137,20 @@ local function make_machine_entity(level, name, entity)
     if_exist_modify(level, new_machine, 'inventory_size', utils.setting_storage_mult, true, false)
     if_exist_modify(level, new_machine, 'inventory_size_bonus', utils.setting_storage_mult, true, false)
 
+    -- Special Effects (such as inbuilt productivity)
+    for _, effect_name in ipairs({
+        "consumption",
+        "speed",
+        "productivity",
+        "pollution",
+        "quality"
+    }) do
+        if_exist_modify(level, new_machine, {'effect_receiver','base_effect',effect_name}, utils.setting_special_effect_mult, true, false)
+    end
+    if_exist_modify(level, new_machine, 'science_pack_drain_rate_percent', 2/(1+utils.setting_special_effect_mult), true, true)
 
+
+    -- Fluid Volume
     for _, fluid_box_name in ipairs({ 'fluid_box', 'fuel_fluid_box', 'oxidizer_fluid_box' }) do
         if_exist_modify(level, new_machine, { fluid_box_name, 'volume' }, utils.setting_tank_mult, true, true)
     end
@@ -210,10 +223,15 @@ local function make_machine_entity(level, name, entity)
     if_exist_modify(level, new_machine, { 'energy_source', 'output_flow_limit', }, utils.setting_energy_mult, true, false)
     if_exist_modify(level, new_machine, 'max_fluid_usage', utils.setting_energy_mult, true, false)
 
+    -- Burner Generator
+    if_exist_modify(level, new_machine, 'max_power_output', utils.setting_energy_mult, true, false)
+    if_exist_modify(level, new_machine, { 'burner', 'effectivity' }, (1+utils.setting_energy_mult)/2, true, false)
+
     -- Energy Settings
     if_exist_modify(level, new_machine, { 'energy_source', 'buffer_capacity', }, utils.setting_energy_mult, true, false)
     if_exist_modify(level, new_machine, { 'energy_source', 'input_flow_limit', }, utils.setting_energy_mult, true, false)
     if_exist_modify(level, new_machine, 'drain', 2/(1+utils.setting_energy_mult), true, false)
+
 
     local energy_source = new_machine["energy_source"]
     if energy_source then
@@ -246,6 +264,9 @@ local function make_machine_item(level, name, item)
         new_machine_item.order = new_machine_item.order .. '-b'
     else
         new_machine_item.order = name .. '-b'
+    end
+    if not new_machine_item.subgroup then
+        new_machine_item.subgroup = "production-machine"
     end
     data.extend({ new_machine_item })
 end
@@ -444,23 +465,19 @@ local function make_machine_recipe(level, name, recipe, new_science_packs)
 end
 
 
-local function add_mapped_pack(sci_packs, mapped)
-    if not mapped then return end
-    if type(mapped) == "table" then
-        for _, p in ipairs(mapped) do
-            if p and not utils.list_contains(sci_packs, p) then
-                table.insert(sci_packs, p)
-            end
-        end
-    else
-        if not utils.list_contains(sci_packs, mapped) then
-            table.insert(sci_packs, mapped)
+-- returns boolean
+local function sci_pack_in_ingredients(ingredients_list, sci_pack_name)
+    for _, item in ipairs(ingredients_list) do
+        if item[1] == sci_pack_name then
+            return true
         end
     end
+    return false
 end
 
+-- generates pre-requisite science packs for a given tech_stack
+local function get_prerequisite_science_packs_from_tree(tech_stack, count, sci_packs, visited)
 
-local function get_prerequisite_science_packs(tech_stack, count, sci_packs, visited)
     visited = visited or {}
     sci_packs = sci_packs or {}
 
@@ -540,6 +557,93 @@ local function get_prerequisite_science_packs(tech_stack, count, sci_packs, visi
 
     return count, sci_packs
 end
+-- takes the new_tech and standardizes it into a regular tech, returning the science ingredients
+local function preprocess_tier_1_science_packs(new_tech)
+    -- turn new_tech into a standard research pack research and return it's ingredients
+
+
+    -- if it's a trigger technology, then we need to create new science packs that its base tech `should` have
+    if new_tech.research_trigger then
+        new_tech.research_trigger = nil
+        local count, sci_packs = get_prerequisite_science_packs_from_tree({ { 0, new_tech } }, 10, {})
+        new_tech.unit = { count = count, time = 60 }
+        local ingredients_list = {}
+        for _, sci_pack in ipairs(sci_packs) do
+            table.insert(ingredients_list, { sci_pack, 1 })
+        end
+        new_tech.unit.ingredients = ingredients_list
+    end
+
+    if not new_tech.unit then -- if no unit for some reason, then add one
+        new_tech.unit = { count = 200, time = 60 }
+    end
+    if not new_tech.unit.ingredients then -- if no ingredients, then add some
+        new_tech.unit.ingredients = {{automation-science-pack, 1}}
+    end
+
+    return new_tech.unit.ingredients
+
+end
+
+local function add_next_sci_pack(level, new_tech, new_science_packs_mapping)
+    -- TODO: Finish this function
+
+    -- reads the current science ingredients to determine the next science pack that should be added. Adds the pack and normalizes things where needed
+    -- updates new_science_packs_mapping with the current tier level's added packs
+
+    -- if it already has a space-pack in ingredients, then fill in any missing packs and go to space pack settings
+
+    -- else, check to see if we can add a non-space pack
+
+    -- if we can't add a non-space pack, then add space pack logic
+
+
+    -- if all else fails, then just increase the cost and go on
+
+
+end
+
+
+local function generate_science_packs_for_tech(level, new_tech)
+
+    -- expected return: new_science_packs:
+    -- {"tier": { '', '', ...}}
+
+    -- first, standardize science packs for the base tech (new_tech is a copy of it)
+    local base_science_packs = preprocess_tier_1_science_packs(new_tech)
+    utils.debug('base_science_packs are '..utils.jsonSerializeTable(base_science_packs))
+
+    -- second, add a new science pack per tier
+    local new_science_packs_mapping = {}
+    for i=2,level,1 do
+        add_next_sci_pack(level,new_tech,new_science_packs_mapping)
+    end
+
+    -- finally, return the new packs (so recipe gen can take them into account)
+    return new_science_packs_mapping
+
+end
+
+
+
+
+
+
+-- old
+local function add_mapped_pack(sci_packs, mapped)
+    if not mapped then return end
+    if type(mapped) == "table" then
+        for _, p in ipairs(mapped) do
+            if p and not utils.list_contains(sci_packs, p) then
+                table.insert(sci_packs, p)
+            end
+        end
+    else
+        if not utils.list_contains(sci_packs, mapped) then
+            table.insert(sci_packs, mapped)
+        end
+    end
+end
 
 local function advance_packs_once(current_packs)
     local new_packs = {}
@@ -583,7 +687,7 @@ local function find_next_science_pack(level, new_technology, new_science_packs, 
     -- if it's a trigger technology, then we need to create new science packs that its base tech `should` have
     if new_technology.research_trigger then
         new_technology.research_trigger = nil
-        local count, sci_packs = get_prerequisite_science_packs({ { 0, new_technology } }, 10, {})
+        local count, sci_packs = get_prerequisite_science_packs_from_tree({ { 0, new_technology } }, 10, {})
         new_technology.unit = { count = count, time = 60 }
         local ingredients_list = {}
         for _, sci_pack in ipairs(sci_packs) do
@@ -681,7 +785,7 @@ local function find_next_science_pack(level, new_technology, new_science_packs, 
     -- Recurse to next lower level
     return find_next_science_pack(level, new_technology, new_science_packs, current_level + 1)
 end
-
+--end old
 
 local function make_machine_technology(level, name, t1_technology)
     local new_machine_technology = table.deepcopy(t1_technology)
@@ -689,7 +793,6 @@ local function make_machine_technology(level, name, t1_technology)
     new_machine_technology.name = utils.get_machine_name(level, name)
     new_machine_technology.localised_name = { "", utils.get_item_localised_name(name), ' ' .. level }
     new_machine_technology.localised_description = { "", utils.get_item_localised_name(name), { utils.mod_name .. '.suffix-upgrade' } }
-
 
     local new_science_packs = find_next_science_pack(level, new_machine_technology, {}, 2) -- Needs To Be Before The prerequisites Update
 
@@ -777,6 +880,7 @@ end
 
 function auto_create_tiers.create_machine_tiers(machine_name, backup_tech)
     utils.debug('Creating Machine Tiers For '..machine_name)
+    
     local entity_type, machine_entity = utils.find_entity_by_name(machine_name)
     if not entity_type or entity_type == '' then
         utils.error('did not find entity definition for ' .. machine_name)
@@ -804,6 +908,57 @@ function auto_create_tiers.create_machine_tiers(machine_name, backup_tech)
 
     add_new_machine(2, machine_name, machine_entity, entity_type, machine_item, machine_technology, machine_recipe)
     add_new_machine(3, machine_name, machine_entity, entity_type, machine_item, machine_technology, machine_recipe)
+end
+
+
+function auto_create_tiers.recreate_entities(machine_name)
+    utils.debug('Recreating Machine Entities For '..machine_name)
+    if machine_name == 'electric-lumber-mill' then -- skip manual ones
+        goto recreate_entities_end
+    end 
+
+    local entity_type, base_machine_entity = utils.find_entity_by_name(utils.get_machine_name(1,machine_name))
+    if not entity_type or entity_type == '' then
+        utils.error('did not find entity definition for ' .. machine_name)
+        return
+    end
+    for i=2,3,1 do
+        -- Remove Current Entity
+        --     find entity
+        local tiered_name = utils.get_machine_name(i, machine_name)
+        local old_entity_type, old_machine_entity = utils.find_entity_by_name(tiered_name)
+        if not old_entity_type or old_entity_type == '' then
+            utils.error('did not find entity definition for ' .. machine_name)
+            return
+        end
+
+        --     save upgrade planner changes
+        local fast_replace_group = old_machine_entity.fast_replaceable_group
+        local next_upgrade = old_machine_entity.next_upgrade
+
+
+        --     delete entity
+        data.raw[old_entity_type][tiered_name] = null
+
+        -- Remake the Entity
+        utils.debug('adding entity: ' .. machine_name .. '-' .. i)
+        make_machine_entity(i, machine_name, base_machine_entity)
+
+        --    reapply upgrade planner changes
+        local new_entity_type, new_machine_entity = utils.find_entity_by_name(tiered_name)
+        if not new_entity_type or new_entity_type == '' then
+            utils.error('did not find entity definition for ' .. machine_name)
+            return
+        end
+        if fast_replace_group then
+            new_machine_entity.fast_replaceable_group = fast_replace_group
+        end
+        if next_upgrade then
+            new_machine_entity.next_upgrade = next_upgrade
+        end
+
+    end
+    ::recreate_entities_end::
 end
 
 

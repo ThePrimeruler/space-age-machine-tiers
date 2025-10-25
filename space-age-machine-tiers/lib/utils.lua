@@ -42,37 +42,39 @@ utils.setting_do_military_tiers = settings.startup[utils.mod_name.."-do-military
 
 
 
----@type number float 
+---@type number float
 ---@diagnostic disable-next-line: assign-type-mismatch
 utils.setting_speed_mult = settings.startup[utils.mod_name.."-speed-multiplier-per-tier"].value
----@type number float 
+---@type number float
 ---@diagnostic disable-next-line: assign-type-mismatch
 utils.setting_energy_mult = settings.startup[utils.mod_name.."-energy-usage-multiplier-per-tier"].value
----@type number float 
+---@type number float
 ---@diagnostic disable-next-line: assign-type-mismatch
 utils.setting_pollution_mult = settings.startup[utils.mod_name.."-pollution-multiplier-per-tier"].value
----@type number float 
+---@type number float
 ---@diagnostic disable-next-line: assign-type-mismatch
 utils.setting_health_mult = settings.startup[utils.mod_name.."-health-multiplier-per-tier"].value
----@type number float 
+---@type number float
 ---@diagnostic disable-next-line: assign-type-mismatch
 utils.setting_range_mult = settings.startup[utils.mod_name.."-range-multiplier-per-tier"].value
----@type number float 
+---@type number float
 ---@diagnostic disable-next-line: assign-type-mismatch
 utils.setting_tank_mult = settings.startup[utils.mod_name.."-tank-multiplier-per-tier"].value
----@type number float 
+---@type number float
 ---@diagnostic disable-next-line: assign-type-mismatch
 utils.setting_storage_mult = settings.startup[utils.mod_name.."-storage-multiplier-per-tier"].value
----@type number float 
+---@type number float
 ---@diagnostic disable-next-line: assign-type-mismatch
 utils.setting_beacon_dist_mult = settings.startup[utils.mod_name.."-beacon-distribution-multiplier-per-tier"].value
----@type number float 
+---@type number float
 ---@diagnostic disable-next-line: assign-type-mismatch
 utils.setting_thruster_performance_mult = settings.startup[utils.mod_name.."-thruster-performance-per-tier"].value
----@type number float 
+---@type number float
 ---@diagnostic disable-next-line: assign-type-mismatch
 utils.setting_damage_mult = settings.startup[utils.mod_name.."-damage-multiplier-per-tier"].value
-
+---@type number float
+---@diagnostic disable-next-line: assign-type-mismatch
+utils.setting_special_effect_mult = settings.startup[utils.mod_name.."-special-effect-multiplier-per-tier"].value
 
 
 
