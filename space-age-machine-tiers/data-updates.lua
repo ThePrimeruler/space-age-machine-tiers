@@ -16,7 +16,7 @@ if utils.do_lignumis and utils.setting_lignumis_add_electric_lumber_mills then
     end
 
     local electric_lumber_mill = 'electric-lumber-mill'
-    local electric_lumber_mill_entity_type, electric_lumber_mill_entity = utils.find_entity_by_name(electric_lumber_mill)
+    local electric_lumber_mill_entity_type, electric_lumber_mill_entity = utils.find_entity_by_name(utils.get_machine_name(1,(electric_lumber_mill)))
     if not electric_lumber_mill_entity_type or electric_lumber_mill_entity_type=='' then
         utils.error('did not find entity definition for  "'..tostring(electric_lumber_mill)..'"')
         goto continue

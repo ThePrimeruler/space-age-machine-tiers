@@ -14,6 +14,8 @@ local function get_constants(utils)
         'recycler',
         'stack-inserter',
         'heating-tower',
+        'fusion-generator',
+        'fusion-reactor',
     }
 
     utils.constants.added_machine_tier_1 = {
@@ -47,6 +49,7 @@ local function get_constants(utils)
     end
 
 
+
     if utils.do_aop then
         utils.constants.aop_machine_list = {
             "aop-arc-furnace",
@@ -62,12 +65,19 @@ local function get_constants(utils)
             "aop-quantum-stabilizer",
             "aop-scrubber",
             "aop-smeltery",
+            "aop-salvager",
+            "aop-advanced-assembling-machine",
+            "aop-core-miner",
+            "aop-armory",
+            "aop-mineral-synthesizer",
+            "aop-biomass-reactor",
+            "aop-transmitter",
         }
-        if mods['lignumis'] then
+        if mods['lignumis'] and (settings.startup['aop-merge-hydro'] and settings.startup['aop-merge-hydro'].value) then
             -- utils.info('Removing the Age Of Production Lumber Mill Upgrades Because Lignumis Is Installed')
             utils.table_remove_by_value(utils.constants.aop_machine_list,'aop-lumber-mill')
         end 
-        if mods['maraxsis'] then
+        if mods['maraxsis'] and (settings.startup['aop-merge-lignumis-lumber-mill'] and settings.startup['aop-merge-lignumis-lumber-mill'].value) then
             -- utils.info('Removing the Age Of Production Hydraulic Plant Upgrades Because Maraxsis Is Installed')
             utils.table_remove_by_value(utils.constants.aop_machine_list,'aop-hydraulic-plant')
         end
@@ -134,7 +144,8 @@ local function get_constants(utils)
         'boiler',
         'generator',
         'fusion-generator',
-
+        'fusion-reactor',
+        'burner-generator',
     }
 
     utils.constants.pollution_types = {
@@ -316,6 +327,12 @@ local function get_constants(utils)
             ['add'] = {
                 item='carbon-fiber', ratio=25
             },
+            ['backup'] = {
+                item='bioflux', ratio=10
+            },
+            ['nutrients'] = {
+                item='bioflux', ratio=1.0
+            },
             ['iron-stick'] = {
                 item = 'carbon-fiber', ratio = 1.0
             },
@@ -351,8 +368,12 @@ local function get_constants(utils)
                 item='quantum-processor', ratio=15
             },
             ['backup'] = {
-                item='lithium-plate', ratio=5
+                item='biter-egg', ratio=15
             },
+            ['bioflux'] = {
+                item='biter-egg', ratio=0.75
+            },
+
         },
     }
 

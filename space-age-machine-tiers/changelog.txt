@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.3
+Date: 2025-10-24
+  Changes:
+    - Added Support For More Age Of Production Machines
+    - Added A Thumbnail
+    - Added Fusion Reactor And Generator Tiers
+    - Added Basic Pelagos Flamethrower Support
+    - Auto-Add Subgroups And Orders To All Machines (Even if base machines don't have them)
+    - Hopefully fixed some bugs related to missmatches between base tiers and their upgrades
+---------------------------------------------------------------------------------------------------
 Version: 0.0.2
 Date: 2025-10-10
   Changes:

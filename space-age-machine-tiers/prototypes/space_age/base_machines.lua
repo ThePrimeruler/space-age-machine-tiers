@@ -19,9 +19,17 @@ local backup_machine_tech_mapping = {
     ['recycler'] = 'recycler',
     ['stack-inserter'] = 'stack-inserter',
     ['heating-tower'] = 'heating-tower',
+    ['fusion-generator'] = 'fusion-reactor',
+    ['fusion-reactor'] = 'fusion-reactor',
 }
 
+
+
+
 for _, machine_name in ipairs(space_age_machine_list) do
+    -- local type, proto = utils.find_entity_by_name(machine_name)
+    -- utils.debug(machine_name..' type is '..type)
+    -- utils.debug(utils.jsonSerializeTable(proto,machine_name))
 
     auto_create_tiers.create_machine_tiers(machine_name,backup_machine_tech_mapping[machine_name])
 

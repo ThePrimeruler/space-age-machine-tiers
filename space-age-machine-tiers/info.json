@@ -1,6 +1,6 @@
 {
     "name": "space-age-machine-tiers",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "title": "Space Age Machine Tiers",
     "author": "Primeruler",
     "factorio_version": "2.0",
@@ -15,7 +15,8 @@
         "? Age-of-Production",
         "? lignumis",
         "? maraxsis",
-        "? planet-muluna"
+        "? planet-muluna",
+        "(?) pelagos"
     ],
     "space_travel_required": true
 }

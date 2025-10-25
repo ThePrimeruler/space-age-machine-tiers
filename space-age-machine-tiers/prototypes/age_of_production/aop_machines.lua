@@ -20,6 +20,13 @@ local backup_aop_machine_tech_mapping = {
     ["aop-quantum-stabilizer"] = "aop-quantum-machinery",
     ["aop-scrubber"] = "aop-air-scrubbing",
     ["aop-smeltery"] = "aop-smeltery",
+    ["aop-salvager"] = "aop-advanced-recycling",
+    ["aop-advanced-assembling-machine"] = "",
+    ["aop-core-miner"] = "aop-core-mining",
+    ["aop-armory"] = "aop-armory",
+    ["aop-mineral-synthesizer"] = "aop-mineral-synthesis",
+    ["aop-biomass-reactor"] = "aop-biomass-reactor",
+    ["aop-transmitter"] = "aop-smaller-beacons",
 }
 
 for _, machine_name in ipairs(aop_machine_list) do

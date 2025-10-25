@@ -181,6 +181,14 @@ data:extend({
         minimum_value = 0.001,
         order = "b",
     },
+    {
+        type = "double-setting",
+        name = utils.mod_name.."-special-effect-multiplier-per-tier",
+        setting_type = "startup",
+        default_value = 1.2,
+        minimum_value = 0.001,
+        order = "b",
+    },
 
     { 
         type = "int-setting",

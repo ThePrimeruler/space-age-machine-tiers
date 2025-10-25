@@ -2,6 +2,21 @@ local utils = require("lib.utils")
 
 local machine_list = utils.constants.every_machine_list
 
+local auto_create_tiers = require("prototypes.auto_create_tiers")
+
+-- Recreate entities in data-final-fixes to fix discrepancies caused from other mods changing values
+for _, machine_name in ipairs(machine_list) do
+    auto_create_tiers.recreate_entities(machine_name)
+end
+
+
+
+-- if pelagos, then update flame throwers to match
+if mods["pelagos"] and utils.setting_do_military_tiers then
+    require('prototypes.pelagos.pelagos_data_final_fixes')
+end
+
+
 
 -- update lab science packs to match their tier 1
 local function get_biolab_name(level)
@@ -55,9 +70,13 @@ end
 local technologies = data.raw["technology"]
 local recipes = data.raw["recipe"]
 
+local function is_technology_valid(tech)
+    return tech and (not tech.hidden) and (tech.enabled ~= false)
+end
+
 local function find_technology_unlocking_recipe(recipe_name)
     for tech_name, tech_data in pairs(technologies) do
-        if tech_data.effects then
+        if tech_data.effects and is_technology_valid(tech_data) then
             for _, effect in ipairs(tech_data.effects) do
                 if effect.type == 'unlock-recipe' and effect.recipe == recipe_name then
                     return tech_name, tech_data
@@ -67,18 +86,17 @@ local function find_technology_unlocking_recipe(recipe_name)
     end
     return nil, nil
 end
-
-local function is_technology_valid(tech)
-    return tech and not tech.hidden and tech.enabled ~= false
-end
-
 local function get_replacement_prerequisite(old_prereq, current_tier, machine_name, tier1_tech_name)
     -- Direct upgrade chain replacement
     if current_tier == 2 and old_prereq == utils.get_machine_name(1, machine_name) then
-        return is_technology_valid(technologies[tier1_tech_name]) and tier1_tech_name or nil
+        if is_technology_valid(technologies[tier1_tech_name]) then
+            return tier1_tech_name
+        end
     elseif current_tier == 3 and old_prereq == utils.get_machine_name(2, machine_name) then
         local tier2_tech = technologies[utils.get_machine_name(2, machine_name)]
-        return is_technology_valid(tier2_tech) and tier2_tech.name or nil
+        if is_technology_valid(tier2_tech) then
+            return tier2_tech.name
+        end
     end
     
     -- Recipe-based replacement
@@ -93,7 +111,6 @@ local function get_replacement_prerequisite(old_prereq, current_tier, machine_na
             end
         end
     end
-    
     return nil
 end
 
@@ -117,7 +134,8 @@ local function update_technology_prerequisites(tech, current_tier, machine_name,
                 table.insert(valid_prerequisites, replacement)
                 utils.debug("Using " .. replacement .. " as replacement for " .. prereq_name)
             else
-                utils.warning("No replacement found for prerequisite " .. prereq_name .. " in " .. tech.name)
+                utils.error("No replacement found for prerequisite " .. prereq_name .. " in " .. tech.name .. " removing it.")
+                utils.table_remove_by_value(valid_prerequisites, prereq_name)
             end
         end
     end
@@ -141,7 +159,7 @@ for _, machine_name in ipairs(machine_list) do
     local tier1_tech_name, tier1_tech = find_technology_unlocking_recipe(tier1_recipe_name)
     
     if not tier1_tech_name then
-        utils.warning("Could not find tier 1 technology for machine: " .. machine_name)
+        utils.error("Could not find tier 1 technology for machine: " .. machine_name)
         goto continue
     end
     
@@ -158,6 +176,10 @@ for _, machine_name in ipairs(machine_list) do
     
     ::continue::
 end
+
+
+
+
 
 
 
@@ -218,22 +240,9 @@ for _, machine_name in ipairs(machine_list) do
                 local tier_item = data.raw.item[tier_name]
 
                 if tier_proto and tier_item then
-                    -- If subgroup/order are missing or unsorted, copy from base
-                    local changed = false
-
-                    if not tier_item.subgroup or tier_item.subgroup == "unsorted" then
-                        tier_item.subgroup = base_item.subgroup
-                        changed = true
-                    end
-
-                    if not tier_item.order or tier_item.order == "" then
-                        tier_item.order = base_item.order..'-b'
-                        changed = true
-                    end
-
-                    if changed then
-                        utils.debug("Re-categorized " .. tier_name .." to subgroup=" .. tostring(tier_item.subgroup) ..", order=" .. tostring(tier_item.order) .." based on " .. base_name)
-                    end
+                    -- update all subgroups and orders, just to be safe
+                    tier_item.subgroup = base_item.subgroup or 'production-machine'
+                    tier_item.order = (base_item.order or 'zzz')..'-b'..tier_name
                 else
                     utils.debug("Skipping " .. tier_name .." (no prototype or item found for categorization)")
                 end
@@ -255,8 +264,7 @@ tech_table_mapping = {
     ["physical%-projectile%-damage"] = utils.constants.physical_projectile_research_list,
     ["refined%-flammables"] = utils.constants.refined_flammables_research_list,
 }
-
-for key, val in pairs(tech_table_mapping) do
+for key, val in pairs(tech_table_mapping) do -- loop through the damage technologies
 
     -- taken and modified from snouz_long_electric_gun_turret mod (https://github.com/snouz/snouz_long_electric_gun_turret)
     for _, tech in pairs(data.raw["technology"]) do 

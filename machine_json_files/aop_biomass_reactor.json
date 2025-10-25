@@ -1,0 +1,206 @@
+{
+    "name": "aop-biomass-reactor",
+    "type": "burner-generator",
+    "icon": "__Age-of-Production-Graphics__/graphics/icons/biomass-reactor.png",
+    "icon_size": 64,
+    "flags": {
+        "1": "placeable-neutral",
+        "2": "placeable-player",
+        "3": "player-creation"
+    },
+    "minable": {
+        "mining_time": 0.5,
+        "results": {
+            "1": {
+                "type": "item",
+                "name": "aop-biomass-reactor",
+                "amount": 1
+            }
+        }
+    },
+    "max_health": 300,
+    "corpse": "big-remnants",
+    "dying_explosion": "medium-explosion",
+    "collision_box": {
+        "1": {
+            "1": -2.1,
+            "2": -2.1
+        },
+        "2": {
+            "1": 2.1,
+            "2": 2.1
+        }
+    },
+    "selection_box": {
+        "1": {
+            "1": -2.5,
+            "2": -2.5
+        },
+        "2": {
+            "1": 2.5,
+            "2": 2.5
+        }
+    },
+    "perceived_performance": {
+        "minimum": 0.25,
+        "performance_to_activity_rate": 2
+    },
+    "max_power_output": "2.5MW",
+    "burner": {
+        "type": "burner",
+        "fuel_categories": {
+            "1": "nutrients",
+            "2": "aop-spoilage"
+        },
+        "effectivity": 5,
+        "fuel_inventory_size": 1,
+        "burnt_inventory_size": 1,
+        "emissions_per_minute": {
+            "pollution": 1
+        }
+    },
+    "energy_source": {
+        "type": "electric",
+        "usage_priority": "secondary-output"
+    },
+    "impact_category": "metal",
+    "open_sound": {
+        "filename": "__base__/sound/machine-open.ogg",
+        "volume": 0.5
+    },
+    "close_sound": {
+        "filename": "__base__/sound/machine-close.ogg",
+        "volume": 0.29
+    },
+    "animation": {
+        "layers": {
+            "1": {
+                "priority": "high",
+                "width": 330,
+                "height": 410,
+                "frame_count": 80,
+                "shift": {
+                    "1": 0,
+                    "2": -0.5625
+                },
+                "animation_speed": 1.25,
+                "scale": 0.5,
+                "stripes": {
+                    "1": {
+                        "filename": "__Age-of-Production-Graphics__/graphics/entity/biomass-reactor/biomass-reactor-hr-animation-1.png",
+                        "width_in_frames": 8,
+                        "height_in_frames": 8
+                    },
+                    "2": {
+                        "filename": "__Age-of-Production-Graphics__/graphics/entity/biomass-reactor/biomass-reactor-hr-animation-2.png",
+                        "width_in_frames": 8,
+                        "height_in_frames": 2
+                    }
+                }
+            },
+            "2": {
+                "priority": "high",
+                "width": 330,
+                "height": 410,
+                "frame_count": 80,
+                "shift": {
+                    "1": 0,
+                    "2": -0.5625
+                },
+                "draw_as_glow": true,
+                "scale": 0.5,
+                "animation_speed": 1.25,
+                "blend_mode": "additive",
+                "stripes": {
+                    "1": {
+                        "filename": "__Age-of-Production-Graphics__/graphics/entity/biomass-reactor/biomass-reactor-hr-emission-1.png",
+                        "width_in_frames": 8,
+                        "height_in_frames": 8
+                    },
+                    "2": {
+                        "filename": "__Age-of-Production-Graphics__/graphics/entity/biomass-reactor/biomass-reactor-hr-emission-2.png",
+                        "width_in_frames": 8,
+                        "height_in_frames": 2
+                    }
+                }
+            },
+            "3": {
+                "filename": "__Age-of-Production-Graphics__/graphics/entity/biomass-reactor/biomass-reactor-hr-shadow.png",
+                "width": 900,
+                "height": 500,
+                "frame_count": 1,
+                "line_length": 1,
+                "repeat_count": 80,
+                "animation_speed": 1.25,
+                "shift": {
+                    "1": 0.40625,
+                    "2": -0.28125
+                },
+                "scale": 0.5,
+                "draw_as_shadow": true
+            }
+        }
+    },
+    "idle_animation": {
+        "layers": {
+            "1": {
+                "priority": "high",
+                "width": 330,
+                "height": 410,
+                "frame_count": 80,
+                "shift": {
+                    "1": 0,
+                    "2": -0.5625
+                },
+                "animation_speed": 1.25,
+                "scale": 0.5,
+                "stripes": {
+                    "1": {
+                        "filename": "__Age-of-Production-Graphics__/graphics/entity/biomass-reactor/biomass-reactor-hr-animation-1.png",
+                        "width_in_frames": 8,
+                        "height_in_frames": 8
+                    },
+                    "2": {
+                        "filename": "__Age-of-Production-Graphics__/graphics/entity/biomass-reactor/biomass-reactor-hr-animation-2.png",
+                        "width_in_frames": 8,
+                        "height_in_frames": 2
+                    }
+                }
+            },
+            "2": {
+                "filename": "__Age-of-Production-Graphics__/graphics/entity/biomass-reactor/biomass-reactor-hr-shadow.png",
+                "width": 900,
+                "height": 500,
+                "frame_count": 1,
+                "line_length": 1,
+                "repeat_count": 80,
+                "animation_speed": 1.25,
+                "shift": {
+                    "1": 0.40625,
+                    "2": -0.28125
+                },
+                "scale": 0.5,
+                "draw_as_shadow": true
+            }
+        }
+    },
+    "working_sound": {
+        "sound": {
+            "filename": "__base__/sound/steam-turbine.ogg",
+            "volume": 0.7
+        },
+        "apparent_volume": 0.3
+    },
+    "created_effect": {
+        "type": "direct",
+        "action_delivery": {
+            "type": "instant",
+            "source_effects": {
+                "1": {
+                    "type": "script",
+                    "effect_id": "aop-biomass-reactor-created"
+                }
+            }
+        }
+    }
+}
