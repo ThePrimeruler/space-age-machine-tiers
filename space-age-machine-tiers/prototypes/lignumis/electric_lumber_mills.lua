@@ -1,6 +1,7 @@
 local item_sounds = require("__base__.prototypes.item_sounds")
 local utils = require("lib.utils")
 
+local cost_mult = utils.setting_cost_mult
 
 local data_group = "assembling-machine"
 
@@ -152,26 +153,27 @@ local function make_electric_lumber_mill_recipe(level, name, old_recipe)
     if level == 1 then
         recipe.ingredients = {
             {type = "item", name = base_lumber_mill_name, amount = 1},
-            { type = "item", name = "stone-brick", amount = 40 },
-            { type = "item", name = "iron-gear-wheel", amount = 20 },
-            { type = "item", name = "pipe", amount = 10 },
-            { type = "item", name = "electronic-circuit", amount = 10 },
+            { type = "item", name = "stone-brick", amount = 40*cost_mult },
+            { type = "item", name = "iron-gear-wheel", amount = 20*cost_mult },
+            { type = "item", name = "pipe", amount = 10*cost_mult },
+            { type = "item", name = "electronic-circuit", amount = 10*cost_mult },
         }
     elseif level == 2 then
         recipe.ingredients = {
             {type = "item", name = get_electric_lumber_mill_name(level-1), amount = 1},
-            { type = "item", name = "concrete", amount = 35 },
-            { type = "item", name = "iron-gear-wheel", amount = 40 },
-            { type = "item", name = "pipe", amount = 20 },
-            { type = "item", name = "advanced-circuit", amount = 10 },
+            { type = "item", name = "concrete", amount = 35*cost_mult },
+            { type = "item", name = "iron-gear-wheel", amount = 40*cost_mult },
+            { type = "item", name = "pipe", amount = 20*cost_mult },
+            { type = "item", name = "advanced-circuit", amount = 10*cost_mult },
         }
     elseif level == 3 then
+        local tmp_mult = cost_mult*cost_mult
         recipe.ingredients = {
             {type = "item", name = get_electric_lumber_mill_name(level-1), amount = 1},
-            { type = "item", name = "refined-concrete", amount = 55 },
-            { type = "item", name = "iron-gear-wheel", amount = 45 },
-            { type = "item", name = "pipe", amount = 25 },
-            { type = "item", name = "processing-unit", amount = 10 },
+            { type = "item", name = "refined-concrete", amount = 55*tmp_mult },
+            { type = "item", name = "iron-gear-wheel", amount = 45*tmp_mult },
+            { type = "item", name = "pipe", amount = 25*tmp_mult },
+            { type = "item", name = "processing-unit", amount = 10*tmp_mult },
         }
     else
         error(utils.mod_name..': make_lumber_mill_recipe: unknown level: '..level )
@@ -203,7 +205,7 @@ local function make_electric_lumber_mill_technology(level, name, old_technology)
         }
     if level == 1 then
         technology.unit = {
-            count = 750,
+            count = 750 * cost_mult,
             ingredients =
             {
                 {"automation-science-pack", 1},
@@ -216,7 +218,7 @@ local function make_electric_lumber_mill_technology(level, name, old_technology)
         }
     elseif level == 2 then
         technology.unit = {
-            count = 1000,
+            count = 1000 * cost_mult,
             ingredients =
             {
                 {"automation-science-pack", 1},
@@ -234,7 +236,7 @@ local function make_electric_lumber_mill_technology(level, name, old_technology)
         }
     elseif level == 3 then
         technology.unit = {
-            count = 1500,
+            count = 1500 * cost_mult * cost_mult,
             ingredients =
             {
                 {"automation-science-pack", 1},

@@ -74,6 +74,7 @@ local function is_technology_valid(tech)
     return tech and (not tech.hidden) and (tech.enabled ~= false)
 end
 
+-- TODO: Rewrite these functions
 local function find_technology_unlocking_recipe(recipe_name)
     for tech_name, tech_data in pairs(technologies) do
         if tech_data.effects and is_technology_valid(tech_data) then
@@ -86,9 +87,11 @@ local function find_technology_unlocking_recipe(recipe_name)
     end
     return nil, nil
 end
+
 local function get_replacement_prerequisite(old_prereq, current_tier, machine_name, tier1_tech_name)
     -- Direct upgrade chain replacement
-    if current_tier == 2 and old_prereq == utils.get_machine_name(1, machine_name) then
+    if not tier1_tech_name then debug('no tier1_tech_name')
+    elseif current_tier == 2 and old_prereq == utils.get_machine_name(1, machine_name) then
         if is_technology_valid(technologies[tier1_tech_name]) then
             return tier1_tech_name
         end
@@ -134,7 +137,7 @@ local function update_technology_prerequisites(tech, current_tier, machine_name,
                 table.insert(valid_prerequisites, replacement)
                 utils.debug("Using " .. replacement .. " as replacement for " .. prereq_name)
             else
-                utils.error("No replacement found for prerequisite " .. prereq_name .. " in " .. tech.name .. " removing it.")
+                utils.warning("No replacement found for prerequisite \"" .. prereq_name .. "\" in " .. tech.name .. " removing it.")
                 utils.table_remove_by_value(valid_prerequisites, prereq_name)
             end
         end
@@ -160,7 +163,7 @@ for _, machine_name in ipairs(machine_list) do
     
     if not tier1_tech_name then
         utils.error("Could not find tier 1 technology for machine: " .. machine_name)
-        goto continue
+        tier1_tech_name = ''
     end
     
     for tier = 2, 3 do
@@ -277,22 +280,29 @@ for key, val in pairs(tech_table_mapping) do -- loop through the damage technolo
                 end
 
                 -- loop through each tier and add them to the techs
+                local machine_tier1_name = utils.get_machine_name(1,machine_name)
+
                 for level = start_tier,3, 1 do
-                    local real_name = utils.get_machine_name(level,machine_name)
-                    _, proto = utils.find_entity_by_name(real_name)
+                    local machine_tiered_name = utils.get_machine_name(level,machine_name)
+                    _, proto = utils.find_entity_by_name(machine_tiered_name)
                     if proto then
 
                         local modifier = 0
                         for _, effect in pairs(tech.effects) do -- find a modifier in the tech so that our changes are consistent
-                            if effect.type == "turret-attack" and effect.modifier then
-                                modifier = effect.modifier
-                                break
+                            if effect.type == "turret-attack" and effect.modifier then -- if it's a 
+                                if modifier == 0 then -- get first effect listed (hopefully more consistent)
+                                    modifier = effect.modifier
+                                end
+                                if effect.turret_id == machine_tier1_name then -- if we found the tier1 turret then stop looking (match better)
+                                    modifier = effect.modifier
+                                    break
+                                end
                             end
                         end
                         table.insert(tech.effects, 
                         {
                             type = "turret-attack",
-                            turret_id = real_name,
+                            turret_id = machine_tiered_name,
                             modifier = modifier,
                         })
                     end

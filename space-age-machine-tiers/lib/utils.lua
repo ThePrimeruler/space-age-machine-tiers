@@ -1,13 +1,12 @@
 local util = require("util")
 local get_constants = require('lib.constants')
-
+local read_settings = require('lib.read_settings')
 
 local utils = {}
 
 
-
-
-utils.debug = true
+utils.do_debug = true
+utils.do_spam = true
 
 
 utils.mod_name = "space-age-machine-tiers"
@@ -17,105 +16,17 @@ utils.log = utils.debug and log or function(_) end
 utils.error = function(input) log('[Error]['..utils.mod_name..']'..input) end
 utils.warning = function(input) log('[Warning]['..utils.mod_name..']'..input) end
 utils.info = function(input) log('[Info]['..utils.mod_name..']'..input) end
-utils.debug = utils.debug and function(input) log('[Debug]['..utils.mod_name..']'..input) end or function(_) end
+utils.debug = utils.do_debug and function(input) log('[Debug]['..utils.mod_name..']'..input) end or function(_) end
+utils.spam = utils.do_spam and function(input) log('[Spam]['..utils.mod_name..']'..input) end or function(_) end
 
 
+-- if no settings, then we are in the settings creation stage, so just return
 if not settings then
     return utils
 end
 
----@type boolean 
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_use_tints = settings.startup[utils.mod_name.."-use-tints"].value
----@type number float 
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_recipe_cost_mult = settings.startup[utils.mod_name.."-recipe-cost-multiplier"].value
-
-
-
----@type boolean 
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_do_space_platform_tiers = settings.startup[utils.mod_name.."-do-space-platform-tiers"].value
----@type boolean 
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_do_military_tiers = settings.startup[utils.mod_name.."-do-military-tiers"].value
-
-
-
----@type number float
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_speed_mult = settings.startup[utils.mod_name.."-speed-multiplier-per-tier"].value
----@type number float
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_energy_mult = settings.startup[utils.mod_name.."-energy-usage-multiplier-per-tier"].value
----@type number float
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_pollution_mult = settings.startup[utils.mod_name.."-pollution-multiplier-per-tier"].value
----@type number float
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_health_mult = settings.startup[utils.mod_name.."-health-multiplier-per-tier"].value
----@type number float
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_range_mult = settings.startup[utils.mod_name.."-range-multiplier-per-tier"].value
----@type number float
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_tank_mult = settings.startup[utils.mod_name.."-tank-multiplier-per-tier"].value
----@type number float
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_storage_mult = settings.startup[utils.mod_name.."-storage-multiplier-per-tier"].value
----@type number float
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_beacon_dist_mult = settings.startup[utils.mod_name.."-beacon-distribution-multiplier-per-tier"].value
----@type number float
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_thruster_performance_mult = settings.startup[utils.mod_name.."-thruster-performance-per-tier"].value
----@type number float
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_damage_mult = settings.startup[utils.mod_name.."-damage-multiplier-per-tier"].value
----@type number float
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_special_effect_mult = settings.startup[utils.mod_name.."-special-effect-multiplier-per-tier"].value
-
-
-
-
----@type number integer 
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_module_mod = settings.startup[utils.mod_name.."-module-slots-per-tier"].value
----@type number integer 
----@diagnostic disable-next-line: assign-type-mismatch
-utils.setting_agg_radius_mod = settings.startup[utils.mod_name.."-agg-radius-per-tier"].value
-
-
-if mods["boblogistics"] then
-    if settings.startup[utils.mod_name.."-fix-bob-turbo-belts"].value then
-        utils.fix_bob_turbo_belts = true
-    end
-end
-
-if mods["Age-of-Production"] then
-    if settings.startup[utils.mod_name.."-add-aop-machines"].value then
-        utils.do_aop = true
-    end
-end
-if mods["lignumis"] then
-    if settings.startup[utils.mod_name.."-add-lignumis-machines"].value then
-        utils.do_lignumis = true
-    end
-end
-if mods["planet-muluna"] then
-    if settings.startup[utils.mod_name.."-add-muluna-machines"].value then
-        utils.do_muluna = true
-    end
-end
-
-if mods["maraxsis"] then
-    if settings.startup[utils.mod_name.."-add-maraxsis-machines"].value then
-        utils.do_maraxsis = true
-    end
-end
-
-
+-- read factorio mod settings and set the values in utils table
+read_settings(utils)
 
 
 function utils.table_remove_by_value(the_table,value)
@@ -135,13 +46,12 @@ function utils.list_contains(the_list,value)
     return false
 end
 
-
-
-
--- TODO: planet-muluna: consider options ...
-
-
-
+function utils.list_extend(base_list,add_from_list)
+    for _, list_item in ipairs(add_from_list) do
+        table.insert(base_list, list_item)
+    end
+    return false
+end
 
 -- Pull Constants And Load Them Into Utils
 get_constants(utils)

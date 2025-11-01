@@ -1,10 +1,19 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.4
+Date: TODO
+  Changes:
+    - Refactored Code For Easier Development
+    - As A Result, Fixed Some Inconsistencies And Minor Issues
+    - Also, Some Tech And Recipe Changes As A Result
+
+---------------------------------------------------------------------------------------------------
 Version: 0.0.3
 Date: 2025-10-24
   Changes:
-    - Added Support For More Age Of Production Machines
     - Added A Thumbnail
     - Added Fusion Reactor And Generator Tiers
+    - Made Things Such As Inbuilt Productivity/Quality Increase With Tier (modifiable in mod settings)
+    - Added Support For More Age Of Production Machines
     - Added Basic Pelagos Flamethrower Support
     - Auto-Add Subgroups And Orders To All Machines (Even if base machines don't have them)
     - Hopefully fixed some bugs related to missmatches between base tiers and their upgrades

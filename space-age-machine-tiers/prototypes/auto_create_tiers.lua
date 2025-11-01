@@ -2,7 +2,7 @@ local utils = require("lib.utils")
 
 local auto_create_tiers = {}
 
-local cost_multiplier = utils.setting_recipe_cost_mult
+local cost_multiplier = utils.setting_cost_mult
 
 local material_to_next_tier_map = utils.constants.material_to_next_tier_map
 
@@ -10,7 +10,12 @@ local science_material_to_next_tier_map = utils.constants.science_material_to_ne
 
 local space_packs = utils.constants.space_packs
 
-local science_to_next_tier_map = utils.constants.science_to_next_tier_map
+local pre_space_science_tiers = utils.constants.pre_space_science_tiers
+local pre_space_science_additional = utils.constants.pre_space_science_additional
+
+local all_space_pack_next = utils.constants.all_space_pack_next
+
+local post_space_science_tiers = utils.constants.post_space_science_tiers
 
 local space_next_pack_mapping = utils.constants.space_next_pack_mapping
 
@@ -18,6 +23,10 @@ local tech_to_sci_pack_map = utils.constants.tech_to_sci_pack_map
 
 local entity_types = utils.constants.entity_types
 
+
+local function isempty(s)
+    return s == nil or s == ''
+end
 
 ---@param level number int
 ---@param entity table
@@ -372,6 +381,7 @@ local function update_recipe_materials(recipe, current_level, new_science_packs)
                     if ingredient_name == add_map.item then
                         if backup_map then
                             target_map = backup_map
+                            break
                         else
                             target_map = nil -- skip entirely
                         end
@@ -382,11 +392,10 @@ local function update_recipe_materials(recipe, current_level, new_science_packs)
 
             -- insert only if we found a valid target_map
             if target_map then
-                local final_amount = math.max(average_amount, target_map.ratio)
                 table.insert(recipe.ingredients, {
                     type   = "item",
                     name   = target_map.item,
-                    amount = final_amount
+                    amount = math.floor(average_amount * target_map.ratio)
                 })
             end
         end
@@ -477,6 +486,8 @@ end
 
 -- generates pre-requisite science packs for a given tech_stack
 local function get_prerequisite_science_packs_from_tree(tech_stack, count, sci_packs, visited)
+    utils.debug('get_prerequisite_science_packs_from_tree')
+
 
     visited = visited or {}
     sci_packs = sci_packs or {}
@@ -504,13 +515,13 @@ local function get_prerequisite_science_packs_from_tree(tech_stack, count, sci_p
         if tech_name then
             local mapped = tech_to_sci_pack_map[tech_name]
             if mapped then
-                -- walk backwards through science_to_next_tier_map to add all prior packs
+                -- walk backwards through pre_space_science_tiers to add all prior packs
                 local function add_with_prereqs(pack, seen_back)
                     seen_back = seen_back or {}
                     if not pack or seen_back[pack] then return end
                     seen_back[pack] = true
                     if not utils.list_contains(sci_packs, pack) then table.insert(sci_packs, pack) end
-                    for pre, m in pairs(science_to_next_tier_map) do
+                    for pre, m in pairs(pre_space_science_tiers) do
                         if m.item == pack then add_with_prereqs(pre, seen_back) end
                     end
                 end
@@ -560,12 +571,15 @@ end
 -- takes the new_tech and standardizes it into a regular tech, returning the science ingredients
 local function preprocess_tier_1_science_packs(new_tech)
     -- turn new_tech into a standard research pack research and return it's ingredients
+    utils.debug('preprocess_tier_1_science_packs for '..new_tech.name)
 
 
     -- if it's a trigger technology, then we need to create new science packs that its base tech `should` have
     if new_tech.research_trigger then
+        utils.spam('Replacing research trigger')
         new_tech.research_trigger = nil
         local count, sci_packs = get_prerequisite_science_packs_from_tree({ { 0, new_tech } }, 10, {})
+        utils.spam('pre-req sci-packs are: '..utils.jsonSerializeTable(sci_packs))
         new_tech.unit = { count = count, time = 60 }
         local ingredients_list = {}
         for _, sci_pack in ipairs(sci_packs) do
@@ -585,33 +599,223 @@ local function preprocess_tier_1_science_packs(new_tech)
 
 end
 
-local function add_next_sci_pack(level, new_tech, new_science_packs_mapping)
-    -- TODO: Finish this function
+local function does_tech_have_sci_pack(new_tech, sci_pack_name)
+    -- returns true if `new_tech` has a science pack ingredient of `sci_pack_name`
 
+    -- utils.spam('does_tech_have_sci_pack for ' ..new_tech.name .. ' for ' .. sci_pack_name)
+    for i, ingredient in ipairs(new_tech.unit.ingredients) do
+        if ingredient[1] == sci_pack_name then
+            return true
+        end
+    end
+    return false
+end
+
+local function try_add_sci_pack_to_ingredients(new_tech, sci_pack_name)
+    -- tries to add the science pack name to the new tech's ingredients. True if successful, false if already there
+
+    -- utils.spam('try_add_sci_pack_to_ingredients for ' ..new_tech.name .. ' for ' .. sci_pack_name)
+
+    if does_tech_have_sci_pack(new_tech, sci_pack_name) then
+        return false
+    end
+    table.insert(new_tech.unit.ingredients, {sci_pack_name, 1})
+    return true
+end
+
+local function fill_in_missing_link_sci_packs(new_tech)
+    -- if a science has tiers 1 and 3 this will fill in 2. 
+    -- Also addresses other gaps so highest tier will cause lower tiers to appear
+    -- Does not address cross-stage missing packs
+    utils.spam('fill_in_missing_link_sci_packs for '..new_tech.name)
+
+    local added_packs = {}
+    local function fill_for_single_tier(new_tech, tier_mapping, loops)
+        if loops > 40 then
+            utils.error('max loops exceeded in fill_in_missing_link_sci_packs!')
+            return
+        end
+        local changed = false
+        for k,v in pairs(tier_mapping) do
+            if does_tech_have_sci_pack(new_tech, v.item) then
+                if try_add_sci_pack_to_ingredients(new_tech,k) then
+                    utils.spam('added '..k..' to ingredients')
+                    table.insert(added_packs,k)
+                    changed = true
+                end
+            end
+        end
+        if changed then
+            utils.spam('science packs changed, so looping')
+            -- utils.spam(utils.jsonSerializeTable(new_tech.unit.ingredients))
+            fill_for_single_tier(new_tech, tier_mapping, loops + 1)
+        end
+    end
+
+    for _, tier_mapping in ipairs({pre_space_science_tiers,post_space_science_tiers}) do
+        fill_for_single_tier(new_tech, tier_mapping, 0)
+    end
+
+    utils.spam('added packs are '..utils.jsonSerializeTable(added_packs))
+    return added_packs
+end
+
+local function fill_in_missing_pre_space_sci_packs(new_tech)
+    -- adds every pre-space science pack to the tech if they don't already exist
+    utils.spam('try_add_new_sci_pack_from_tier_mapping for '..new_tech.name)
+    local added_packs = {}
+
+    for k,v in pairs(pre_space_science_tiers) do
+        if try_add_sci_pack_to_ingredients(new_tech,k) then
+            utils.spam('added '..k..' as a missing link tech')
+            table.insert(added_packs,k)
+        end
+        if try_add_sci_pack_to_ingredients(new_tech,v.item) then
+            utils.spam('added '..v.item..' as a missing link tech')
+            table.insert(added_packs,v.item)
+        end
+    end
+    for _,k in ipairs(pre_space_science_additional) do
+        if try_add_sci_pack_to_ingredients(new_tech,k) then
+            utils.spam('added '..k..' as a missing link tech')
+            table.insert(added_packs,k)
+        end
+    end
+    utils.spam('added packs are '..utils.jsonSerializeTable(added_packs))
+    return added_packs
+end
+
+local function try_add_new_sci_pack_from_tier_mapping(new_tech, tier_mapping)
+    -- looks through the tier_mapping to try and add a next_pack to the new_tech
+    -- return ratio, sci_pack_name. if unsuccessful, return 1.0, ''
+    utils.spam('try_add_new_sci_pack_from_tier_mapping for '..new_tech.name)
+
+    for k,v in pairs(tier_mapping) do
+        if does_tech_have_sci_pack(new_tech,k) then
+            if try_add_sci_pack_to_ingredients(new_tech, v.item) then
+                return v.ratio, v.item
+            end
+        end
+    end
+    return 1.0, ''
+
+end
+
+local function try_add_first_space_pack(new_tech)
+    utils.spam('try_add_first_space_pack for '..new_tech.name)
+    -- determine what the first space pack should be for this tech and tries to add it (shouldn't fail)
+    -- return ratio, sci_pack_name. if unsuccessful, return 1.0, ''
+    local prod_pack = does_tech_have_sci_pack(new_tech,'production-science-pack')
+    local util_pack = does_tech_have_sci_pack(new_tech,'utility-science-pack')
+
+    -- No space packs: choose starting one based on prod/util packs (to not make it all the same)
+    if prod_pack and not util_pack then
+        added_pack = 'metallurgic-science-pack'
+        map = space_next_pack_mapping[added_pack]
+    elseif not prod_pack and util_pack then
+        added_pack = 'agricultural-science-pack'
+        map = space_next_pack_mapping[added_pack]
+    else
+        added_pack = 'electromagnetic-science-pack'
+        map = space_next_pack_mapping[added_pack]
+    end
+    ratio = map and (map.ratio or 1.0) or 1.0
+    if not map then
+        return 1.0, ''
+    end
+    if not try_add_sci_pack_to_ingredients(new_tech,added_pack) then
+        return 1.0, ''
+    end
+    return ratio, added_pack
+end
+
+local function add_next_sci_pack(level, new_tech, new_science_packs_mapping)
     -- reads the current science ingredients to determine the next science pack that should be added. Adds the pack and normalizes things where needed
     -- updates new_science_packs_mapping with the current tier level's added packs
+    utils.spam('add_next_sci_pack level '..level..' for '..new_tech.name)
 
+    local added_packs = {}
+
+    local next_sci_pack = ''
+    local ratio = 1.0
     -- if it already has a space-pack in ingredients, then fill in any missing packs and go to space pack settings
+    local num_space_packs = 0
+    for i, ingredient in ipairs(new_tech.unit.ingredients) do
+        if utils.list_contains(space_packs,ingredient[1]) then
+            num_space_packs = num_space_packs + 1
+        end
+    end
+    if num_space_packs > 0 then
+        utils.spam('num_space_packs is > 0')
+        -- if we have a space pack, then make sure the previous tier science packs are there
+        -- then if only 1 space pack, add another
+        -- if 2 or more space packs, we go onto post-space pack logic
+        utils.list_extend(added_packs,fill_in_missing_pre_space_sci_packs(new_tech))
+        if num_space_packs == 1 then -- one, so add another
+            utils.spam('finding next space pack')
+            for k,v in pairs(space_next_pack_mapping) do
+                if does_tech_have_sci_pack(new_tech,k) then
+                    ratio = v.ratio
+                    try_add_sci_pack_to_ingredients(new_tech,v.item)
+                    next_sci_pack = v.item
+                    break
+                end
+            end
+        else -- else, move on to next level (post space)
+            utils.spam('moving onto post space packs')
+            if not does_tech_have_sci_pack(new_tech, all_space_pack_next.item) then -- try the space to post transition
+                ratio = all_space_pack_next.ratio
+                try_add_sci_pack_to_ingredients(new_tech,all_space_pack_next.item)
+                next_sci_pack = all_space_pack_next.item
+            else -- try the post space mapping
+                utils.list_extend(added_packs,fill_in_missing_link_sci_packs(new_tech))
+                ratio, next_sci_pack = try_add_new_sci_pack_from_tier_mapping(new_tech, post_space_science_tiers)
+            end
+        end
+    else -- else, we have no space packs, so do non-space pack logic
+        -- we add a non-sci-pack (or first sci pack (see what old is doing to select new))
+        utils.spam('pre-space-pack additions')
+        utils.list_extend(added_packs,fill_in_missing_link_sci_packs(new_tech))
+        ratio, next_sci_pack = try_add_new_sci_pack_from_tier_mapping(new_tech, pre_space_science_tiers)
+        if isempty(next_sci_pack) then -- if we don't have a next science pack, then we need to add a space pack
+            utils.spam('trying to add first space pack')
+            ratio, next_sci_pack = try_add_first_space_pack(new_tech)
+            utils.list_extend(added_packs,fill_in_missing_pre_space_sci_packs(new_tech)) -- fill in pre-space because we are transitioning out
+        end
+    end
 
-    -- else, check to see if we can add a non-space pack
+    ratio = ratio * cost_multiplier -- apply the cost multiplier
+    if isempty(next_sci_pack) then -- if all else fails, then just increase the cost and go on
+        ratio = ratio * cost_multiplier
+    end
 
-    -- if we can't add a non-space pack, then add space pack logic
+    -- change the cost now that we have a ratio value
+    new_tech.unit.count = math.floor(new_tech.unit.count * ratio)
+
+    -- finally, return new_science_packs_mapping in the form it's expecting
+    if not isempty(next_sci_pack) then
+        new_science_packs_mapping[level] = {next_sci_pack}
+    end
+    for _, pack in pairs(added_packs) do
+        if not new_science_packs_mapping[level] then
+            new_science_packs_mapping[level] = {}
+        end
+        table.insert(new_science_packs_mapping[level], pack)
+    end
 
 
-    -- if all else fails, then just increase the cost and go on
-
-
+    return new_science_packs_mapping
 end
 
 
 local function generate_science_packs_for_tech(level, new_tech)
-
+    utils.spam('generate_science_packs_for_tech level '..level..' for '..new_tech.name)
     -- expected return: new_science_packs:
     -- {"tier": { '', '', ...}}
 
     -- first, standardize science packs for the base tech (new_tech is a copy of it)
     local base_science_packs = preprocess_tier_1_science_packs(new_tech)
-    utils.debug('base_science_packs are '..utils.jsonSerializeTable(base_science_packs))
+    utils.spam('base_science_packs from preprocess are '..utils.jsonSerializeTable(base_science_packs))
 
     -- second, add a new science pack per tier
     local new_science_packs_mapping = {}
@@ -625,168 +829,6 @@ local function generate_science_packs_for_tech(level, new_tech)
 end
 
 
-
-
-
-
--- old
-local function add_mapped_pack(sci_packs, mapped)
-    if not mapped then return end
-    if type(mapped) == "table" then
-        for _, p in ipairs(mapped) do
-            if p and not utils.list_contains(sci_packs, p) then
-                table.insert(sci_packs, p)
-            end
-        end
-    else
-        if not utils.list_contains(sci_packs, mapped) then
-            table.insert(sci_packs, mapped)
-        end
-    end
-end
-
-local function advance_packs_once(current_packs)
-    local new_packs = {}
-    local seen = {}
-    local ratio = 1.0
-
-    for pack, _ in pairs(current_packs) do
-        local cursor = science_to_next_tier_map[pack]
-
-        -- skip forward through already owned packs
-        while cursor and current_packs[cursor.item] do
-            cursor = science_to_next_tier_map[cursor.item]
-        end
-
-        -- now cursor points at the first missing pack in this chain
-        while cursor and not seen[cursor.item] and not current_packs[cursor.item] do
-            new_packs[cursor.item] = true
-            seen[cursor.item] = true
-            ratio = math.max(ratio, cursor.ratio or 1.0)
-            -- advance further, in case multiple tiers are missing in a row
-            cursor = science_to_next_tier_map[cursor.item]
-            -- stop early if the next in the chain is already owned
-            while cursor and current_packs[cursor.item] do
-                cursor = science_to_next_tier_map[cursor.item]
-            end
-        end
-    end
-
-    return new_packs, ratio
-end
-
-
-local function find_next_science_pack(level, new_technology, new_science_packs, current_level)
-    -- Looks at the Level 1 (Tier1)'s technologies and tries to find the `next` techpack to add the technology for the current tier
-    -- First Gets The Techpacks of the base technology
-    -- Then Sees if it can get a new tech from `science_to_next_tier_map`
-    -- If it can't find one, then that means we need to check space packs to see if we should add one instead
-    -- If we can't find a techpack, it instead just increases the cost
-
-
-    -- if it's a trigger technology, then we need to create new science packs that its base tech `should` have
-    if new_technology.research_trigger then
-        new_technology.research_trigger = nil
-        local count, sci_packs = get_prerequisite_science_packs_from_tree({ { 0, new_technology } }, 10, {})
-        new_technology.unit = { count = count, time = 60 }
-        local ingredients_list = {}
-        for _, sci_pack in ipairs(sci_packs) do
-            table.insert(ingredients_list, { sci_pack, 1 })
-        end
-        new_technology.unit.ingredients = ingredients_list
-
-        -- record what Tier-1 uses
-        new_science_packs[current_level] = sci_packs
-    end
-
-    if current_level > level then
-        return new_science_packs
-    end
-
-    -- Collect current packs and convert to a lookup for faster membership
-    local current_packs = {}
-    for _, ing in ipairs(new_technology.unit.ingredients) do
-        local pack = ing[1] or ing.name
-        current_packs[pack] = true
-    end
-
-    -- go through the initial mapping (also find skipped sci-packs)
-    local next_packs, ratio = advance_packs_once(current_packs)
-
-    -- utils.debug('advance_packs_once next_packs response: '..utils.jsonSerializeTable(next_packs))
-
-
-    if next(next_packs) == nil then
-        local added_pack
-        local map
-        local prod_pack = current_packs['production-science-pack']
-        local util_pack = current_packs['utility-science-pack']
-
-        -- Count how many space packs we already have
-        local space_pack_count = 0
-        for _, sp in ipairs(space_packs) do
-            if current_packs[sp] then
-                space_pack_count = space_pack_count + 1
-            end
-        end
-
-
-        -- if we have enough space (max of two before moving on) science packs, add higher tier
-        if space_pack_count > 1 then
-            -- Try the special all_space mapping (see if you can add cryogenic if we have enough pre-requisites)
-            map = utils.constants.all_space_pack_next
-            if map and not current_packs[map.item] then
-                added_pack = map.item
-                ratio = map.ratio or 1.0
-            end
-        elseif space_pack_count == 0 then
-            -- No space packs: choose starting one based on prod/util packs
-            if prod_pack and not util_pack then
-                added_pack = 'metallurgic-science-pack'
-                map = space_next_pack_mapping[added_pack]
-            elseif not prod_pack and util_pack then
-                added_pack = 'agricultural-science-pack'
-                map = space_next_pack_mapping[added_pack]
-            else
-                added_pack = 'electromagnetic-science-pack'
-                map = space_next_pack_mapping[added_pack]
-            end
-            ratio = map and (map.ratio or 1.0) or 1.0
-        else
-            -- Exactly 1 space pack: continue its progression
-            for pack, _ in pairs(current_packs) do
-                map = space_next_pack_mapping[pack]
-                if map and not current_packs[map.item] then
-                    added_pack = map.item
-                    ratio = map.ratio or 1.0
-                    break
-                end
-            end
-        end
-
-        if added_pack then
-            next_packs[added_pack] = true
-        end
-    end
-
-    -- Adjust count and add pack(s)
-    if next(next_packs) ~= nil then
-        new_science_packs[current_level] = {}
-        for pack, _ in pairs(next_packs) do
-            table.insert(new_technology.unit.ingredients, { pack, 1 })
-            table.insert(new_science_packs[current_level], pack)
-        end
-    else
-        new_science_packs[current_level] = {}
-    end
-
-    new_technology.unit.count = math.floor(new_technology.unit.count * cost_multiplier * ratio)
-
-    -- Recurse to next lower level
-    return find_next_science_pack(level, new_technology, new_science_packs, current_level + 1)
-end
---end old
-
 local function make_machine_technology(level, name, t1_technology)
     local new_machine_technology = table.deepcopy(t1_technology)
     local old_tech_name = new_machine_technology.name
@@ -794,9 +836,9 @@ local function make_machine_technology(level, name, t1_technology)
     new_machine_technology.localised_name = { "", utils.get_item_localised_name(name), ' ' .. level }
     new_machine_technology.localised_description = { "", utils.get_item_localised_name(name), { utils.mod_name .. '.suffix-upgrade' } }
 
-    local new_science_packs = find_next_science_pack(level, new_machine_technology, {}, 2) -- Needs To Be Before The prerequisites Update
+    local new_science_packs = generate_science_packs_for_tech(level, new_machine_technology)
 
-    utils.debug('new_science_packs are ' .. utils.jsonSerializeTable(new_science_packs))
+    -- utils.debug('new_science_packs are ' .. utils.jsonSerializeTable(new_science_packs))
 
     if level == 2 then
         new_machine_technology.prerequisites = { old_tech_name }
@@ -806,7 +848,9 @@ local function make_machine_technology(level, name, t1_technology)
 
     if new_science_packs[level] then
         for _, prereq in ipairs(new_science_packs[level]) do
-            table.insert(new_machine_technology.prerequisites, prereq)
+            if not isempty(prereq) then
+                table.insert(new_machine_technology.prerequisites, prereq)
+            end
         end
     end
 
@@ -816,15 +860,17 @@ local function make_machine_technology(level, name, t1_technology)
 
     data.extend({ new_machine_technology })
 
+    utils.spam(new_machine_technology.name .. ' technology is: ' .. utils.jsonSerializeTable(new_machine_technology))
+
     return new_science_packs
 end
 
 local function add_new_machine(level, name, entity, entity_type, item, technology, recipe)
-    -- utils.debug('name: '..utils.jsonSerializeTable(name))
-    -- utils.debug('entity: '..utils.jsonSerializeTable(entity))
-    -- utils.debug('item: '..utils.jsonSerializeTable(item))
-    -- utils.debug('technology: '..utils.jsonSerializeTable(technology))
-    -- utils.debug('recipe: '..utils.jsonSerializeTable(recipe))
+    utils.spam('name: '..utils.jsonSerializeTable(name))
+    utils.spam('entity: '..utils.jsonSerializeTable(entity))
+    utils.spam('item: '..utils.jsonSerializeTable(item))
+    utils.spam('technology: '..utils.jsonSerializeTable(technology))
+    utils.spam('recipe: '..utils.jsonSerializeTable(recipe))
 
 
     utils.debug('adding new machine: ' .. name .. '-' .. level)

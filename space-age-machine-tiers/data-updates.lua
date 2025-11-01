@@ -1,10 +1,11 @@
 local utils = require("lib.utils")
 
+-- NOTE: Entity Definitions are deleted and recreated in the data-final-fixes stage, so may have to update changes made here there if relying on entity changes
 
 
--- update the upgrade_planner
+-- Update the upgrade_planner
 
--- handle electric_lumber_mill edge case
+    -- handle electric_lumber_mill edge case
 if utils.do_lignumis and utils.setting_lignumis_add_electric_lumber_mills then
     -- make lumber-mills and electric-lumber-mills share the same upgrade planner state
     local lumber_mill = 'lumber-mill'

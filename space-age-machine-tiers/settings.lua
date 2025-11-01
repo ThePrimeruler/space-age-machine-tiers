@@ -95,9 +95,9 @@ data:extend({
     },
     {
         type = "double-setting",
-        name = utils.mod_name.."-recipe-cost-multiplier",
+        name = utils.mod_name.."-cost-multiplier",
         setting_type = "startup",
-        default_value = 1.5,
+        default_value = 2.0,
         minimum_value = 0.001,
         order = "a-b",
     },

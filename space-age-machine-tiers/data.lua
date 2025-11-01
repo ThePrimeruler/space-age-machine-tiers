@@ -3,11 +3,11 @@ local utils = require("lib.utils")
 require "prototypes.space_age.base_machines"
 
 if utils.setting_do_space_platform_tiers then
-    require "prototypes.space_age.space_platform"
+    require "prototypes.space_age.space_platform.space_platform"
 end
 
 if utils.setting_do_military_tiers then
-    require "prototypes.space_age.military"
+    require "prototypes.space_age.military.military"
 end
 
 if utils.do_aop then
