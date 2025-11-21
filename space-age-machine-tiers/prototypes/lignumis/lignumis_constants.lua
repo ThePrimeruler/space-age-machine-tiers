@@ -4,6 +4,7 @@ local function lignumis_constants(utils)
         'desiccation-furnace',
         'lumber-mill',
         'gold-storage-tank',
+        'burner-agricultural-tower',
     }
 
     if utils.setting_lignumis_add_electric_lumber_mills then
@@ -28,6 +29,13 @@ local function lignumis_constants(utils)
     }) do
         utils.constants.pre_space_science_tiers[k] = v
     end
+
+    utils.constants.science_material_to_next_tier_map['steam-science-pack'] = {
+        ['add'] = {
+            item='basic-circuit-board', ratio=1.0
+        },
+    }
+
 end
 
 return lignumis_constants

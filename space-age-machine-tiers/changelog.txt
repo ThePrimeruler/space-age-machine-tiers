@@ -1,6 +1,16 @@
 ---------------------------------------------------------------------------------------------------
-Version: 0.0.4
+Version: 0.0.5
 Date: TODO
+  Changes:
+    - Added an option to add number icons to the items/techs/recipes so you know what tier they are
+    - Added Beacons And Radars to a new base game tiered machine options
+    - Added Resource Drain Percent (like from drills) to the tier improvements
+    - Added Some More Machines From Lignumis and Muluna
+    - Make Electric Lumbermill (setting with lignumis installed) Not Require Atmosphere/Pressure
+    - Added A Check To Make Sure Item Weights To Match Their Tier1 Variants
+---------------------------------------------------------------------------------------------------
+Version: 0.0.4
+Date: 2025-10-31
   Changes:
     - Refactored Code For Easier Development
     - As A Result, Fixed Some Inconsistencies And Minor Issues

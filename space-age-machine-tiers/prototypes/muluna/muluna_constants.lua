@@ -6,7 +6,8 @@ local function muluna_constants(utils)
         'muluna-cycling-steam-turbine',
         -- 'muluna-vacuum-heating-tower',
         'muluna-steam-crusher',
-        -- 'muluna-greenhouse-wood',
+        'muluna-greenhouse-wood',
+        'muluna-telescope',
 
     }
     for _, name in ipairs(utils.constants.muluna_machine_list) do

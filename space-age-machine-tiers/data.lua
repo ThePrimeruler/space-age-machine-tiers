@@ -10,6 +10,10 @@ if utils.setting_do_military_tiers then
     require "prototypes.space_age.military.military"
 end
 
+if utils.setting_do_base_game_tiers then
+    require "prototypes.space_age.base_game.base_game"
+end
+
 if utils.do_aop then
     require "prototypes.age_of_production.aop_machines"
 end

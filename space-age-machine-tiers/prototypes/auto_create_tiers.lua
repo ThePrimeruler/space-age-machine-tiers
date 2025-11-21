@@ -23,17 +23,19 @@ local tech_to_sci_pack_map = utils.constants.tech_to_sci_pack_map
 
 local entity_types = utils.constants.entity_types
 
-
-local function isempty(s)
-    return s == nil or s == ''
+---@param val any
+---@return boolean (true if nil, '', or {})
+local function isempty(val)
+    return val == nil or val == '' or val == {}
 end
 
----@param level number int
----@param entity table
+---@param level integer
+---@param entity data.EntityPrototype
 ---@param key string | table
 ---@param modifier number
----@param is_mult bool
----@param floor bool
+---@param is_mult bool true means multiply, false means add
+---@param floor bool should the result be rounded down (integer)
+---@return nil
 local function if_exist_modify(level, entity, key, modifier, is_mult, floor)
     ---@param the_entity table
     ---@param the_key string | table
@@ -124,9 +126,15 @@ local function if_exist_modify(level, entity, key, modifier, is_mult, floor)
     end
 end
 
-
+---@param level integer
+---@param name string
+---@param entity data.EntityPrototype
+---@return nil
 local function make_machine_entity(level, name, entity)
     local new_machine = table.deepcopy(entity)
+    if utils.setting_add_tier_icons and (new_machine.icon or new_machine.icons) then
+        utils.add_tier_icon_to_proto(new_machine, level)
+    end
 
     new_machine.name = utils.get_machine_name(level, name)
     new_machine.localised_name = { "", utils.get_item_localised_name(name), ' ' .. level }
@@ -157,7 +165,7 @@ local function make_machine_entity(level, name, entity)
         if_exist_modify(level, new_machine, {'effect_receiver','base_effect',effect_name}, utils.setting_special_effect_mult, true, false)
     end
     if_exist_modify(level, new_machine, 'science_pack_drain_rate_percent', 2/(1+utils.setting_special_effect_mult), true, true)
-
+    if_exist_modify(level, new_machine, 'resource_drain_rate_percent', 2/(1+utils.setting_special_effect_mult), true, true)
 
     -- Fluid Volume
     for _, fluid_box_name in ipairs({ 'fluid_box', 'fuel_fluid_box', 'oxidizer_fluid_box' }) do
@@ -222,11 +230,19 @@ local function make_machine_entity(level, name, entity)
 
     -- lightning collector
     if_exist_modify(level, new_machine, 'range_elongation', utils.setting_range_mult, true, false)
+    if_exist_modify(level, new_machine, 'efficiency', utils.setting_special_effect_mult, true, false)
 
 
     -- inserter
     if_exist_modify(level, new_machine, 'extension_speed', utils.setting_speed_mult, true, false)
     --(rotation speed already covered)
+
+    -- radar
+    if_exist_modify(level, new_machine, 'energy_per_sector', 2/(1+utils.setting_energy_mult), true, false)
+    if_exist_modify(level, new_machine, 'energy_per_nearby_scan', 2/(1+utils.setting_energy_mult), true, false)
+    if_exist_modify(level, new_machine, 'max_distance_of_sector_revealed', utils.setting_range_mult, true, true)
+    if_exist_modify(level, new_machine, 'max_distance_of_nearby_sector_revealed', utils.setting_range_mult, true, true)
+
 
     -- Turbines
     if_exist_modify(level, new_machine, { 'energy_source', 'output_flow_limit', }, utils.setting_energy_mult, true, false)
@@ -263,8 +279,16 @@ local function make_machine_entity(level, name, entity)
     data.extend({ new_machine })
 end
 
+---@param level integer
+---@param name string
+---@param item data.ItemPrototype
+---@return nil
 local function make_machine_item(level, name, item)
     local new_machine_item = table.deepcopy(item)
+    if utils.setting_add_tier_icons and (new_machine_item.icon or new_machine_item.icons) then
+        utils.add_tier_icon_to_proto(new_machine_item, level)
+    end
+    new_machine_item.icons = new_machine_item.icons -- TODO: code here
     new_machine_item.name = utils.get_machine_name(level, name)
     new_machine_item.localised_name = { "", utils.get_item_localised_name(name), ' ' .. level }
     new_machine_item.localised_description = { "", utils.get_item_localised_description(name) }
@@ -281,7 +305,12 @@ local function make_machine_item(level, name, item)
 end
 
 
-
+--- TODO:  rewrite this unction
+--- Break out material maps into their own functions
+---@param recipe data.RecipePrototype
+---@param current_level integer
+---@param new_science_packs table
+---@return nil
 local function update_recipe_materials(recipe, current_level, new_science_packs)
     -- material_to_next_tier_map
     -- science_material_to_next_tier_map
@@ -294,7 +323,7 @@ local function update_recipe_materials(recipe, current_level, new_science_packs)
 
     local material_mapping = table.deepcopy(material_to_next_tier_map)
 
-    for _, sci_pack in ipairs(current_new_science_packs) do
+    for _, sci_pack in ipairs(current_new_science_packs) do -- TODO: rework how this works to fix overwriting
         if science_material_to_next_tier_map[sci_pack] then
             for key, val in pairs(science_material_to_next_tier_map[sci_pack]) do
                 material_mapping[key] = val
@@ -440,18 +469,26 @@ local function update_recipe_materials(recipe, current_level, new_science_packs)
     end
 end
 
+---@param level integer
+---@param name string
+---@param recipe data.RecipePrototype
+---@param new_science_packs table
+---@return nil
 local function make_machine_recipe(level, name, recipe, new_science_packs)
     --new_science_packs is table in format: {[level] = sci_packs}
     --      sci_packs being {sci_pack_name,...}
 
     local new_machine_recipe = table.deepcopy(recipe)
+    if utils.setting_add_tier_icons and (new_machine_recipe.icon or new_machine_recipe.icons) then
+        utils.add_tier_icon_to_proto(new_machine_recipe, level)
+    end
     new_machine_recipe.name = utils.get_machine_name(level, name)
 
     new_machine_recipe.localised_name = { "", utils.get_item_localised_name(name), ' ' .. level }
     new_machine_recipe.localised_description = { "", utils.get_item_localised_description(name) }
 
     if new_machine_recipe.energy_required then
-        new_machine_recipe.energy_required = new_machine_recipe.energy_required * cost_multiplier
+        new_machine_recipe.energy_required = new_machine_recipe.energy_required * (cost_multiplier^(level-1))
     end
     new_machine_recipe.results[1].name = utils.get_machine_name(level, name)
     new_machine_recipe.main_product = utils.get_machine_name(level, name)
@@ -474,7 +511,10 @@ local function make_machine_recipe(level, name, recipe, new_science_packs)
 end
 
 
--- returns boolean
+--- true if `sci_pack_name` exists in the `ingredients_list`
+---@param ingredients_list array
+---@param sci_pack_name string
+---@return boolean
 local function sci_pack_in_ingredients(ingredients_list, sci_pack_name)
     for _, item in ipairs(ingredients_list) do
         if item[1] == sci_pack_name then
@@ -484,7 +524,13 @@ local function sci_pack_in_ingredients(ingredients_list, sci_pack_name)
     return false
 end
 
--- generates pre-requisite science packs for a given tech_stack
+--- generates pre-requisite science packs for a given tech_stack
+---@param tech_stack [string|data.TechnologyPrototype]
+---@param count integer
+---@param sci_packs table
+---@param visited table
+---@return integer
+---@return table
 local function get_prerequisite_science_packs_from_tree(tech_stack, count, sci_packs, visited)
     utils.debug('get_prerequisite_science_packs_from_tree')
 
@@ -568,7 +614,9 @@ local function get_prerequisite_science_packs_from_tree(tech_stack, count, sci_p
 
     return count, sci_packs
 end
--- takes the new_tech and standardizes it into a regular tech, returning the science ingredients
+--- takes the new_tech and standardizes it into a regular tech, returning the science ingredients
+---@param new_tech data.TechnologyPrototype
+---@return table
 local function preprocess_tier_1_science_packs(new_tech)
     -- turn new_tech into a standard research pack research and return it's ingredients
     utils.debug('preprocess_tier_1_science_packs for '..new_tech.name)
@@ -599,6 +647,9 @@ local function preprocess_tier_1_science_packs(new_tech)
 
 end
 
+---@param new_tech data.TechnologyPrototype
+---@param sci_pack_name string
+---@return boolean
 local function does_tech_have_sci_pack(new_tech, sci_pack_name)
     -- returns true if `new_tech` has a science pack ingredient of `sci_pack_name`
 
@@ -611,6 +662,9 @@ local function does_tech_have_sci_pack(new_tech, sci_pack_name)
     return false
 end
 
+---@param new_tech data.TechnologyPrototype
+---@param sci_pack_name string
+---@return boolean (true if successful)
 local function try_add_sci_pack_to_ingredients(new_tech, sci_pack_name)
     -- tries to add the science pack name to the new tech's ingredients. True if successful, false if already there
 
@@ -623,6 +677,8 @@ local function try_add_sci_pack_to_ingredients(new_tech, sci_pack_name)
     return true
 end
 
+---@param new_tech data.TechnologyPrototype
+---@return table (added packs)
 local function fill_in_missing_link_sci_packs(new_tech)
     -- if a science has tiers 1 and 3 this will fill in 2. 
     -- Also addresses other gaps so highest tier will cause lower tiers to appear
@@ -660,6 +716,8 @@ local function fill_in_missing_link_sci_packs(new_tech)
     return added_packs
 end
 
+---@param new_tech data.TechnologyPrototype
+---@return table
 local function fill_in_missing_pre_space_sci_packs(new_tech)
     -- adds every pre-space science pack to the tech if they don't already exist
     utils.spam('try_add_new_sci_pack_from_tier_mapping for '..new_tech.name)
@@ -685,6 +743,10 @@ local function fill_in_missing_pre_space_sci_packs(new_tech)
     return added_packs
 end
 
+---@param new_tech data.TechnologyPrototype
+---@param tier_mapping table
+---@return number
+---@return string
 local function try_add_new_sci_pack_from_tier_mapping(new_tech, tier_mapping)
     -- looks through the tier_mapping to try and add a next_pack to the new_tech
     -- return ratio, sci_pack_name. if unsuccessful, return 1.0, ''
@@ -701,6 +763,9 @@ local function try_add_new_sci_pack_from_tier_mapping(new_tech, tier_mapping)
 
 end
 
+---@param new_tech data.TechnologyPrototype
+---@return number
+---@return string
 local function try_add_first_space_pack(new_tech)
     utils.spam('try_add_first_space_pack for '..new_tech.name)
     -- determine what the first space pack should be for this tech and tries to add it (shouldn't fail)
@@ -729,6 +794,10 @@ local function try_add_first_space_pack(new_tech)
     return ratio, added_pack
 end
 
+---@param level integer
+---@param new_tech data.TechnologyPrototype
+---@param new_science_packs_mapping table
+---@return table
 local function add_next_sci_pack(level, new_tech, new_science_packs_mapping)
     -- reads the current science ingredients to determine the next science pack that should be added. Adds the pack and normalizes things where needed
     -- updates new_science_packs_mapping with the current tier level's added packs
@@ -807,7 +876,9 @@ local function add_next_sci_pack(level, new_tech, new_science_packs_mapping)
     return new_science_packs_mapping
 end
 
-
+---@param level integer
+---@param new_tech data.TechnologyPrototype
+---@return table
 local function generate_science_packs_for_tech(level, new_tech)
     utils.spam('generate_science_packs_for_tech level '..level..' for '..new_tech.name)
     -- expected return: new_science_packs:
@@ -828,10 +899,16 @@ local function generate_science_packs_for_tech(level, new_tech)
 
 end
 
-
+---@param level integer
+---@param name string
+---@param t1_technology data.TechnologyPrototype
+---@return table
 local function make_machine_technology(level, name, t1_technology)
     local new_machine_technology = table.deepcopy(t1_technology)
     local old_tech_name = new_machine_technology.name
+    if utils.setting_add_tier_icons and (new_machine_technology.icon or new_machine_technology.icons) then
+        utils.add_tier_icon_to_proto(new_machine_technology, level)
+    end
     new_machine_technology.name = utils.get_machine_name(level, name)
     new_machine_technology.localised_name = { "", utils.get_item_localised_name(name), ' ' .. level }
     new_machine_technology.localised_description = { "", utils.get_item_localised_name(name), { utils.mod_name .. '.suffix-upgrade' } }
@@ -865,6 +942,13 @@ local function make_machine_technology(level, name, t1_technology)
     return new_science_packs
 end
 
+---@param level integer
+---@param name string
+---@param entity data.EntityPrototype
+---@param entity_type string
+---@param item data.ItemPrototype
+---@param technology data.TechnologyPrototype
+---@param recipe data.RecipePrototype
 local function add_new_machine(level, name, entity, entity_type, item, technology, recipe)
     utils.spam('name: '..utils.jsonSerializeTable(name))
     utils.spam('entity: '..utils.jsonSerializeTable(entity))
@@ -899,6 +983,9 @@ local items = data.raw.item
 local technologies = data.raw.technology
 
 ---@param machine_name string
+---@param backup_tech string
+---@return string
+---@return data.TechnologyPrototype
 local function find_recipe_technology(machine_name, backup_tech)
     if technologies[machine_name] then
         return machine_name, technologies[machine_name]
@@ -923,7 +1010,8 @@ local function find_recipe_technology(machine_name, backup_tech)
 end
 
 
-
+---@param machine_name string
+---@param backup_tech string
 function auto_create_tiers.create_machine_tiers(machine_name, backup_tech)
     utils.debug('Creating Machine Tiers For '..machine_name)
     
@@ -956,7 +1044,7 @@ function auto_create_tiers.create_machine_tiers(machine_name, backup_tech)
     add_new_machine(3, machine_name, machine_entity, entity_type, machine_item, machine_technology, machine_recipe)
 end
 
-
+---@param machine_name string
 function auto_create_tiers.recreate_entities(machine_name)
     utils.debug('Recreating Machine Entities For '..machine_name)
     if machine_name == 'electric-lumber-mill' then -- skip manual ones

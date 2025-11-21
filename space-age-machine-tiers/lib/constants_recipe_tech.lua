@@ -46,7 +46,7 @@ local function recipe_and_tech_constants(utils)
         ['nutrients'] = {
             item='bioflux', ratio=1.0
         },
-    }
+    } ---@type {[string]: {item: string, ratio: number}}
 
     -- materials that can be added if that science pack was added to the tech
     utils.constants.science_material_to_next_tier_map = {
@@ -169,14 +169,14 @@ local function recipe_and_tech_constants(utils)
             },
 
         },
-    }
+    } ---@type {[string]: {item: string, ratio: number}}
 
     -- a list of space science packs to compare against
     utils.constants.space_packs = {
         'metallurgic-science-pack',
         'electromagnetic-science-pack',
         'agricultural-science-pack',
-    }
+    } ---@type string[]
 
     -- where the science-pack progression ordering
     utils.constants.space_next_pack_mapping = {
@@ -189,7 +189,7 @@ local function recipe_and_tech_constants(utils)
         ['agricultural-science-pack'] = {
             item='metallurgic-science-pack', ratio=1.0
         },
-    }
+    } ---@type {[string]: {item: string, ratio: number}}
 
 
     -- checks for these science packs in the order
@@ -203,25 +203,25 @@ local function recipe_and_tech_constants(utils)
         ['chemical-science-pack'] = {
             item='space-science-pack', ratio=1.0
         },
-    }
+    } ---@type {[string]: {item: string, ratio: number}}
 
     -- if moving past pre-space, add these packs in
     utils.constants.pre_space_science_additional = {
         "production-science-pack",
         "utility-science-pack",
-    }
+    } ---@type string[]
 
     -- if you have all the space packs, add this one
     utils.constants.all_space_pack_next = {
         item='cryogenic-science-pack', ratio=1.5
-    }
+    } ---@type {item: string, ratio: number}
 
     -- post space pack mapping
     utils.constants.post_space_science_tiers = {
             ['cryogenic-science-pack'] = {
                 item='promethium-science-pack', ratio=2.0
         },
-    }
+    } ---@type {[string]: {item: string, ratio: number}}
 
     -- mapping of technologies to science packs
     utils.constants.tech_to_sci_pack_map = {
@@ -240,7 +240,7 @@ local function recipe_and_tech_constants(utils)
         ['agricultural-science-pack'] = 'agricultural-science-pack',
         ['electromagnetic-science-pack'] = 'electromagnetic-science-pack',
         ['metallurgic-science-pack'] = 'metallurgic-science-pack',
-    }
+    } ---@type {[string]: string}
 
 end
 

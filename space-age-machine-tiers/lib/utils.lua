@@ -12,12 +12,12 @@ utils.do_spam = true
 utils.mod_name = "space-age-machine-tiers"
 utils.mod_path = "__"..utils.mod_name.."__"
 
-utils.log = utils.debug and log or function(_) end
-utils.error = function(input) log('[Error]['..utils.mod_name..']'..input) end
-utils.warning = function(input) log('[Warning]['..utils.mod_name..']'..input) end
-utils.info = function(input) log('[Info]['..utils.mod_name..']'..input) end
-utils.debug = utils.do_debug and function(input) log('[Debug]['..utils.mod_name..']'..input) end or function(_) end
-utils.spam = utils.do_spam and function(input) log('[Spam]['..utils.mod_name..']'..input) end or function(_) end
+utils.log = utils.debug and log or function(...) end
+utils.error = function(input) log('[Error]['..utils.mod_name..']'..tostring(input)) end
+utils.warning = function(input) log('[Warning]['..utils.mod_name..']'..tostring(input)) end
+utils.info = function(input) log('[Info]['..utils.mod_name..']'..tostring(input)) end
+utils.debug = utils.do_debug and function(input) log('[Debug]['..utils.mod_name..']'..tostring(input)) end or function(...) end
+utils.spam = utils.do_spam and function(input) log('[Spam]['..utils.mod_name..']'..tostring(input)) end or function(...) end
 
 
 -- if no settings, then we are in the settings creation stage, so just return
@@ -28,7 +28,35 @@ end
 -- read factorio mod settings and set the values in utils table
 read_settings(utils)
 
+-- measurement shorthands
+utils.measurements = {}
+local msr = utils.measurements
+msr.gram = 1
+msr.grams = msr.gram
+msr.kg = 1000*msr.grams
+msr.kgs = msr.kg
+msr.kilogram = msr.kg
+msr.kilograms = msr.kg
+msr.tons = 1000*msr.kg
+msr.ton = msr.tons
+msr.second = 60
+msr.seconds = msr.second
+msr.minute = 60 * msr.second
+msr.minutes = msr.minute
+msr.hour = 60 * msr.minute
+msr.hours = msr.hour
+msr.meter = 1
+msr.meters = msr.meter
+msr.kilometer = 1000
+msr.kilometers = msr.kilometer
+utils.measurements = msr
 
+
+
+--- removes `value` from `the_list`
+---@param the_list any[]
+---@param value any
+---@return nil
 function utils.table_remove_by_value(the_table,value)
     for i = #the_table, 1, -1 do
         if the_table[i] == value then
@@ -37,6 +65,10 @@ function utils.table_remove_by_value(the_table,value)
     end
 end
 
+--- returns true if `the_list` contains `value`
+---@param the_list any[]
+---@param value any
+---@return boolean
 function utils.list_contains(the_list,value)
     for _, list_item in ipairs(the_list) do
         if list_item == value then
@@ -46,11 +78,14 @@ function utils.list_contains(the_list,value)
     return false
 end
 
+---Adds Each Element Of add_from_list to base_list
+---@param base_list any[]
+---@param add_from_list any[]
+---@return nil
 function utils.list_extend(base_list,add_from_list)
     for _, list_item in ipairs(add_from_list) do
         table.insert(base_list, list_item)
     end
-    return false
 end
 
 -- Pull Constants And Load Them Into Utils
@@ -58,8 +93,12 @@ get_constants(utils)
 
 
 
-
-
+--- Converts a given value into a lua string format
+---@param val any val to convert to lua string
+---@param name string internal
+---@param skipnewlines boolean
+---@param depth number internal
+---@return string
 function utils.luaSerializeTable(val, name, skipnewlines, depth)
     skipnewlines = skipnewlines or false
     depth = depth or 0
@@ -89,6 +128,11 @@ function utils.luaSerializeTable(val, name, skipnewlines, depth)
     return tmp
 end
 
+--- Converts a given value into a json string format
+---@param val any val to convert to json
+---@param name string internal
+---@param depth number internal
+---@return string
 function utils.jsonSerializeTable(val, name, depth)
     local indent = '    '
     depth = depth or 0
@@ -126,18 +170,21 @@ end
 
 ---@param level number integer
 ---@param multiplier number float
+---@return number
 function utils.get_level_multiplier_delta(level, multiplier)
     return multiplier ^ (level-1)
 end
 
 ---@param level number integer
 ---@param delta number float
+---@return number
 function utils.get_level_linear_delta(level, delta)
     return delta * (level-1)
 end
 
 ---@param input string string like "10kW"
 ---@param multiplier number float
+---@return number
 function utils.multiply_with_unit(input, multiplier)
     -- Extract number and unit
     local value, unit = input:match("^(%d+%.?%d*)(%a+)$")
@@ -164,6 +211,7 @@ end
 
 ---@param level number integer
 ---@param name string
+---@return string
 function utils.get_machine_name(level, name)
     if level <= 1 and not utils.list_contains(utils.constants.added_machine_tier_1,name) then
         return tostring(name)
@@ -172,6 +220,7 @@ function utils.get_machine_name(level, name)
 end
 
 ---@param entity_name string
+---@return data.Prototype
 function utils.find_entity_by_name(entity_name) 
     -- look through our list and see if it's there
     for _, e_type in ipairs(utils.constants.entity_types) do
@@ -250,6 +299,7 @@ local layers_to_tint = {
 ---@param entity table
 ---@param tint table
 ---@param entity_type string
+---@return nil
 function utils.add_tint_to_entity(entity, tint, entity_type)
     -- exit early if issues
     if not utils.setting_use_tints then
@@ -312,9 +362,77 @@ function utils.add_tint_to_entity(entity, tint, entity_type)
     end
 end
 
+---@param proto data.Prototype
+---@param level number
+---@return nil
+function utils.add_tier_icon_to_proto(proto, level)
+    if type(level) ~= 'number' or level < 1 or level > 9 then
+        utils.error('add_tier_icon_to_item: level of "'..tostring(level)..'" invalid')
+        return
+    end
+    if (not proto) or ((not proto.icons) and (not proto.icon)) then
+        utils.error('add_tier_icon_to_item: prototype does not have a icon')
+        return
+    end
+    local icon_path = '__base__/graphics/icons/signal/signal_'..tostring(math.floor(level))..'.png'
+    -- puts icon in bottom left corner
+
+    local icons = {}
+    local base_icon_size = proto.icon_size or 64
+
+    if proto.icons == nil then -- For single icon case
+        local new_scale = 0.25 * (base_icon_size / 64)
+        local tmp_icon_size = 64*new_scale
+        icons = {
+            {
+                icon = proto.icon,
+                icon_size = proto.icon_size,
+                icon_mipmaps = proto.icon_mipmaps
+            },
+            {
+                icon = icon_path,
+                icon_size = 64,
+                icon_mipmaps = 4,
+                scale = new_scale,
+                shift = {(-base_icon_size/2) + (1.5*tmp_icon_size), (base_icon_size/2) - (1.5*tmp_icon_size)} -- x,y shift is from the center
+            }
+        }
+    else -- For multiple icons case
+        for i = 1, #proto.icons do
+            local icon = table.deepcopy(proto.icons[i])
+            if icon.icon_size and icon.icon_size > base_icon_size then
+                base_icon_size = icon.icon_size
+            end
+            icons[#icons + 1] = icon
+        end
+
+        local new_scale = 0.25 * (base_icon_size / 64)
+        local tmp_icon_size = 64*new_scale
+
+        icons[#icons + 1] = {
+            icon = icon_path,
+            icon_size = 64,
+            icon_mipmaps = 4,
+            scale = new_scale,
+            shift = {(-base_icon_size/2) + (1.5*tmp_icon_size), (base_icon_size/2) - (1.5*tmp_icon_size)} -- x,y shift is from the center
+        }
+    end
+
+    if #icons == 0 then
+        utils.error('icons is empty for ' .. (proto.name or ('no name: '..utils.jsonSerializeTable(proto))))
+    end
+
+    -- Apply
+    proto.icon = nil
+    proto.icons = icons
+end
+
+
+
 
 -- taken from the recycling mod
-
+-- BEGIN
+--- internal from recycling mod
 local function get_prototype(base_type, name)
   for type_name in pairs(defines.prototypes[base_type]) do
     local prototypes = data.raw[type_name]
@@ -324,6 +442,7 @@ local function get_prototype(base_type, name)
   end
 end
 
+--- internal from recycling mod
 function utils.get_item_localised_name(name)
   local item = get_prototype("item", name)
   if not item then return end
@@ -349,6 +468,7 @@ function utils.get_item_localised_name(name)
   return prototype and prototype.localised_name or {type_name.."-name."..name}
 end
 
+--- internal from recycling mod
 function utils.get_item_localised_description(name)
   local item = get_prototype("item", name)
   if not item then return end
@@ -374,6 +494,7 @@ function utils.get_item_localised_description(name)
   return prototype and prototype.localised_description or {type_name.."-description."..name}
 end
 
+--- internal from recycling mod
 local function generate_recycling_recipe_icons_from_item(item)
   local icons = {}
   if item.icons == nil then
@@ -412,6 +533,7 @@ local function generate_recycling_recipe_icons_from_item(item)
   return icons
 end
 
+--- internal from recycling mod
 local function add_recipe_values(structure, input, result)
   local result_count
   local input_result = nil
@@ -491,6 +613,10 @@ local function add_recipe_values(structure, input, result)
 end
 
 local recipes = data.raw.recipe
+
+--- Give a recipe, this makes and adds the recycling recipe for it
+--- @param recipe data.RecipePrototype
+--- @return nil
 function utils.generate_recycling_recipe(recipe)
     local recipe_subgroup = recipe.subgroup
     if not recipe_subgroup then
@@ -520,5 +646,10 @@ function utils.generate_recycling_recipe(recipe)
         recipes[result.name] = result
     end
 end
+-- END FROM RECYCLING
+
+
+
+
 
 return utils

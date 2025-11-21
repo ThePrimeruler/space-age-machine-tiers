@@ -3,12 +3,10 @@ local recipe_and_tech_constants = require('lib.constants_recipe_tech')
 local function get_constants(utils)
     utils.constants = {}
 
-    utils.constants.added_machine_tier_1 = {
-    }
+    utils.constants.added_machine_tier_1 = {} ---@type string[]
 
-    utils.constants.physical_projectile_research_list = {}
-    utils.constants.refined_flammables_research_list = {}
-
+    utils.constants.physical_projectile_research_list = {} ---@type string[]
+    utils.constants.refined_flammables_research_list = {} ---@type string[]
 
     utils.constants.entity_types = {
         'agricultural-tower',
@@ -34,15 +32,16 @@ local function get_constants(utils)
         'fusion-generator',
         'fusion-reactor',
         'burner-generator',
-    }
+        'radar',
+    } ---@type string[]
 
     utils.constants.pollution_types = {
         'pollution',
         'spores',
-    }
+    } ---@type string[]
 
     -- List Of Machine Names (Base) added by this mod
-    utils.constants.every_machine_list = {}
+    utils.constants.every_machine_list = {} ---@type string[]
 
     -- load in the recipe and tech constants into the utils.constants table
     recipe_and_tech_constants(utils)
@@ -55,6 +54,9 @@ local function get_constants(utils)
     end
     if utils.setting_do_space_platform_tiers then
         require('prototypes.space_age.space_platform.space_platform_constants')(utils) -- import and call the constants function
+    end
+    if utils.setting_do_base_game_tiers then
+        require('prototypes.space_age.base_game.base_game_constants')(utils) -- import and call the constants function
     end
 
 

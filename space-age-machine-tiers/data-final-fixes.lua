@@ -63,7 +63,23 @@ for _, machine_name in ipairs(machine_list) do
     end
 end
 
-
+-- make sure item weights match their tier 1 variants (or if none specified, make 1 stack fit in a rocket)
+for _, machine_name in ipairs(machine_list) do
+    utils.debug('ensuring '..tostring(machine_name)..' item weights match higher tiers')
+    local tier_1_name = utils.get_machine_name(1,machine_name)
+    utils.spam('tier_1_name is '..tostring(tier_1_name))
+    local tier_1_item = data.raw["item"][tier_1_name]
+    if tier_1_item == nil then
+        utils.error('Failed To Find Item For "' .. tier_1_name .. '". Skipping Weight Update')
+    else
+        local t1_weight = tier_1_item.weight or math.floor(utils.measurements.ton/(tier_1_item.stack_size or 20.0)) -- get the item weight from the tier_1 item, or make it 1 stack
+        for tier=2,3,1 do
+            local tiered_name = utils.get_machine_name(tier,machine_name)
+            utils.spam('tiered_name is '..tostring(tiered_name))
+            data.raw["item"][tiered_name].weight = t1_weight
+        end
+    end
+end
 
 
 -- look through technologies and entities for the base tier update the technology pre-requisite if it has been changed or made invalid
@@ -191,6 +207,9 @@ end
 for _, machine_name in ipairs(machine_list) do
     utils.debug('verifying that '..tostring(machine_name)..' is still valid for the upgrade planner')
 
+    -- --------------------------------------------------
+    -- Tier 1
+    -- --------------------------------------------------
     local real_name = utils.get_machine_name(1,machine_name)
 
     utils.debug('real_name is '..tostring(real_name))
@@ -211,22 +230,77 @@ for _, machine_name in ipairs(machine_list) do
             data.raw[entity_type][real_name].next_upgrade = nil
         end
 
-        item = data.raw.item[real_name]
-        if item and item.hidden then
+        tier_1_item = data.raw.item[real_name]
+        if tier_1_item and tier_1_item.hidden then
             utils.warning("Removing next_upgrade from " .. real_name .. " because its item is hidden.")
             data.raw[entity_type][real_name].next_upgrade = nil
         end
 
     else
         if not proto then
-            utils.debug(real_name..' not proto')
+            utils.spam(real_name..' not proto')
         elseif not proto.next_upgrade then
-            utils.debug(real_name..' not next upgrade')
+            utils.spam(real_name..' not next upgrade')
         else
-            utils.debug(real_name..' something else')
+            utils.spam(real_name..' something else')
+        end
+    end
+
+    -- --------------------------------------------------
+    -- Tiers 2,3
+    -- --------------------------------------------------
+
+    local bad = false
+    for tier=2,3,1 do
+
+
+        local real_name = utils.get_machine_name(tier,machine_name)
+
+        utils.debug('real_name is '..tostring(real_name))
+
+
+        local entity_type, proto = utils.find_entity_by_name(real_name)
+        -- utils.debug(utils.jsonSerializeTable(proto))
+        if bad then
+            data.raw[entity_type][real_name].next_upgrade = nil
+        elseif proto and proto.next_upgrade then
+            utils.debug(real_name..' has a next_upgrade')
+
+            if proto.fast_replaceable_group == nil or proto.fast_replaceable_group == ''  then
+                utils.warning("Removing next_upgrade from " .. real_name .. " because it is doesn't have a fast_replaceable_group.")
+                data.raw[entity_type][real_name].next_upgrade = nil
+                bad = true
+            end
+
+            if proto.hidden then
+                utils.warning("Removing next_upgrade from " .. real_name .. " because it is hidden.")
+                data.raw[entity_type][real_name].next_upgrade = nil
+                bad = true
+            end
+
+            tier_1_item = data.raw.item[real_name]
+            if tier_1_item and tier_1_item.hidden then
+                utils.warning("Removing next_upgrade from " .. real_name .. " because its item is hidden.")
+                data.raw[entity_type][real_name].next_upgrade = nil
+                bad = true
+            end
+
+        else
+            if not proto then
+                utils.spam(real_name..' not proto')
+            elseif not proto.next_upgrade then
+                utils.spam(real_name..' not next upgrade')
+            else
+                utils.spam(real_name..' something else')
+            end
         end
     end
 end
+
+
+
+
+
 
 
 -- Ensure cloned machines inherit the UI categorization from tier 1

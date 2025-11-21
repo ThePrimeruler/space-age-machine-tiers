@@ -81,6 +81,13 @@ data:extend({
     },
     {
         type = "bool-setting",
+        name = utils.mod_name.."-add-tier-icons",
+        setting_type = "startup",
+        default_value = true,
+        order = "a-a",
+    },
+    {
+        type = "bool-setting",
         name = utils.mod_name.."-do-space-platform-tiers",
         setting_type = "startup",
         default_value = true,
@@ -89,6 +96,13 @@ data:extend({
     {
         type = "bool-setting",
         name = utils.mod_name.."-do-military-tiers",
+        setting_type = "startup",
+        default_value = true,
+        order = "a-b",
+    },
+    {
+        type = "bool-setting",
+        name = utils.mod_name.."-do-base-game-tiers",
         setting_type = "startup",
         default_value = true,
         order = "a-b",

@@ -39,6 +39,7 @@ local backup_lignumis_machine_tech_mapping = {
     [base_lumber_mill_name] = base_lumber_mill_name
 }
 ---@param machine_name string
+---@return data.TechnologyPrototype
 local function find_recipe_technology(machine_name)
     if technologies[machine_name] then
         return machine_name, technologies[machine_name]
@@ -71,7 +72,11 @@ end
 
 
 -- Functions To Create New Tiers
-
+---@param level integer
+---@param entity data.EntityPrototype
+---@param key string
+---@param modifier number
+---@param is_mult boolean true means multiply, false means add
 local function if_exist_modify(level,entity,key,modifier,is_mult)
     if not entity[key] then
         return
@@ -88,9 +93,14 @@ end
 
 
 
----@param level number integer
+---@param level integer
+---@param name string
+---@param item data.ItemPrototype
 local function make_electric_lumber_mill_item(level, name, item)
     local new_machine_item = table.deepcopy(item)
+    if utils.setting_add_tier_icons and (new_machine_item.icon or new_machine_item.icons) then
+        utils.add_tier_icon_to_proto(new_machine_item, level)
+    end
     new_machine_item.name = get_electric_lumber_mill_name(level)
     new_machine_item.localised_name = {"", {utils.mod_name..'.prefix-electric'}, utils.get_item_localised_name(name), ''.. (level>1 and (' '..level) or '') }
     new_machine_item.localised_description = {"", utils.get_item_localised_description(name) }
@@ -99,15 +109,21 @@ local function make_electric_lumber_mill_item(level, name, item)
     data.extend({new_machine_item})
 end
 
----@param level number integer
+---@param level integer
+---@param name string
+---@param entity data.AssemblingMachinePrototype
 local function make_electric_lumber_mill_entity(level, name, entity)
     local new_machine = table.deepcopy(entity)
-
+    if utils.setting_add_tier_icons and (new_machine.icon or new_machine.icons) then
+        utils.add_tier_icon_to_proto(new_machine, level)
+    end
     new_machine.name = get_electric_lumber_mill_name(level)
     new_machine.localised_name = {"", {utils.mod_name..'.prefix-electric'}, utils.get_item_localised_name(name), ''.. (level>1 and (' '..level) or '') }
     new_machine.localised_description = {"", utils.get_item_localised_description(name) }
 
     new_machine.minable.result = get_electric_lumber_mill_name(level)
+
+    new_machine.surface_conditions = nil
 
     if_exist_modify(level,new_machine,'max_health',utils.setting_health_mult,true)
     if_exist_modify(level,new_machine,'crafting_speed',utils.setting_speed_mult,true)
@@ -135,7 +151,9 @@ local function make_electric_lumber_mill_entity(level, name, entity)
     data.extend({new_machine})
 end
 
----@param level number integer
+---@param level integer
+---@param name string
+---@param old_recipe data.RecipePrototype
 local function make_electric_lumber_mill_recipe(level, name, old_recipe)
     local recipe = {
         type = "recipe",
@@ -143,12 +161,12 @@ local function make_electric_lumber_mill_recipe(level, name, old_recipe)
         name = get_electric_lumber_mill_name(level),
         enabled = false,
         allow_productivity = false,
-        surface_conditions = {{property = "pressure", min = 1000, max = 2000}},
+        -- surface_conditions = {{property = "pressure", min = 1000, max = 2000}},
         main_product = get_electric_lumber_mill_name(level),
         results = {
             {type = "item", name = get_electric_lumber_mill_name(level), amount = 1}
         },
-        category = "organic"
+        category = "wood-processing-or-assembling"
     }
     if level == 1 then
         recipe.ingredients = {
@@ -185,7 +203,9 @@ local function make_electric_lumber_mill_recipe(level, name, old_recipe)
     })
 end
 
----@param level number integer
+---@param level integer
+---@param name string
+---@param old_technology data.TechnologyPrototype
 local function make_electric_lumber_mill_technology(level, name, old_technology)
     local technology = {
             type = "technology",
@@ -203,6 +223,9 @@ local function make_electric_lumber_mill_technology(level, name, old_technology)
             localised_name = {"", {utils.mod_name..'.prefix-electric'}, utils.get_item_localised_name(name), ''.. (level>1 and (' '..level) or '') },
             localised_description = {"", utils.get_item_localised_description(name) },
         }
+    if utils.setting_add_tier_icons and (technology.icon or technology.icons) then
+        utils.add_tier_icon_to_proto(technology, level)
+    end
     if level == 1 then
         technology.unit = {
             count = 750 * cost_mult,
@@ -312,7 +335,7 @@ local function update_base_lumber_mill()
 end
 
 
----@param level number integer
+---@param level integer
 local function add_new_electric_lumber_mill(level)
     utils.debug('adding new electric_lumber_mill: '..level)
 

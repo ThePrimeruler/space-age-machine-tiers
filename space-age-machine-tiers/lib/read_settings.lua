@@ -3,21 +3,27 @@ local function read_settings(utils)
         error('read_settings: utils is nil')
     end
 
-    ---@type boolean 
+    ---@type boolean
     ---@diagnostic disable-next-line: assign-type-mismatch
     utils.setting_use_tints = settings.startup[utils.mod_name.."-use-tints"].value
-    ---@type number float 
+    ---@type boolean
+    ---@diagnostic disable-next-line: assign-type-mismatch
+    utils.setting_add_tier_icons = settings.startup[utils.mod_name.."-add-tier-icons"].value
+    ---@type number float
     ---@diagnostic disable-next-line: assign-type-mismatch
     utils.setting_cost_mult = settings.startup[utils.mod_name.."-cost-multiplier"].value
 
 
 
-    ---@type boolean 
+    ---@type boolean
     ---@diagnostic disable-next-line: assign-type-mismatch
     utils.setting_do_space_platform_tiers = settings.startup[utils.mod_name.."-do-space-platform-tiers"].value
-    ---@type boolean 
+    ---@type boolean
     ---@diagnostic disable-next-line: assign-type-mismatch
     utils.setting_do_military_tiers = settings.startup[utils.mod_name.."-do-military-tiers"].value
+    ---@type boolean
+    ---@diagnostic disable-next-line: assign-type-mismatch
+    utils.setting_do_base_game_tiers = settings.startup[utils.mod_name.."-do-base-game-tiers"].value
 
 
 
@@ -58,10 +64,10 @@ local function read_settings(utils)
 
 
 
-    ---@type number integer 
+    ---@type number integer
     ---@diagnostic disable-next-line: assign-type-mismatch
     utils.setting_module_mod = settings.startup[utils.mod_name.."-module-slots-per-tier"].value
-    ---@type number integer 
+    ---@type number integer
     ---@diagnostic disable-next-line: assign-type-mismatch
     utils.setting_agg_radius_mod = settings.startup[utils.mod_name.."-agg-radius-per-tier"].value
 
@@ -81,7 +87,7 @@ local function read_settings(utils)
         if settings.startup[utils.mod_name.."-add-lignumis-machines"].value then
             utils.do_lignumis = true
         end
-        ---@type boolean 
+        ---@type boolean
         ---@diagnostic disable-next-line: assign-type-mismatch
         utils.setting_lignumis_add_electric_lumber_mills = settings.startup[utils.mod_name.."-lignumis-add-electric-lumber-mills"].value
     end

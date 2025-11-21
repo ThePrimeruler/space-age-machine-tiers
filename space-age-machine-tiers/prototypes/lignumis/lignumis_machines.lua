@@ -11,6 +11,7 @@ local backup_lignumis_machine_tech_mapping = {
     ['desiccation-furnace'] = 'gold-fluid-handling',
     ['lumber-mill'] = 'lumber-mill',
     ['gold-storage-tank'] = 'gold-fluid-handling',
+    ['burner-agricultural-tower'] = 'tree-seeding'
 }
 
 

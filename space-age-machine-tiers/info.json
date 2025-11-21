@@ -1,10 +1,10 @@
 {
     "name": "space-age-machine-tiers",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "title": "Space Age Machine Tiers",
     "author": "Primeruler",
     "factorio_version": "2.0",
-    "description": "Basically Adds Some Higher Tier Space-Age Machines To Match Bob's Style Progression. Like Quality, But Different!",
+    "description": "Adds Some Higher Tier Space-Age Machines To Match Bob's Style Progression. Like Quality, But Different!",
     "settings": ["settings.lua"],
     "homepage":"https://github.com/ThePrimeruler/space-age-machine-tiers",
     "dependencies": [
