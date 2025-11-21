@@ -1,6 +1,7 @@
 local util = require("util")
 local get_constants = require('lib.constants')
 local read_settings = require('lib.read_settings')
+local icon_builder = require('lib.icon_builder')
 
 local utils = {}
 
@@ -11,6 +12,9 @@ utils.do_spam = true
 
 utils.mod_name = "space-age-machine-tiers"
 utils.mod_path = "__"..utils.mod_name.."__"
+utils.mod_graphics = utils.mod_path..'/graphics'
+utils.base_graphics = '__base__/graphics'
+utils.core_graphics = '__core__/graphics'
 
 utils.log = utils.debug and log or function(...) end
 utils.error = function(input) log('[Error]['..utils.mod_name..']'..tostring(input)) end
@@ -362,71 +366,29 @@ function utils.add_tint_to_entity(entity, tint, entity_type)
     end
 end
 
+
 ---@param proto data.Prototype
 ---@param level number
 ---@return nil
 function utils.add_tier_icon_to_proto(proto, level)
     if type(level) ~= 'number' or level < 1 or level > 9 then
-        utils.error('add_tier_icon_to_item: level of "'..tostring(level)..'" invalid')
+        utils.error('add_tier_icon_to_proto: level of "'..tostring(level)..'" invalid')
         return
     end
     if (not proto) or ((not proto.icons) and (not proto.icon)) then
-        utils.error('add_tier_icon_to_item: prototype does not have a icon')
+        utils.error('add_tier_icon_to_proto: prototype does not have an icon')
         return
     end
-    local icon_path = '__base__/graphics/icons/signal/signal_'..tostring(math.floor(level))..'.png'
+    -- local number_icon_path = utils.mod_graphics..'/icons/number-'..tostring(math.floor(level))..'.png'
+    local number_icon_path = utils.base_graphics..'/icons/signal/signal_'..tostring(math.floor(level))..'.png'
+
     -- puts icon in bottom left corner
-
-    local icons = {}
-    local base_icon_size = proto.icon_size or 64
-
-    if proto.icons == nil then -- For single icon case
-        local new_scale = 0.25 * (base_icon_size / 64)
-        local tmp_icon_size = 64*new_scale
-        icons = {
-            {
-                icon = proto.icon,
-                icon_size = proto.icon_size,
-                icon_mipmaps = proto.icon_mipmaps
-            },
-            {
-                icon = icon_path,
-                icon_size = 64,
-                icon_mipmaps = 4,
-                scale = new_scale,
-                shift = {(-base_icon_size/2) + (1.5*tmp_icon_size), (base_icon_size/2) - (1.5*tmp_icon_size)} -- x,y shift is from the center
-            }
-        }
-    else -- For multiple icons case
-        for i = 1, #proto.icons do
-            local icon = table.deepcopy(proto.icons[i])
-            if icon.icon_size and icon.icon_size > base_icon_size then
-                base_icon_size = icon.icon_size
-            end
-            icons[#icons + 1] = icon
-        end
-
-        local new_scale = 0.25 * (base_icon_size / 64)
-        local tmp_icon_size = 64*new_scale
-
-        icons[#icons + 1] = {
-            icon = icon_path,
-            icon_size = 64,
-            icon_mipmaps = 4,
-            scale = new_scale,
-            shift = {(-base_icon_size/2) + (1.5*tmp_icon_size), (base_icon_size/2) - (1.5*tmp_icon_size)} -- x,y shift is from the center
-        }
-    end
-
-    if #icons == 0 then
-        utils.error('icons is empty for ' .. (proto.name or ('no name: '..utils.jsonSerializeTable(proto))))
-    end
-
-    -- Apply
-    proto.icon = nil
-    proto.icons = icons
+    local proto_icon = icon_builder.getIconsFromProto(proto):copy()
+    local number_icon = icon_builder.makeSingleIconLayer(number_icon_path,64,4):toIconBuilder()
+    number_icon = proto_icon:formatTopLeft(number_icon, .25)
+    proto_icon:addIconsInfront(number_icon)
+    proto_icon:setProtoIcons(proto)
 end
-
 
 
 
