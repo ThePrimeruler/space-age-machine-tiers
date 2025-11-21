@@ -7,7 +7,7 @@ local function muluna_constants(utils)
         -- 'muluna-vacuum-heating-tower',
         'muluna-steam-crusher',
         'muluna-greenhouse-wood',
-        'muluna-telescope',
+        -- 'muluna-telescope', -- TODO: look into code to make this 1 per planet
 
     }
     for _, name in ipairs(utils.constants.muluna_machine_list) do
